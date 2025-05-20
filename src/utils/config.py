@@ -2,7 +2,16 @@
 from pathlib import Path
 
 # Project directory setup
-PROJECT_PATH = Path("/project/greencenter/Toprak_lab/shared/TEM1_Combinatorial_Mutagenesis/src/Epistasis")
+#
+# Historically the project assumed an absolute path on the Toprak lab
+# server.  When running the pipeline outside of that environment the
+# absolute path does not exist and all scripts fail to locate data and
+# cache directories.  To make the code portable we derive the project
+# root relative to this configuration file.
+
+# `config.py` lives in `src/utils/`, therefore two ``parents`` levels
+# up from this file points to the repository root.
+PROJECT_PATH = Path(__file__).resolve().parents[2]
 RUN_ID = "full"
 CACHE_DIR = PROJECT_PATH / "cache" / RUN_ID
 
