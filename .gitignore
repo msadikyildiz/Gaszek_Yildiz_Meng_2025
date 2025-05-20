@@ -1,0 +1,4 @@
+# Ignore folders
+archive/
+cache/
+*.pyc

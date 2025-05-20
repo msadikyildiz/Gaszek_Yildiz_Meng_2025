@@ -1,0 +1,118 @@
+Bootstrap: docker
+From: nvcr.io/nvidia/pytorch:24.01-py3
+
+%labels
+    Maintainer TEM1_Epistasis_Project
+    Version 1.0
+    CUDA_Version 12.2
+
+%files
+    # Add any files you want to include in the container (optional)
+    # Examples: 
+    # config_files/jupyter_config.py /root/.jupyter/
+    # scripts/startup.sh /opt/
+
+%post
+    # Update system packages
+    apt-get update && apt-get install -y --no-install-recommends \
+        wget \
+        git \
+        vim \
+        htop \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
+    
+    # Ensure pip is available and up-to-date
+    python3 -m pip install --no-cache-dir --upgrade pip
+    
+    # Install project dependencies
+    python3 -m pip install --no-cache-dir \
+        jupyterlab \
+        polars \
+        numpy \
+        pandas \
+        matplotlib \
+        tqdm \
+        logomaker \
+        scipy \
+        pyarrow \
+        jupyter \
+        seaborn \
+        lightgbm \
+        scikit-learn \
+        shap \
+        ipywidgets \
+        openpyxl \
+        plotly
+    
+    # Clean up pip cache
+    rm -rf /root/.cache/pip
+    
+    # Create mount point for data
+    mkdir -p /workspace
+    mkdir -p /project
+    
+    echo "Package installation complete."
+
+%environment
+    # Environment variables
+    export LC_ALL=C
+    export PYTHONUNBUFFERED=1
+    export PATH=/opt/conda/bin:$PATH
+    # Optional: Set default working directory
+    cd /workspace
+
+%runscript
+    echo "TEM1 Combinatorial Mutagenesis Epistasis Analysis Container"
+    echo "============================================================"
+    echo "This container contains all dependencies for the TEM1 β-lactamase epistasis analysis."
+    echo
+    echo "Usage examples:"
+    echo "  Run Jupyter Lab:   singularity exec --nv instance://{instance_name} jupyter lab --ip=0.0.0.0 --port=8888 --no-browser"
+    echo "  Run Python script: singularity exec --nv instance://{instance_name} python /workspace/your_script.py"
+    echo
+    echo "Starting shell..."
+    exec /bin/bash
+
+%startscript
+    # Commands to run when using 'singularity instance start'
+    jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='tem1project' --notebook-dir=/workspace
+
+%help
+    TEM1 Combinatorial Mutagenesis Epistasis Analysis Container
+    
+    This container includes PyTorch with CUDA support and all dependencies required for
+    analyzing TEM-1 β-lactamase combinatorial mutagenesis data, including:
+    
+    - PyTorch (CUDA-enabled)
+    - JupyterLab
+    - Polars and Pandas for data manipulation
+    - LightGBM for regression analysis
+    - SHAP for model interpretation
+    - Various visualization libraries (matplotlib, seaborn, plotly)
+    
+    === Usage on HPC Systems ===
+    
+    1. Start a container instance:
+       singularity instance start --nv --bind /path/to/project:/workspace tem1_epistasis.sif tem1_instance
+       
+    2. Connect to Jupyter:
+       singularity exec instance://tem1_instance jupyter lab --ip=0.0.0.0 --port=8888 --no-browser
+       
+    3. Run specific scripts:
+       singularity exec --nv instance://tem1_instance python /workspace/src/02_epistasis_pipeline.py
+       
+    4. Start an interactive shell:
+       singularity shell --nv instance://tem1_instance
+       
+    5. Stop the instance when done:
+       singularity instance stop tem1_instance
+       
+    === Building the Container ===
+    
+    sudo singularity build tem1_epistasis.sif pytorch_cuda_env.def
+    
+    === Notes ===
+    
+    - The --nv flag is required for CUDA GPU support
+    - Bind your project directory to /workspace for seamless access
