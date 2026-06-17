@@ -1,0 +1,51 @@
+{
+  "variants": {
+    "WT":   { "mutations": [], "genotype_13": "LQMERMAGERTRN", "description": "Wild-type TEM-1" },
+    "DD":   { "mutations": ["S70A", "E166A"], "genotype_13": null, "description": "Catalytically dead double mutant" },
+    "v1.1": { "mutations": ["E104K", "R164N", "M182T", "E240K"], "genotype_13": "LQMKNTAGKRTRN" },
+    "v1.2": { "mutations": ["L21P", "E104K", "R164N", "E240K", "T265M"], "genotype_13": "PQMKNMAGKRMRN" },
+    "v2.1": { "mutations": ["E104K", "R164N", "E240K", "T265M"], "genotype_13": "LQMKNMAGKRMRN" },
+    "v3.1": { "mutations": ["L21P", "E104K", "R164N", "M182T", "E240K"], "genotype_13": "PQMKNTAGKRTRN" },
+    "Col2": { "mutations": ["Q39K", "M69L", "E104K", "M182T", "G238S", "E240K", "R275L"], "genotype_13": "LKLKRTASKRTLN", "description": "Sanger confirmed" },
+    "Col3": { "mutations": ["L21P", "Q39K", "E104K", "R164H", "M182T", "E240K", "T265M"], "genotype_13": "PKMKHTAGKRMRN", "description": "Sanger confirmed" },
+    "Col4": { "mutations": ["L21P", "Q39K", "M69L", "E104K", "R164N", "E240K", "N276D"], "genotype_13": "PKLKNMAGKRTRD", "description": "Sanger confirmed" },
+    "a2":   { "mutations": ["Q39K", "R164S", "M182T", "A237T", "R244S", "N276D"], "genotype_13": "LKMESTTGESTRD", "description": "CML pool colony, nanopore 99%" },
+    "a4":   { "mutations": ["L21P", "Q39K", "E104K", "R164N", "M182T", "A237T", "G238S", "E240K", "R244S", "T265M", "R275Q"], "genotype_13": "PKMKNTTSKSMQN", "description": "CML pool colony, nanopore 100%" },
+    "a7":   { "mutations": ["E104K", "R164H", "G238S", "R244C", "N276D"], "genotype_13": "LQMKHMASECTRD", "description": "CML pool colony, nanopore 99%" },
+    "a9":   { "mutations": ["E104K", "R164S", "A237T", "R244S", "R275Q", "N276D"], "genotype_13": "LQMKSMTGESTQD", "description": "CML pool colony, nanopore 99%" },
+    "b2":   { "mutations": ["L21P", "Q39K", "R164N", "M182T", "G238S", "E240K", "T265M"], "genotype_13": "PKMENTASKRMRN", "description": "AZT 4 pool colony, nanopore 100%" }
+  },
+  "display_order": [
+    "WT", "DD",
+    "v1.1", "v1.2", "v2.1", "v3.1",
+    "Col2", "Col3", "Col4",
+    "a2", "a4", "a7", "a9",
+    "b2"
+  ],
+  "colors": {
+    "WT":   "#1A1A1A",
+    "DD":   "#9E9E9E",
+    "v1.1": "#0D47A1",
+    "v1.2": "#42A5F5",
+    "v2.1": "#1E88E5",
+    "v3.1": "#1565C0",
+    "Col2": "#00838F",
+    "Col3": "#43A047",
+    "Col4": "#00695C",
+    "a2":   "#D32F2F",
+    "a4":   "#C2185B",
+    "a7":   "#E65100",
+    "a9":   "#827717",
+    "b2":   "#880E4F"
+  },
+  "clusters": {
+    "Controls":                    ["WT", "DD"],
+    "Known variants (no Q39K)":    ["v1.1", "v1.2", "v2.1", "v3.1"],
+    "Colony isolates (prev)":      ["Col2", "Col3", "Col4"],
+    "CML pool":                    ["a2", "a4", "a7", "a9"],
+    "AZT 4 pool":                  ["b2"]
+  },
+  "bg_exclude": {
+    "AMP": []
+  }
+}

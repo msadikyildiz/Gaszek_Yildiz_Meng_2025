@@ -1,0 +1,125 @@
+{
+  "experiments": [
+    {
+      "batch": "20260220",
+      "id": "stack7_azt2916",
+      "date": "2026-02-20",
+      "drug": "Aztreonam",
+      "drug_abbrev": "AZT",
+      "largest_conc_ugml": 2916,
+      "dilution_fold": 3,
+      "file_name": "20260220/20260220_stacker7_LB_NEB_TEM1_C1-2_C3-4_WT-DD_1.2-3_2.1-2_2.3-3.1_MT4-MT4_AZT_2916_dil3",
+      "equipment": "stacker7",
+      "media": "LB",
+      "plates": [
+        { "plate": 1, "variant_1": "Col1", "variant_2": "Col2" },
+        { "plate": 2, "variant_1": "Col3", "variant_2": "Col4" },
+        { "plate": 3, "variant_1": "WT",   "variant_2": "DD" },
+        { "plate": 4, "variant_1": "v1.2", "variant_2": "v1.3" },
+        { "plate": 5, "variant_1": "v2.1", "variant_2": "v2.2" },
+        { "plate": 6, "variant_1": "v2.3", "variant_2": "v3.1" },
+        { "plate": 7, "variant_1": "v1.1", "variant_2": "v1.1" }
+      ],
+      "plate_layout": {
+        "variant_1_rows": ["B", "C", "D"],
+        "variant_2_rows": ["E", "F", "G"],
+        "background_rows": ["A", "H"],
+        "drug_columns": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+        "control_column": 12
+      }
+    },
+    {
+      "batch": "20260220",
+      "id": "stack7_amp50K",
+      "date": "2026-02-23",
+      "drug": "Ampicillin",
+      "drug_abbrev": "AMP",
+      "largest_conc_ugml": 50000,
+      "dilution_fold": 4,
+      "file_name": "20260220/20260223_stacker7_LB_NEB_TEM1_C1-2_C3-4_WT-DD_1.2-3_2.1-2_2.3-3.1_MT4-MT4_AMP_50Kug_dil4",
+      "equipment": "stacker7",
+      "media": "LB",
+      "plates": [
+        { "plate": 1, "variant_1": "Col1", "variant_2": "Col2" },
+        { "plate": 2, "variant_1": "Col3", "variant_2": "Col4" },
+        { "plate": 3, "variant_1": "WT",   "variant_2": "DD" },
+        { "plate": 4, "variant_1": "v1.2", "variant_2": "v1.3" },
+        { "plate": 5, "variant_1": "v2.1", "variant_2": "v2.2" },
+        { "plate": 6, "variant_1": "v2.3", "variant_2": "v3.1" },
+        { "plate": 7, "variant_1": "v1.1", "variant_2": "v1.1" }
+      ],
+      "plate_layout": {
+        "variant_1_rows": ["B", "C", "D"],
+        "variant_2_rows": ["E", "F", "G"],
+        "background_rows": ["A", "H"],
+        "drug_columns": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+        "control_column": 12
+      }
+    },
+    {
+      "batch": "20260307",
+      "id": "stack10_azt2916",
+      "date": "2026-03-07",
+      "drug": "Aztreonam",
+      "drug_abbrev": "AZT",
+      "largest_conc_ugml": 2916,
+      "dilution_fold": 3,
+      "file_name": "20260307/20260307_stacker10_LB_NEB_TEM1_a2-4_a5-6_a7-8_a9-11_a12-b1_b2-c1_c2-3_c4-v1.1_WT-DD_v2.1-v3.1_dil3_AZT_2916ug",
+      "equipment": "stacker10",
+      "media": "LB",
+      "plates": [
+        { "plate": 1,  "variant_1": "a2",   "variant_2": "a4" },
+        { "plate": 2,  "variant_1": "a5",   "variant_2": "a6" },
+        { "plate": 3,  "variant_1": "a7",   "variant_2": "a8" },
+        { "plate": 4,  "variant_1": "a9",   "variant_2": "a11" },
+        { "plate": 5,  "variant_1": "a12",  "variant_2": "b1" },
+        { "plate": 6,  "variant_1": "b2",   "variant_2": "Col1" },
+        { "plate": 7,  "variant_1": "Col2", "variant_2": "Col3" },
+        { "plate": 8,  "variant_1": "Col4", "variant_2": "v1.1" },
+        { "plate": 9,  "variant_1": "WT",   "variant_2": "DD" },
+        { "plate": 10, "variant_1": "v2.1", "variant_2": "v3.1" }
+      ],
+      "plate_layout": {
+        "variant_1_rows": ["B", "C", "D"],
+        "variant_2_rows": ["E", "F", "G"],
+        "background_rows": ["A", "H"],
+        "drug_columns": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+        "control_column": 12
+      }
+    },
+    {
+      "batch": "20260407",
+      "id": "stack7_amp50K_v2",
+      "date": "2026-04-07",
+      "drug": "Ampicillin",
+      "drug_abbrev": "AMP",
+      "largest_conc_ugml": 50000,
+      "dilution_fold": 4,
+      "file_name": "20260407/20260407_stacker7_LB_NEB_TEM1_a2-4_a7-9_b2-c2_c3-4_WT-DD_v1.1-1.2_v2.1-3.1_dil4_AMP_50Kug",
+      "equipment": "stacker7",
+      "media": "LB",
+      "plates": [
+        { "plate": 1, "variant_1": "a2",   "variant_2": "a4" },
+        { "plate": 2, "variant_1": "a7",   "variant_2": "a9" },
+        { "plate": 3, "variant_1": "b2",   "variant_2": "Col2" },
+        { "plate": 4, "variant_1": "Col3", "variant_2": "Col4" },
+        { "plate": 5, "variant_1": "WT",   "variant_2": "DD" },
+        { "plate": 6, "variant_1": "v1.1", "variant_2": "v1.2" },
+        { "plate": 7, "variant_1": "v2.1", "variant_2": "v3.1" }
+      ],
+      "plate_layout": {
+        "variant_1_rows": ["B", "C", "D"],
+        "variant_2_rows": ["E", "F", "G"],
+        "background_rows": ["A", "H"],
+        "drug_columns": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+        "control_column": 12
+      },
+      "nanopore_frequencies": {
+        "a2": 0.99, "a4": 1.00,
+        "a7": 0.99, "a9": 0.99,
+        "b2": 1.00, "Col2": 0.98,
+        "Col3": 1.00, "Col4": 0.98
+      }
+    }
+  ]
+}

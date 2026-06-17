@@ -1,0 +1,20 @@
+# Ignore folders
+archive/
+cache/
+.venv/
+*.pyc
+
+# macOS finder metadata
+.DS_Store
+
+# Devin notebook scratch outputs
+src/graph_analysis/_generated/
+
+# Figure composition scratch
+figures/_compose/
+
+# Large regenerable intermediate (rebuild via revision_analyses/s5_replicate_correlations/analysis.py)
+revision_analyses/s5_replicate_correlations/data/per_genotype_replicate_stats.csv
+
+# Validation pipeline regenerable figures (rebuild via validation_experiments/src/run_all.py)
+validation_experiments/figures/

@@ -1,0 +1,7 @@
+test,value,threshold_pass,threshold_halt,passes_invariance,halt_needed,notes
+pairwise_fitness_pearson_r,0.8576836900280911,0.95,0.9,false,true,"n_pairs=349 max|Δ|=0.363 mean|Δ|=0.161 spearman_rho=0.8468 (clean shifts upward, not uniformly: L21P-pairs shift most, R164H/N-pairs least)"
+pairwise_epistasis_pearson_r,0.9999999999999998,0.95,0.9,true,false,Fig 5E/F view; order-1+2 genotypes not majority-low
+pairwise_fitness_spearman_rho,0.8467774844762799,0.95,0.9,false,true,rank-order of pair means (translation-invariant)
+r2_vs_order_max_abs_delta_K1_to_13,0.045579821235556484,0.02,0.05,false,false,worst K=3; clean R² higher at every K
+lightgbm_shap_rank_spearman,0.869969040247678,0.9,0.8,false,false,RMSD_full=0.463 RMSD_clean=0.373 R²_full=0.551 R²_clean=0.634
+majority_low_fraction_landscape_subset,0.14890769675925927,NaN,NaN,false,false,"raw library frac=0.3215 (n=70,183); landscape frac=0.1489 (n=55,296)"

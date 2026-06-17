@@ -1,0 +1,48 @@
+{
+  "variants": {
+    "WT":   { "mutations": [], "genotype_13": "LQMERMAGERTRN", "description": "Wild-type TEM-1" },
+    "DD":   { "mutations": ["S70A", "E166A"], "genotype_13": null, "description": "Catalytically dead double mutant" },
+    "v1.1": { "mutations": ["E104K", "R164N", "M182T", "E240K"], "genotype_13": "LQMKNTAGKRTRN" },
+    "v1.2": { "mutations": ["L21P", "E104K", "R164N", "E240K", "T265M"], "genotype_13": "PQMKNMAGKRMRN" },
+    "v1.3": { "mutations": ["Q39K", "E104K", "R164S", "E240K", "T265M"], "genotype_13": "LKMKSMAGKRMRN" },
+    "v2.1": { "mutations": ["E104K", "R164N", "E240K", "T265M"], "genotype_13": "LQMKNMAGKRMRN" },
+    "v2.2": { "mutations": ["Q39K", "E104K", "R164N", "E240K"], "genotype_13": "LKMKNMAGKRTRN" },
+    "v2.3": { "mutations": ["Q39K", "E104K", "R164N", "M182T", "E240K"], "genotype_13": "LKMKNTAGKRTRN" },
+    "v3.1": { "mutations": ["L21P", "E104K", "R164N", "M182T", "E240K"], "genotype_13": "PQMKNTAGKRTRN" },
+    "Col1": { "mutations": ["Q39K", "R164H", "M182T", "R244S", "T265M"], "genotype_13": "LKMEHTAGESMRN" },
+    "Col2": { "mutations": ["Q39K", "M69L", "E104K", "M182T", "G238S", "E240K", "R275L"], "genotype_13": "LKLKRTASKRTLN" },
+    "Col3": { "mutations": ["L21P", "Q39K", "E104K", "R164H", "M182T", "E240K", "T265M"], "genotype_13": "PKMKHTAGKRMRN" },
+    "Col4": { "mutations": ["L21P", "Q39K", "M69L", "E104K", "R164N", "E240K", "N276D"], "genotype_13": "PKLKNMAGKRTRD" }
+  },
+  "display_order": [
+    "WT", "DD",
+    "v1.1", "v3.1", "v2.1", "v1.2",
+    "v2.2", "v2.3", "v1.3",
+    "Col1", "Col3", "Col2", "Col4"
+  ],
+  "colors": {
+    "WT":   "#1A1A1A",
+    "DD":   "#9E9E9E",
+    "v1.1": "#0D47A1",
+    "v3.1": "#1565C0",
+    "v2.1": "#1E88E5",
+    "v1.2": "#42A5F5",
+    "v2.2": "#C62828",
+    "v2.3": "#E53935",
+    "v1.3": "#FF8F00",
+    "Col1": "#2E7D32",
+    "Col3": "#43A047",
+    "Col2": "#00838F",
+    "Col4": "#00695C"
+  },
+  "clusters": {
+    "No Q39K":         ["v1.1", "v3.1", "v2.1", "v1.2"],
+    "Controls":        ["WT", "DD"],
+    "+Q39K":           ["v2.2", "v2.3", "v1.3"],
+    "Colony isolates (AMP 16 + AZT 32 \u00b5g/mL)": ["Col1", "Col3", "Col2", "Col4"]
+  },
+  "bg_exclude": {
+    "AZT": ["A16"],
+    "AMP": ["A8"]
+  }
+}
