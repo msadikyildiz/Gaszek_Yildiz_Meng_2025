@@ -3,8 +3,8 @@
 Code and data accompanying:
 
 > Gaszek IK\*, Yildiz MS\*, Meng Z\*, de la Paz JA, Alvarez SM, Sezer D, Morcos F, Lin M, Toprak E.
-> **Higher-order epistasis drives evolutionary unpredictability toward novel antibiotic resistance.**
-> *Nature Communications* (under review). \*Equal contribution.
+> **Higher-order epistasis drives evolutionary unpredictability toward resistance against non-native antibiotics.**
+> *Nature Communications* (in press). \*Equal contribution.
 
 We profiled the fitness of a combinatorial mutant library of TEM-1 β-lactamase — 13
 resistance-associated positions, ~55,000 genotypes — under ampicillin (AMP) and
@@ -98,6 +98,17 @@ Positions, in protein numbering, are 19, 37, 67, 102, 162, 180, 235, 236, 237, 2
 concentration, carrying fitness (median AUC), its error, and epistasis under each of the
 three definitions. See **[DATA_README.md](DATA_README.md)** for the full column-level
 description of every raw and processed file.
+
+---
+
+## Data and code availability
+
+- **Raw sequencing reads** — barcode-count Illumina libraries and the PacBio barcode-to-genotype
+  matchbook — are deposited in the NCBI Sequence Read Archive; the accession is given in the
+  article's Data Availability statement.
+- **Processed data and analysis code** are in this repository, archived at Zenodo
+  (DOI: `[[ZENODO_DOI]]`, added on release).
+- **Source data** underlying the figures are provided with the published article.
 
 ---
 

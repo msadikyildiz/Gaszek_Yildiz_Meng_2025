@@ -1,0 +1,30 @@
+{
+  "title": "Higher-order epistasis drives evolutionary unpredictability toward resistance against non-native antibiotics",
+  "description": "Analysis code and processed data for a combinatorially complete TEM-1 beta-lactamase fitness landscape (55,296 variants from 18 clinical mutations across 13 residues) measured under native (ampicillin) and non-native (aztreonam) antibiotic selection. Includes preprocessing, epistasis-order decomposition, LightGBM/SHAP regression, graph analysis, direct coupling analysis / latent generative landscapes, and figure generation. Accompanies the Nature Communications article.",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "GPL-3.0-or-later",
+  "creators": [
+    {"name": "Gaszek, Ilona Kamila", "affiliation": "The University of Texas Southwestern Medical Center", "orcid": "0000-0002-3397-7294"},
+    {"name": "Yildiz, Muhammed Sadik", "affiliation": "The University of Texas Southwestern Medical Center", "orcid": "0000-0002-1473-0819"},
+    {"name": "Meng, Zhaoxu", "affiliation": "The University of Texas Southwestern Medical Center"},
+    {"name": "de la Paz, Jose Alberto", "affiliation": "The University of Texas at Dallas"},
+    {"name": "Alvarez, Sophia Maria", "affiliation": "The University of Texas at Dallas", "orcid": "0009-0007-3112-2632"},
+    {"name": "Sezer, Deniz", "affiliation": "The University of Texas Southwestern Medical Center", "orcid": "0000-0002-9635-4369"},
+    {"name": "Morcos, Faruck", "affiliation": "The University of Texas at Dallas", "orcid": "0000-0001-6208-1561"},
+    {"name": "Lin, Milo", "affiliation": "The University of Texas Southwestern Medical Center", "orcid": "0000-0001-8680-2685"},
+    {"name": "Toprak, Erdal", "affiliation": "The University of Texas Southwestern Medical Center", "orcid": "0000-0002-4883-7681"}
+  ],
+  "keywords": [
+    "antibiotic resistance",
+    "beta-lactamase",
+    "extended-spectrum beta-lactamase",
+    "TEM-1",
+    "epistasis",
+    "higher-order epistasis",
+    "fitness landscape",
+    "combinatorial mutagenesis",
+    "machine learning",
+    "direct coupling analysis"
+  ]
+}

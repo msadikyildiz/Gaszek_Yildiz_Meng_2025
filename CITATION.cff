@@ -1,0 +1,61 @@
+cff-version: 1.2.0
+message: "If you use this software or the accompanying data, please cite the article and this repository."
+title: "Higher-order epistasis drives evolutionary unpredictability toward resistance against non-native antibiotics"
+abstract: >-
+  Analysis code and processed data for a combinatorially complete TEM-1 beta-lactamase
+  fitness landscape (55,296 variants from 18 clinical mutations across 13 residues) measured
+  under native (ampicillin) and non-native (aztreonam) antibiotic selection. Includes
+  preprocessing, epistasis-order decomposition, LightGBM/SHAP regression, graph analysis,
+  direct coupling analysis / latent generative landscapes, and figure generation.
+type: software
+authors:
+  - family-names: Gaszek
+    given-names: Ilona Kamila
+    affiliation: "The University of Texas Southwestern Medical Center, Dallas, TX, USA"
+    orcid: "https://orcid.org/0000-0002-3397-7294"
+  - family-names: Yildiz
+    given-names: Muhammed Sadik
+    affiliation: "The University of Texas Southwestern Medical Center, Dallas, TX, USA"
+    orcid: "https://orcid.org/0000-0002-1473-0819"
+  - family-names: Meng
+    given-names: Zhaoxu
+    affiliation: "The University of Texas Southwestern Medical Center, Dallas, TX, USA"
+  - family-names: "de la Paz"
+    given-names: Jose Alberto
+    affiliation: "The University of Texas at Dallas, Richardson, TX, USA"
+  - family-names: Alvarez
+    given-names: Sophia Maria
+    affiliation: "The University of Texas at Dallas, Richardson, TX, USA"
+    orcid: "https://orcid.org/0009-0007-3112-2632"
+  - family-names: Sezer
+    given-names: Deniz
+    affiliation: "The University of Texas Southwestern Medical Center, Dallas, TX, USA"
+    orcid: "https://orcid.org/0000-0002-9635-4369"
+  - family-names: Morcos
+    given-names: Faruck
+    affiliation: "The University of Texas at Dallas, Richardson, TX, USA"
+    orcid: "https://orcid.org/0000-0001-6208-1561"
+  - family-names: Lin
+    given-names: Milo
+    affiliation: "The University of Texas Southwestern Medical Center, Dallas, TX, USA"
+    orcid: "https://orcid.org/0000-0001-8680-2685"
+  - family-names: Toprak
+    given-names: Erdal
+    affiliation: "The University of Texas Southwestern Medical Center, Dallas, TX, USA"
+    email: Erdal.Toprak@utsouthwestern.edu
+    orcid: "https://orcid.org/0000-0002-4883-7681"
+repository-code: "https://github.com/msadikyildiz/Gaszek_Yildiz_Meng_2025"
+license: GPL-3.0-or-later
+keywords:
+  - antibiotic resistance
+  - beta-lactamase
+  - extended-spectrum beta-lactamase
+  - TEM-1
+  - epistasis
+  - higher-order epistasis
+  - fitness landscape
+  - combinatorial mutagenesis
+  - machine learning
+  - direct coupling analysis
+version: 1.0.0
+date-released: "2026-07-19"
