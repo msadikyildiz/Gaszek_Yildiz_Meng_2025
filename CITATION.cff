@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software or the accompanying data, please cite the article and this repository."
-title: "Higher-order epistasis drives evolutionary unpredictability toward resistance against non-native antibiotics"
+title: "Higher-order epistasis drives evolutionary unpredictability toward new antibiotic resistance"
 abstract: >-
   Analysis code and processed data for a combinatorially complete TEM-1 beta-lactamase
   fitness landscape (55,296 variants from 18 clinical mutations across 13 residues) measured

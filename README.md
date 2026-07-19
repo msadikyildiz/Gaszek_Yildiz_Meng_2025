@@ -3,7 +3,7 @@
 Code and data accompanying:
 
 > Gaszek IK\*, Yildiz MS\*, Meng Z\*, de la Paz JA, Alvarez SM, Sezer D, Morcos F, Lin M, Toprak E.
-> **Higher-order epistasis drives evolutionary unpredictability toward resistance against non-native antibiotics.**
+> **Higher-order epistasis drives evolutionary unpredictability toward new antibiotic resistance.**
 > *Nature Communications* (in press). \*Equal contribution.
 
 We profiled the fitness of a combinatorial mutant library of TEM-1 β-lactamase — 13
