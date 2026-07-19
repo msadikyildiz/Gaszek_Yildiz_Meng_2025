@@ -106,8 +106,8 @@ description of every raw and processed file.
 - **Raw sequencing reads** — barcode-count Illumina libraries and the PacBio barcode-to-genotype
   matchbook — are deposited in the NCBI Sequence Read Archive; the accession is given in the
   article's Data Availability statement.
-- **Processed data and analysis code** are in this repository, archived at Zenodo
-  (DOI: `[[ZENODO_DOI]]`, added on release).
+- **Processed data and analysis code** are in this repository, archived at Zenodo:
+  [10.5281/zenodo.21442350](https://doi.org/10.5281/zenodo.21442350) (concept DOI, resolves to the latest version).
 - **Source data** underlying the figures are provided with the published article.
 
 ---

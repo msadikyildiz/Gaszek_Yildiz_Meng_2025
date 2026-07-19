@@ -45,6 +45,7 @@ authors:
     email: Erdal.Toprak@utsouthwestern.edu
     orcid: "https://orcid.org/0000-0002-4883-7681"
 repository-code: "https://github.com/msadikyildiz/Gaszek_Yildiz_Meng_2025"
+doi: "10.5281/zenodo.21442350"
 license: GPL-3.0-or-later
 keywords:
   - antibiotic resistance
@@ -57,5 +58,5 @@ keywords:
   - combinatorial mutagenesis
   - machine learning
   - direct coupling analysis
-version: 1.0.0
+version: 1.0.1
 date-released: "2026-07-19"
