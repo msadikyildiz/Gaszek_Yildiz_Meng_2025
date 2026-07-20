@@ -21,24 +21,33 @@ that regenerate every epistasis calculation, regression model, and figure in the
 data/
   raw/            # Read counts + AUC per genotype (AMP/AZT) and sample metadata (CSV)
   processed/      # Tidy AUC tables (wide/long) and Epistasis_Combined.parquet
+  known_variants/ # Clinical / characterized-variant encodings (encoded_variants.csv)
 src/
   01_data_preprocessing.ipynb       # Raw CSV → tidy Parquet (mean / median / std / CV)
   02_epistasis_pipeline.py          # Biochemical, ensemble, regression epistasis → Epistasis_Combined.parquet
-  03_epistasis_azt_regression.ipynb # LightGBM + SHAP, AZT
-  04_epistasis_amp_regression.ipynb # LightGBM + SHAP, AMP
-  05_epistasis_figures.ipynb        # Publication figures
+  03_epistasis_azt_regression.ipynb # LightGBM + SHAP, AZT (Fig 5B/5D)
+  04_epistasis_amp_regression.ipynb # LightGBM + SHAP, AMP (Fig 5A/5C)
+  05_epistasis_figures.ipynb        # Main-figure panels (Figs 3-4) + SI panels S1, S5
   utils/                            # W/H/V/G/X matrix generation, epistasis methods, config
-  graph_analysis/                   # Fitness-landscape graphs + distribution analysis (Fig 1, 2, S4, S18)
-figures/                  # Publication figures, named by manuscript panel (see "Figures" below)
-revision_analyses/        # Code reproducing the revision's new Supplementary Figures (S9–S18)
-validation_experiments/   # Monoculture IC50/MIC validation data + pipeline (Supplementary Figs S7, S8)
+  graph_analysis/                   # Landscape-graph + distribution analysis; graph_builder/ = Fig 2 construction
+  figure_scripts/                   # Standalone figure scripts (Fig 3A; known-variants overlay)
+analysis/                 # Revision analyses → Supplementary Figs S9–S17 (one self-contained module each)
+validation/               # Monoculture IC50/MIC pipeline (feeds Supplementary Figs S7, S8)
+si_figures/               # Reproducing code for SI figures built from external data (S2, S3, S7/S8)
+figures/
+  main/                   # Main-text Figures 1–6
+  supplementary/          # Supplementary Figures S1–S18
+  diagnostics/            # Non-manuscript regression + exploratory renders
+  manifest.csv            # figure → generator map (see figures/README.md)
+source_data/              # Per-figure Source Data generators (source_data/scripts/)
 env/                      # Conda environment (epistasis_env.yml) + Singularity definition
 pyproject.toml            # uv project (Python 3.12); uv.lock pins the full environment
 DATA_README.md            # Column-level description of every data file
-LICENSE                   # GPL-3.0
+CITATION.cff / LICENSE    # Citation metadata; GPL-3.0
 ```
 
-> `archive/`, `cache/`, and `.venv/` are git-ignored and not part of the distribution.
+> `archive/`, `cache/`, `.venv/`, and per-module generator scratch (e.g. `analysis/**/figures/`,
+> `si_figures/**/figures/`, `source_data/derived/`) are git-ignored and not part of the distribution.
 
 ---
 
@@ -83,7 +92,11 @@ conda activate epistasis_env
    `src/04_epistasis_amp_regression.ipynb` for LightGBM cross-validation, learning
    curves, permutation importance, and SHAP attributions.
 
-4. **Generate figures** — run `src/05_epistasis_figures.ipynb`.
+4. **Generate figures** — main-text panels come from `src/05_epistasis_figures.ipynb`
+   (and `src/03`/`src/04` for Fig 5). Supplementary Figures are produced by the
+   self-contained modules under `analysis/` (S9–S17), `validation/` (S7/S8), and
+   `si_figures/` (S2, S3). See `figures/README.md` + `figures/manifest.csv` for the full
+   map, and `source_data/` for the per-figure Source Data generators.
 
 ---
 
@@ -114,28 +127,32 @@ description of every raw and processed file.
 
 ## Figures
 
-Files in `figures/` are named by their manuscript identity — `Figure <N><panel>. <description>.png`
-for main figures 1–6 and the supplementary panels (S1, S4, S5). Supporting material lives
-in subfolders:
+`figures/` collects every published figure in one place:
 
 | Folder | Contents |
 |---|---|
-| `amp_regression/`, `azt_regression/` | Regression diagnostics: learning curves, permutation importance, SHAP heatmaps, 2-D prediction histograms, and learning-curve statistics (CSV). |
-| `known_variants/` | Clinical / characterized-variant encodings and the notebook that places them on the landscape. |
-| `Figure 3A/` | Standalone script for the Figure 3A AMP-vs-AZT scatter. |
-| `_not_in_manuscript/` | Notebook renders with no manuscript panel, plus `_pre_s9_s13/` — a frozen pre-revision figure snapshot under the earlier numbering. See the folder's README. |
+| `main/` | Main-text Figures 1–6 |
+| `supplementary/` | Supplementary Figures S1–S18 (`figure_sNN[_amp/azt].png`) |
+| `diagnostics/` | Non-manuscript renders: regression learning-curve/SHAP/permutation panels and exploratory distributions |
 
-All main-text figures are regenerable from `src/05_epistasis_figures.ipynb`.
-Supplementary Figures S2 and S3 are original-submission panels whose
-generating code lived only on the wet-lab MIC-estimation and sequencing
-clusters; `si_figures/` backfills their source for this public archive:
+`figures/manifest.csv` maps every figure and panel to the code that generates it, and
+`figures/README.md` explains how each is reproduced. Most regenerate from this repository's
+code — `src/05_epistasis_figures.ipynb` (Figs 3–4, S1, S5), `src/03`/`src/04` (Fig 5 SHAP),
+`src/figure_scripts/figure_3a.py` (Fig 3A), the `analysis/` modules (S9–S17), and the
+`si_figures/` folders (S2, S3, S7/S8). A few are produced with external tools (Gephi for the
+Fig 2 / S4 graph layouts, BioRender for the Fig 1 schematics) or by collaborators (Fig 6 / S6
+DCA, S18) and cannot be regenerated by this repository's code alone — noted in the manifest.
+
+Supplementary Figures whose generating code needed data outside the main pipeline are
+backfilled under `si_figures/` for this public archive:
 
 | Folder | Produces |
 |---|---|
-| `si_figures/s02_mic/` | Supplementary Fig **S2** (MIC panel for TEM-1-CML and select variants across 9 beta-lactams). Bundles the small local `plategig` fitting package; verified to run end-to-end in this repo's `uv` env. |
-| `si_figures/s03_dose_response/` | Supplementary Fig **S3** (dose-response AUC profiles for a representative genotype subset). `analysis.py` reads `data/raw/*_auc_per_genotype.csv` directly — no extra data needed. |
+| `si_figures/s02_mic/` | Supplementary Fig **S2** (MIC panel for TEM-1-CML and select variants across 9 β-lactams). Bundles the small local `plategig` fitting package; runs end-to-end in this repo's `uv` env. The peer-reviewed single-panel figure is retained; this folder reproduces its underlying data. |
+| `si_figures/s03_dose_response/` | Supplementary Fig **S3** (dose-response profiles for a representative genotype subset). `analysis.py` reads `data/raw/*_auc_per_genotype.csv` directly. |
+| `si_figures/s07_s08_ic50/` | Supplementary Figs **S7/S8** (monoculture IC50 vs AUC-fitness). Reads `validation/src/processed/`. |
 
-See each folder's README for BioHPC provenance and reproducibility notes.
+See each folder's README for provenance and reproducibility notes.
 
 ---
 
