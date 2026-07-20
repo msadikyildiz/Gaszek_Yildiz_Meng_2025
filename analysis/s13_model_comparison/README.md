@@ -22,8 +22,13 @@ Runtime: ~1 minute on 8 cores.
 
 ## Outputs
 
-- `figures/model_comparison_amp.png` — AMP @ 781 µg/mL learning curves.
-- `figures/model_comparison_azt.png` — AZT @ 36 µg/mL learning curves.
+Both learning-curve panels are the published Supplementary Fig. S13 and are
+written directly to the shared gallery `figures/supplementary/`; this module
+has no secondary/diagnostic panel, so its local `figures/` dir is unused
+(gitignored).
+
+- `figures/supplementary/figure_s13_amp.png` — AMP @ 781 µg/mL learning curves. **Published Supplementary Fig. S13 (AMP)**.
+- `figures/supplementary/figure_s13_azt.png` — AZT @ 36 µg/mL learning curves. **Published Supplementary Fig. S13 (AZT)**.
 - `results_table.csv` — one row per (model, drug, fraction, seed): RMSD, R², runtime (396 rows; raw per-seed data).
 - `data/learning_curves_summary.csv` — aggregated mean ± s.d. over seeds for every (model, drug, fraction) (132 rows; the spec-shaped table).
 

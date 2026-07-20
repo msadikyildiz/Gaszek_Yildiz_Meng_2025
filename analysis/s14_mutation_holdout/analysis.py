@@ -49,8 +49,10 @@ PARQUET = REPO / 'data' / 'processed' / 'Epistasis_Combined.parquet'
 OUT = Path(__file__).resolve().parent
 FIG = OUT / 'figures'
 DAT = OUT / 'data'
+SUPP = REPO / 'figures' / 'supplementary'
 FIG.mkdir(parents=True, exist_ok=True)
 DAT.mkdir(parents=True, exist_ok=True)
+SUPP.mkdir(parents=True, exist_ok=True)
 
 # ------------------------------------------------------------------ schema
 # Ambler-numbered mutation labels (paper convention)
@@ -336,7 +338,7 @@ def make_figure(drug, lomo_df, ham_df):
     ax.legend(fontsize=7, loc='best', frameon=True)
 
     plt.tight_layout()
-    out_path = FIG / f'block_holdout_{drug.lower()}.png'
+    out_path = SUPP / f'figure_s14_{drug.lower()}.png'
     plt.savefig(out_path, dpi=300, bbox_inches='tight')
     plt.close(fig)
     print(f'wrote {out_path}')

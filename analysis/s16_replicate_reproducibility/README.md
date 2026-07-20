@@ -22,16 +22,24 @@ Runtime: ~30 s single-core. Polars + Matplotlib, reproducible (seed 20260420).
 
 ## Outputs
 
-- `figures/replicate_scatter_amp.png` — 5x3 hex-bin grid of replicate-pair
+The replicate-scatter panels are the published Supplementary Fig. S16 and are
+written directly to the shared gallery `figures/supplementary/`. The CV/SD
+distribution panels (and the viable-subset variants) are secondary/diagnostic
+and regenerate into this module's local `figures/` (gitignored, scratch).
+
+- `figures/supplementary/figure_s16_amp.png` — 5x3 hex-bin grid of replicate-pair
   scatter plots for the five nonzero AMP concentrations. Identity line in
-  drug colour; Pearson r, p-value, n annotated per panel.
-- `figures/replicate_scatter_azt.png` — 7x3 hex-bin grid for the seven
-  nonzero AZT concentrations.
+  drug colour; Pearson r, p-value, n annotated per panel. **Published
+  Supplementary Fig. S16 (AMP)**.
+- `figures/supplementary/figure_s16_azt.png` — 7x3 hex-bin grid for the seven
+  nonzero AZT concentrations. **Published Supplementary Fig. S16 (AZT)**.
 - `figures/replicate_cv_amp.png` — per-concentration histograms of
   (left) %CV on raw AUC and (right) SD of log10(AUC). Dashed line at 10% CV
   marks the manuscript's claimed threshold; medians, IQR, and fraction of
-  genotypes below 10% CV are annotated in-panel.
-- `figures/replicate_cv_azt.png` — same layout for AZT.
+  genotypes below 10% CV are annotated in-panel. Secondary/diagnostic —
+  regenerates locally (gitignored).
+- `figures/replicate_cv_azt.png` — same layout for AZT. Secondary/diagnostic
+  — regenerates locally (gitignored).
 - `data/per_genotype_replicate_stats.csv` — one row per (genotype, drug,
   concentration); columns: `genotype, drug, concentration, log_mean,
   log_sd, raw_mean, raw_sd, cv_percent` (985,674 rows).

@@ -62,8 +62,10 @@ S7_R2 = HERE.parent / "s11_s12_concentration_grid" / "data" / "regression_r2_by_
 S7_PAIRWISE = HERE.parent / "s11_s12_concentration_grid" / "data" / "pairwise_mean_fitness.csv"
 FIGDIR = HERE / "figures"
 DATADIR = HERE / "data"
+SUPP = REPO / "figures" / "supplementary"
 FIGDIR.mkdir(exist_ok=True, parents=True)
 DATADIR.mkdir(exist_ok=True, parents=True)
+SUPP.mkdir(exist_ok=True, parents=True)
 
 SEED = 20260420
 
@@ -633,13 +635,13 @@ def main() -> None:
     # Ext Fig A (single-drug + combined).
     plot_ext_fig_a_single(df_order, "AMP", FIGDIR / "ext_order_decomposition_amp.png")
     plot_ext_fig_a_single(df_order, "AZT", FIGDIR / "ext_order_decomposition_azt.png")
-    plot_ext_fig_a_combined(df_order, FIGDIR / "ext_order_decomposition_combined.png")
+    plot_ext_fig_a_combined(df_order, SUPP / "figure_s09.png")
 
     # Ext Fig E (matched stringency).
     matched_long, extras = compute_matched_stringency(df_all, df_order)
     matched_long.write_csv(DATADIR / "matched_stringency_summary.csv")
     print(f"wrote {DATADIR / 'matched_stringency_summary.csv'} ({matched_long.height} rows)")
-    plot_ext_fig_e(matched_long, extras, df_order, FIGDIR / "ext_drug_asymmetry.png")
+    plot_ext_fig_e(matched_long, extras, df_order, SUPP / "figure_s10.png")
 
     # Source Data workbook.
     write_source_data(df_order, matched_long, extras, DATADIR / "source_data.xlsx")

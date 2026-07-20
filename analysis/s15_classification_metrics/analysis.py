@@ -59,8 +59,10 @@ REPO = _repo_root(Path(__file__).resolve())
 DATA_DIR = REPO / "data" / "processed"
 OUT_DIR = Path(__file__).resolve().parent
 FIG_DIR = OUT_DIR / "figures"
+SUPP = REPO / "figures" / "supplementary"
 FIG_DIR.mkdir(exist_ok=True, parents=True)
 (OUT_DIR / "data").mkdir(exist_ok=True, parents=True)
+SUPP.mkdir(exist_ok=True, parents=True)
 
 # Ambler numbering – matches notebooks 03/04
 SIGN_POS = [21, 39, 69, 104, 164, 182, 237, 238, 240, 244, 265, 275, 276]
@@ -513,7 +515,7 @@ def plot_drug(res: dict) -> Path:
         s.set_linewidth(0.6)
 
     fig.tight_layout()
-    out = FIG_DIR / f"rmsd_justification_{drug.lower()}.png"
+    out = SUPP / f"figure_s15_{drug.lower()}.png"
     fig.savefig(out, dpi=300, bbox_inches="tight")
     print(f"  saved {out}")
     plt.close(fig)

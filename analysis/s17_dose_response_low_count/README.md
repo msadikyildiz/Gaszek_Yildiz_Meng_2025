@@ -35,9 +35,16 @@ Runtime: ~45 s.
 
 ## Outputs
 
+The per-drug panels are the published Supplementary Fig. S17 and are written
+directly to the shared gallery `figures/supplementary/`. The combined
+two-panel figure is secondary/diagnostic and regenerates into this module's
+local `figures/` (gitignored, scratch).
+
 - `figures/fig_s3_revised.png` — combined two-panel publication figure.
-- `figures/fig_s3_revised_amp.png`, `fig_s3_revised_azt.png` — per-drug
-  high-resolution panels (kept in case individual embedding is preferred).
+  Secondary/diagnostic — regenerates locally (gitignored).
+- `figures/supplementary/figure_s17_amp.png`, `figures/supplementary/figure_s17_azt.png`
+  — per-drug high-resolution panels (kept in case individual embedding is
+  preferred). **Published Supplementary Fig. S17**.
 - `data/highlighted_variants.csv` — 107 rows: one per highlighted genotype
   with its category (WT / dead / single / clinical / top-composite), label,
   Ambler position (singles only) and ranking (composites only).

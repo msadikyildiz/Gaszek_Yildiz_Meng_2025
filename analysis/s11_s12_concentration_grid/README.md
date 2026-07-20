@@ -27,15 +27,20 @@ aggregate and plot).
 
 ## Outputs
 
+The four published Supplementary panels (S11, S12) are written directly to
+the shared gallery `figures/supplementary/`. The R²-vs-order line plot is
+secondary/diagnostic and regenerates into this module's local `figures/`
+(gitignored, scratch).
+
 ### Figures
 
 | File | Description |
 | --- | --- |
-| `figures/pairwise_heatmap_amp.png` | 19×19 pairwise-epistasis heatmap, one panel per AMP concentration (5 panels). |
-| `figures/pairwise_heatmap_azt.png` | 19×19 pairwise-epistasis heatmap, one panel per AZT concentration (7 panels). |
-| `figures/pred_vs_measured_amp.png` | Measured vs. predicted fitness density, rows = 5 AMP concentrations, columns = max. included epistatic order K ∈ 1..6. |
-| `figures/pred_vs_measured_azt.png` | Measured vs. predicted fitness density, rows = 7 AZT concentrations, columns = max. included epistatic order K ∈ 1..6. |
-| `figures/r2_vs_order.png` | Two-panel line plot: R² vs. maximum epistatic order, one curve per concentration, AMP (left) and AZT (right). |
+| `figures/supplementary/figure_s11_amp.png` | 19×19 pairwise-epistasis heatmap, one panel per AMP concentration (5 panels) — **published Supplementary Fig. S11 (AMP)**. |
+| `figures/supplementary/figure_s11_azt.png` | 19×19 pairwise-epistasis heatmap, one panel per AZT concentration (7 panels) — **published Supplementary Fig. S11 (AZT)**. |
+| `figures/supplementary/figure_s12_amp.png` | Measured vs. predicted fitness density, rows = 5 AMP concentrations, columns = max. included epistatic order K ∈ 1..6 — **published Supplementary Fig. S12 (AMP)**. |
+| `figures/supplementary/figure_s12_azt.png` | Measured vs. predicted fitness density, rows = 7 AZT concentrations, columns = max. included epistatic order K ∈ 1..6 — **published Supplementary Fig. S12 (AZT)**. |
+| `figures/r2_vs_order.png` | Two-panel line plot: R² vs. maximum epistatic order, one curve per concentration, AMP (left) and AZT (right). Secondary/diagnostic — regenerates locally (gitignored). |
 
 ### Data
 

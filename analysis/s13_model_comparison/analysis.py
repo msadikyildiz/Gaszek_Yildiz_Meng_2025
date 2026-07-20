@@ -56,8 +56,10 @@ REPO = _repo_root(Path(__file__).resolve())
 PARQUET = REPO / "data" / "processed" / "Epistasis_Combined.parquet"
 FIGDIR = HERE / "figures"
 DATADIR = HERE / "data"
+SUPP = REPO / "figures" / "supplementary"
 FIGDIR.mkdir(exist_ok=True, parents=True)
 DATADIR.mkdir(exist_ok=True, parents=True)
+SUPP.mkdir(exist_ok=True, parents=True)
 
 # --- constants ---------------------------------------------------------------
 # The fitness parquet encodes each of the 13 positions with its wild-type letter
@@ -385,7 +387,7 @@ def main():
     summary.write_csv(DATADIR / "learning_curves_summary.csv")
 
     for drug, conc in CONDITIONS:
-        out = FIGDIR / f"model_comparison_{drug.lower()}.png"
+        out = SUPP / f"figure_s13_{drug.lower()}.png"
         plot_curve(summary, drug, conc, out)
 
 

@@ -62,8 +62,10 @@ REPO = _repo_root(Path(__file__).resolve())
 RAW = REPO / "data" / "raw"
 FIGDIR = HERE / "figures"
 DATADIR = HERE / "data"
+SUPP = REPO / "figures" / "supplementary"
 FIGDIR.mkdir(exist_ok=True, parents=True)
 DATADIR.mkdir(exist_ok=True, parents=True)
+SUPP.mkdir(exist_ok=True, parents=True)
 
 # --- constants ---------------------------------------------------------------
 DRUG_FILES = {
@@ -481,7 +483,7 @@ def main():
 
     print("Drawing replicate-pair scatter panels...")
     for drug in DRUG_FILES:
-        plot_replicate_scatter(drug, FIGDIR / f"replicate_scatter_{drug[:3].lower()}.png")
+        plot_replicate_scatter(drug, SUPP / f"figure_s16_{drug[:3].lower()}.png")
 
     print("Drawing CV / log-SD distribution panels...")
     for drug in DRUG_FILES:

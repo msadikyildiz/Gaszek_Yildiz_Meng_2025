@@ -63,8 +63,10 @@ CLINICAL_CSV = (
 )
 FIGDIR = HERE / "figures"
 DATADIR = HERE / "data"
+SUPP = REPO / "figures" / "supplementary"
 FIGDIR.mkdir(exist_ok=True, parents=True)
 DATADIR.mkdir(exist_ok=True, parents=True)
+SUPP.mkdir(exist_ok=True, parents=True)
 
 # --- constants ---------------------------------------------------------------
 # The library encodes genotypes in "masked" form: '.' at a position where the
@@ -600,7 +602,7 @@ def plot_single_panel(drug: str, per_variant: pl.DataFrame,
                fontsize=7.5, frameon=False, ncol=1, handletextpad=0.6)
     tag = drug[:3].lower()
     fig.tight_layout()
-    out = FIGDIR / f"fig_s3_revised_{tag}.png"
+    out = SUPP / f"figure_s17_{tag}.png"
     fig.savefig(out, dpi=300, bbox_inches="tight")
     plt.close(fig)
     print(f"saved {out}")

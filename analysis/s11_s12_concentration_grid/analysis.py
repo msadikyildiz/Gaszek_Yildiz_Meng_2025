@@ -57,8 +57,10 @@ REPO = _repo_root(Path(__file__).resolve())
 PARQUET = REPO / "data" / "processed" / "Epistasis_Combined.parquet"
 FIGDIR = HERE / "figures"
 DATADIR = HERE / "data"
+SUPP = REPO / "figures" / "supplementary"
 FIGDIR.mkdir(exist_ok=True, parents=True)
 DATADIR.mkdir(exist_ok=True, parents=True)
+SUPP.mkdir(exist_ok=True, parents=True)
 
 # --- constants ---------------------------------------------------------------
 AMBLER_POS = [21, 39, 69, 104, 164, 182, 237, 238, 240, 244, 265, 275, 276]
@@ -419,7 +421,7 @@ def main() -> None:
     # (1) Pairwise heatmap grids
     pair_frames: list[pl.DataFrame] = []
     for drug in ["AMP", "AZT"]:
-        out = FIGDIR / f"pairwise_heatmap_{drug.lower()}.png"
+        out = SUPP / f"figure_s11_{drug.lower()}.png"
         pair_frames.append(plot_pairwise_grid(df_all, drug, out))
     pair_long = pl.concat(pair_frames)
     pair_long.write_csv(DATADIR / "pairwise_mean_fitness.csv")
@@ -427,7 +429,7 @@ def main() -> None:
 
     # (2) Measured-vs-predicted density grids
     for drug in ["AMP", "AZT"]:
-        out = FIGDIR / f"pred_vs_measured_{drug.lower()}.png"
+        out = SUPP / f"figure_s12_{drug.lower()}.png"
         plot_pred_vs_measured(df_all, drug, out)
 
     # (3) R^2 vs order

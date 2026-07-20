@@ -34,14 +34,19 @@ stores every `Fitness_predicted for order K` column we need.
 
 ## Outputs
 
+The two published Supplementary panels (S9, S10) are written directly to the
+shared gallery `figures/supplementary/`. The single-drug decomposition panels
+are secondary/diagnostic and regenerate into this module's local `figures/`
+(gitignored, scratch).
+
 ### Figures
 
 | File | Description |
 | --- | --- |
-| `figures/ext_order_decomposition_amp.png` | Ext Fig. A (AMP only). Cumulative R² line + ΔR² bars per concentration. |
-| `figures/ext_order_decomposition_azt.png` | Ext Fig. A (AZT only). |
-| `figures/ext_order_decomposition_combined.png` | Ext Fig. A combined — primary publication panel. |
-| `figures/ext_drug_asymmetry.png` | Ext Fig. E, 2×2 panels: R², RMSD, fitness distribution, pairwise-ε histogram at matched stringency. |
+| `figures/ext_order_decomposition_amp.png` | Ext Fig. A (AMP only). Cumulative R² line + ΔR² bars per concentration. Secondary/diagnostic — regenerates locally (gitignored). |
+| `figures/ext_order_decomposition_azt.png` | Ext Fig. A (AZT only). Secondary/diagnostic — regenerates locally (gitignored). |
+| `figures/supplementary/figure_s09.png` | Ext Fig. A combined — **published Supplementary Fig. S9**. |
+| `figures/supplementary/figure_s10.png` | Ext Fig. E, 2×2 panels: R², RMSD, fitness distribution, pairwise-ε histogram at matched stringency — **published Supplementary Fig. S10**. |
 
 ### Data
 

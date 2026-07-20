@@ -18,3 +18,10 @@ analysis/s16_replicate_reproducibility/data/per_genotype_replicate_stats.csv
 
 # Validation pipeline regenerable figures (rebuild via validation/src/run_all.py)
 validation/figures/
+
+# Per-module analysis figure scratch: published Supplementary panels now write
+# directly to figures/supplementary/ (tracked); everything left in a module's
+# own figures/ (top-level or nested, e.g. library_invariance/figures/) is
+# secondary/diagnostic output that regenerates on rerun of that module's
+# analysis.py, so it is not committed.
+analysis/**/figures/

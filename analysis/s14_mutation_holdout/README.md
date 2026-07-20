@@ -27,10 +27,15 @@ P90 gain-of-resistance). Output: `data/classification_results.csv`.
 
 ## Outputs
 
+Both figures are the published Supplementary Fig. S14 and are written
+directly to the shared gallery `figures/supplementary/`; this module has no
+secondary/diagnostic panel, so its local `figures/` dir is unused
+(gitignored).
+
 | File | Purpose |
 |------|---------|
-| `figures/block_holdout_amp.png` | Two-panel figure: LOMO bar chart + Hamming curve |
-| `figures/block_holdout_azt.png` | Same for AZT |
+| `figures/supplementary/figure_s14_amp.png` | Two-panel figure: LOMO bar chart + Hamming curve — **published Supplementary Fig. S14 (AMP)** |
+| `figures/supplementary/figure_s14_azt.png` | Same for AZT — **published Supplementary Fig. S14 (AZT)** |
 | `data/lomo_results.csv`         | Per-mutation LightGBM + random + Lasso RMSD/R² |
 | `data/hamming_results.csv`      | Per-D LightGBM + random RMSD/R² for both references |
 | `data/classification_results.csv` | AUROC / balanced-accuracy under LOMO |

@@ -34,9 +34,11 @@ Runtime: a few minutes single-core (LightGBM over 10 random 10/90 splits per dru
 
 ## Outputs
 
-- `figures/rmsd_justification_azt.png`, `figures/rmsd_justification_amp.png` —
+- `figures/supplementary/figure_s15_azt.png`, `figures/supplementary/figure_s15_amp.png` —
   three-panel figures (ROC, confusion matrix, measured-vs-predicted scatter),
-  pooled across the 10 seeds.
+  pooled across the 10 seeds. **Published Supplementary Fig. S15**, written
+  directly to the shared gallery; this module has no secondary/diagnostic
+  panel, so its local `figures/` dir is unused (gitignored).
 - `results_table.csv` — per-threshold sens/spec/PPV/NPV/AUROC/AUPR with ± std,
   plus the `sigma_median3_estimated_floor` noise-floor column.
 
