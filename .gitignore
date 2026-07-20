@@ -13,6 +13,9 @@ src/graph_analysis/_generated/
 # Figure composition scratch
 figures/_compose/
 
+# Figure 6 DCA notebook run scratch (regenerates on running the notebook)
+src/evolutionary_statistics/figures/
+
 # Large regenerable intermediate (rebuild via analysis/s16_replicate_reproducibility/analysis.py)
 analysis/s16_replicate_reproducibility/data/per_genotype_replicate_stats.csv
 

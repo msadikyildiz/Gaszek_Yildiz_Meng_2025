@@ -73,9 +73,11 @@ before running the assembler.
 release-gated on outstanding contributor work:
 
 - **Fig 6** (DCA logo, effective alphabet, Hamiltonian distributions, LGL
-  coordinates) — pending F.M./Sophia/Alberto: we have requested the reproducible
-  code (preferred — it also settles the Fig 6A/6B legend items) or the source
-  values, with "available on request" only as a fallback if they decline.
+  coordinates) — the DCA code is folded in at `src/evolutionary_statistics/`
+  (panels A/B/C/G/H); LGL panels D/E/F are the separate
+  `github.com/morcoslab/LGL-VAE`. The Source Data numbers still need the
+  PF13354 MSA + `py-mfdca` to run the notebook, plus the LGL-VAE outputs — see
+  `src/evolutionary_statistics/README.md`.
 - **S18** (peak-advantage box plots + neutral-threshold matrix) — Devin/Milo.
 
 `build_source_data.py` stubs both sheets (plus Fig 1F, which has no plotted

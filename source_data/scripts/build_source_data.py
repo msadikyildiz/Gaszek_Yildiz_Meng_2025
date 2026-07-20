@@ -87,7 +87,7 @@ DATA = {
 
 # figure -> (source note, owner) for not-yet-filled sheets
 STUB = {
- "Fig6 - TODO Morcos lab":   ("Reproducible code (preferred) or source values for the DCA sequence logo (A), effective-alphabet (B), Hamiltonian distributions (C/G/H), and LGL coordinates (D/E/F) — pending F.M./Sophia/Alberto; may instead be stated as available-on-request if they elect that", "F.M./Sophia/Alberto"),
+ "Fig6 - TODO Morcos lab":   ("DCA code folded in at src/evolutionary_statistics/ (panels A/B/C/G/H: family logo, effective alphabet, Hamiltonian C/G/H); LGL D/E/F via github.com/morcoslab/LGL-VAE. Numbers pending: add MSAs/PF13354_ga.fasta + install py-mfdca to run + extract, and obtain LGL-VAE outputs — F.M./Sophia/Alberto", "F.M./Sophia/Alberto"),
  "S18 - TODO Devin-Milo":    ("Peak-advantage box plots + neutral-threshold matrix underlying values", "Devin/Milo"),
  "Fig1F no plotted data":    ("Structural render + 2D chemical structures — no plotted data; ChemDraw supplied as artwork", "IG/DS"),
 }
