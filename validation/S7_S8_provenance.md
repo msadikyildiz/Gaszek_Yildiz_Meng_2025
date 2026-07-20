@@ -36,7 +36,7 @@ uv run python - <<'PY'
 import polars as pl
 from scipy import stats
 for drug, b in [("AMP", "20260407"), ("AZT", "20260307")]:
-    d = pl.read_parquet(f"validation_experiments/src/processed/{b}/xref_expanded_df.parquet")
+    d = pl.read_parquet(f"validation/src/processed/{b}/xref_expanded_df.parquet")
     d = (d.filter((pl.col("drug") == drug) & pl.col("genotype_13").is_not_null())
            .select(["mean_fitness", "log10_ic50"]).drop_nulls())
     r, p = stats.pearsonr(d["mean_fitness"], d["log10_ic50"])

@@ -33,13 +33,13 @@ plate_reader/         plate-reader I/O utilities (utils.py) + config notebook
 From the repository root, with the environment set up (`uv sync`):
 
 ```bash
-uv run python validation_experiments/src/run_all.py            # all batches
-uv run python validation_experiments/src/fig_c_mic_vs_fitness.py   # S7/S8 only
-uv run python validation_experiments/src/export_csv.py            # per-variant tables
+uv run python validation/src/run_all.py            # all batches
+uv run python validation/src/fig_c_mic_vs_fitness.py   # S7/S8 only
+uv run python validation/src/export_csv.py            # per-variant tables
 ```
 
 The pipeline reads the raw plate XLSX in `data/`, writes processed per-variant
 tables into `src/processed/<batch>/`, and regenerates figures into
-`validation_experiments/figures/` (gitignored; rebuilt on run). The
+`validation/figures/` (gitignored; rebuilt on run). The
 cross-reference step joins monoculture metrics to the pooled fitness landscape
 in `../data/processed/Epistasis_Combined.parquet` (located automatically).
