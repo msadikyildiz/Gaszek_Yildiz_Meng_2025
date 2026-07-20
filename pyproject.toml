@@ -28,6 +28,13 @@ dependencies = [
     "joypy>=0.2.6",
 ]
 
+# Optional: only needed to re-run the Supplementary Fig S2 MIC-estimation notebook
+# (si_figures/s02_mic/). Install with `uv sync --extra si-figures`.
+[project.optional-dependencies]
+si-figures = [
+    "plategig @ git+https://github.com/msadikyildiz/plategig",
+]
+
 [tool.uv.sources]
 torch = [
     { index = "pytorch-cpu", marker = "sys_platform != 'linux'" },

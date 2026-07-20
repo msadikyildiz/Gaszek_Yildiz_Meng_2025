@@ -2323,6 +2323,11 @@ wheels = [
 ]
 
 [[package]]
+name = "plategig"
+version = "0.1"
+source = { git = "https://github.com/msadikyildiz/plategig#b531e202e7e7f87625a89a5069b86f992e952e10" }
+
+[[package]]
 name = "platformdirs"
 version = "4.9.2"
 source = { registry = "https://pypi.org/simple" }
@@ -3342,6 +3347,11 @@ dependencies = [
     { name = "vl-convert-python" },
 ]
 
+[package.optional-dependencies]
+si-figures = [
+    { name = "plategig" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "altair", specifier = ">=5.4" },
@@ -3356,6 +3366,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "openpyxl" },
     { name = "pandas" },
+    { name = "plategig", marker = "extra == 'si-figures'", git = "https://github.com/msadikyildiz/plategig" },
     { name = "polars" },
     { name = "pyarrow" },
     { name = "scikit-learn" },
