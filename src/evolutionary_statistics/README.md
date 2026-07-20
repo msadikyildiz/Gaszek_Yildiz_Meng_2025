@@ -1,83 +1,88 @@
-# Figure 6 — evolutionary statistics (DCA / family analysis)
+# Figure 6 (+ Supplementary Figure S6) — evolutionary statistics (DCA / family analysis)
 
-Direct-coupling-analysis (DCA) code behind **Figure 6**, contributed by the Morcos
-lab (F. Morcos, A. de la Paz, S. Alvarez, UT Dallas). `Figure6_evolutionary_statistics.ipynb`
-is the notebook **as received** from A. de la Paz — it is internally titled *"Figure 8
-and Supplementary Figure 8"* because it was written against the original-submission
-numbering. **Original Figure 8 = revision Figure 6.**
+Direct-coupling-analysis (DCA) of the Pfam **PF13354** β-lactamase family behind
+**Figure 6** and **Supplementary Figure S6**, contributed by the Morcos lab
+(F. Morcos, J. A. de la Paz, S. Alvarez, UT Dallas).
+
+- **`Figure6_Analysis.ipynb`** — the notebook **as received** from J. A. de la Paz, kept
+  verbatim for provenance.
+- **`reproduce_fig6.py`** — a faithful, repo-relative transcription of that notebook that
+  runs on our shipped data and writes the Source Data. This is the in-repo entry point.
 
 ## Panel coverage
 
-This notebook reproduces the DCA half of Figure 6:
+`reproduce_fig6.py` regenerates the DCA panels and their Source Data:
 
-| Figure 6 panel | Notebook output (`_8x` = original numbering) | What it is |
+| Panel | What it is | Source Data |
 |---|---|---|
-| **6A** | `FamilyLogo_8a.png/pdf` | PF13354 family sequence logo (logomaker) |
-| **6B** | `TEM1_EffAlph_fam_ga_SpecificPositions_8b.png/pdf` | effective alphabet at the target positions |
-| **6C** | `Ridge_Histogram_H_fam_by_Dataset_8C.png/pdf` | ridge histogram of the family Hamiltonian by dataset |
-| **6G** | `H_fam_Distribution_withTop2.5k_781AMP_G.png/pdf` | family-Hamiltonian distribution, AMP 781 |
-| **6H** | `H_fam_Distribution_withTop2.5k_36AZT_H.png/pdf` | family-Hamiltonian distribution, AZT 36 |
+| **6A** | PF13354 family sequence logo at the nine family positions | `source_data/fig6a_family_logo_information.csv` |
+| **6B** | contextual effective alphabet (family average ± SD vs TEM-1) | `source_data/fig6b_effective_alphabet.csv` |
+| **6C** | family-Hamiltonian distribution by dataset (all / top-10k / top-2.5k common) | `source_data/full/fig6c_hamiltonian_by_dataset.csv` |
+| **6G** | family-Hamiltonian distribution, AMP 781 µg ml⁻¹, top-2.5k | `source_data/full/fig6g_hamiltonian_amp.csv` |
+| **6H** | family-Hamiltonian distribution, AZT 36 µg ml⁻¹, top-2.5k | `source_data/full/fig6h_hamiltonian_azt.csv` |
+| **S6** | family Hamiltonian vs fitness, per concentration (Spearman ρ) | `source_data/figS6_spearman_stats.csv` + `full/figS6_hamiltonian_vs_fitness_{amp,azt}.csv` |
 
-**Panels 6D / 6E / 6F (LGL coordinates) are NOT produced here** — they come from the
-separate LGL-VAE model at <https://github.com/morcoslab/LGL-VAE> (A. de la Paz; **MIT**
-licensed, release 2023-03-28). Its training / plotting files are archived on Dryad
-(**doi:10.5061/dryad.51c59zwbn**). The VAE is stochastic, so the exact 6D/E/F coordinates
-require the Dryad-deposited trained model / coordinates, not merely a re-run.
+**Panels 6D / 6E / 6F (Latent Generative Landscape) are NOT produced here.** They come
+from the separate LGL-VAE model at <https://github.com/morcoslab/LGL-VAE> (J. A. de la Paz;
+**MIT** licensed), archived on Dryad (**doi:10.5061/dryad.51c59zwbn**). The VAE is
+stochastic, so exact 6D/E/F coordinates require the deposited model, not a re-run. The
+notebook writes the LGL input MSAs (`AMP/AZT_MSA_wrtPF13354_*_headers.fasta`); S. Alvarez
+assembles 6D/E/F into the final figure.
+
+## Reproduced in-repo
+
+```bash
+uv sync --extra evo-stats          # installs py-mfdca (pinned) + pyhmmer + logomaker
+export MPLCONFIGDIR=$PWD/.mpl_cache
+python src/evolutionary_statistics/reproduce_fig6.py     # ~5 min (mean-field DCA + Hamiltonians)
+```
+
+It (1) filters PF13354 to ≤5 % gaps, (2) back-maps the nine family positions with an
+`hmmscan` of the TEM-1 reference (using the committed `MSAs/TEM1_263AA.scan` when the
+HMMER binary is absent — the reference-to-profile alignment is fixed), (3) fits the
+mean-field family model, and (4) scores the family and the 55,293 intended designs,
+writing the plotted values to `source_data/`.
+
+**Verified** against the assembled figure: the panel-6B effective alphabet matches to two
+decimals at all nine positions (e.g. position 104 family-mean 1.86 / TEM-1 bar 3.39;
+position 240 family-mean 2.41 / TEM-1 bar 3.76). Run constants: `M = 27242` filtered family
+sequences, `N = 214`, `Meff = 8377`, TEM-1 Hamiltonian −1838.24.
+
+> **Legend note (n).** The published 6B labels the family average `n = 27241`; the
+> deterministic filter here keeps **27242** sequences. The one-sequence difference is a
+> fencepost in the *reported* "kept" count of the `filter_pfam` step and does not affect
+> the plotted mean/SD (Δ < 0.004 %).
 
 ## What this settles for the legend / reporting checklist
 
-- **6A shows 9 of the 13 library positions**, not all 13. The panel labels exactly
-  `['69','104','164','182','237','238','240','244','265']` (Ambler); positions 21, 39,
-  275 and 276 are absent (21 is the signal-peptide residue; the other three fall outside
-  the PF13354 mature-domain alignment).
-- **6B error bars are the standard deviation** across the family sequences
-  (`yerr = OutputEffAlph_fam[:, positions].std(axis=0)`).
-- **6B `n` is the effective number of sequences** `Meff`, printed by the notebook
-  (`familyModel.Meff`, alongside `M` and `N`). It is emitted on running the notebook;
-  it is not hard-coded here.
+- **6A shows 9 of the 13 library positions** — `['69','104','164','182','237','238','240','244','265']`
+  (Ambler). Positions 21, 39, 275, 276 fall outside the PF13354 mature-domain alignment (21 is
+  the signal-peptide residue).
+- **6B error bars are the standard deviation** across the family sequences.
+- **6B `n`** is the number of filtered family sequences (27242; see the legend note above).
 
-## Dependencies
+## Dependencies (optional extra `evo-stats`)
 
-- **`py-mfdca`** — the `dca` package (`from dca.dca_class import dca`), published at
-  <https://github.com/utdal/py-mfdca> (UT Dallas). Public and pip/git-installable
-  (`pip install git+https://github.com/utdal/py-mfdca.git@v1.0.0`), release **v1.0.0**
-  (2024-07-18) — the pin target when this is wired as an optional extra. **License not
-  yet visible on the repo** — a Code-availability requirement to confirm with the Morcos lab.
-  Not yet declared in this repo's `pyproject.toml` (see "Status" below).
-- `logomaker`, `biopython` (`Bio`), `numpy`, `pandas`, `seaborn`, `matplotlib` — already
-  in this repo's environment.
-- **HMMER** (`hmmsearch` / `hmmalign`, called via `subprocess`) — a system tool, not a
-  Python package.
+- **`py-mfdca`** — the `dca` package (`from dca.dca_class import dca`),
+  <https://github.com/utdal/py-mfdca> (UT Dallas). Pinned to commit `24bb3adf` (v1.6.0),
+  installable on Python ≥ 3.12. (The `v1.0.0` release tag is **not** used: it predates
+  `compute_EffAlphabet` and requires Python < 3.10.)
+- **`pyhmmer`** — bundles HMMER; no separate binary needed. The notebook's `subprocess`
+  `hmmscan` path is only exercised when a system HMMER is on `PATH`.
+- `logomaker`, `biopython`, `numpy`, `pandas`, `seaborn`, `matplotlib`, `scipy`.
 
 ## Inputs
 
-Relative to the notebook's run directory (`MSADir=MSAs/`, `UTSWDir=data/`, `CleanFigDir=figures/`):
+- **`MSAs/PF13354_ga.fasta.gz`** — the Pfam PF13354 alignment (104 745 sequences, gzipped;
+  `reproduce_fig6.py` decompresses it on first run). Provenance (J. A. de la Paz): the
+  PF13354 HMM profile from <https://www.ebi.ac.uk/interpro/entry/pfam/PF13354/>, `hmmsearch`
+  against UniProt TrEMBL + Swiss-Prot. See `MSAs/README.md`.
+- `../../data/processed/{amp,azt}_auc_wide_df.parquet` — our AUC-fitness tables.
+- `../../data/processed/TEM1-combinatorial-mutagenesis-intended.csv` — the intended-genotype list.
 
-- **`MSAs/PF13354_ga.fasta`** — the Pfam PF13354 alignment. **NOT YET IN THIS REPO** — see
-  `MSAs/README.md`. Provenance (A. de la Paz): the PF13354 HMM profile from
-  <https://www.ebi.ac.uk/interpro/entry/pfam/PF13354/logo/>, `hmmsearch` against the
-  UniProt TrEMBL + Swiss-Prot databases (<https://www.uniprot.org/help/downloads>).
-- `data/amp_auc_wide_df.parquet`, `data/azt_auc_wide_df.parquet` — our AUC-fitness tables
-  (present in this repo at **`data/processed/`**; the notebook's `UTSWDir` must be pointed
-  there when run).
-- `data/TEM1-combinatorial-mutagenesis-intended.csv` — the intended-genotype list.
-- Intermediate MSAs (`TEM1_263AA.fasta`, `TEM1_single_MSA.fasta`,
-  `AMP_MSA_wrtPF13354.fasta`, `AZT_MSA_wrtPF13354.fasta`) — built by the notebook from the
-  above during a run.
+## Source Data layout
 
-## Status — folded in as received; not yet runnable end-to-end
-
-The notebook is committed verbatim for provenance. Three things are needed before it runs
-top-to-bottom in this repo and its Source Data numbers (6B effective alphabet; 6C/6G/6H
-Hamiltonians) can be extracted:
-
-1. **`MSAs/PF13354_ga.fasta`** — obtain from A. de la Paz (the OneDrive attachment on the
-   2025-11-26 email) or regenerate from the InterPro/UniProt provenance above.
-2. **`py-mfdca`** installed (then pin it as an optional `pyproject` extra, mirroring
-   `plategig`, and re-lock).
-3. Point `UTSWDir` at `../../data/processed/` (a one-line path port).
-
-The **LGL panels (6D/E/F)** additionally require the `LGL-VAE` repo and its inputs.
-
-Once (1)-(3) land, this becomes a fully reproducible in-repo generator for Figure 6A/B/C/G/H
-(like `si_figures/s02_mic/`), and the Source Data sheet for Figure 6 can be populated.
+Small summary tables (6A logo, 6B effective alphabet, S6 Spearman, DCA constants) are
+committed here. The large per-genotype tables (6C/6G/6H Hamiltonians, S6 Hamiltonian-vs-fitness;
+~28 MB) are regenerated into `source_data/full/` (git-ignored) and packaged into the release
+Source Data archive.

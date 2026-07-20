@@ -1,0 +1,49 @@
+# hmmscan :: search sequence(s) against a profile database
+# HMMER 3.4 (Aug 2023); http://hmmer.org/
+# Copyright (C) 2023 Howard Hughes Medical Institute.
+# Freely distributed under the BSD open source license.
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# query sequence file:             MSAs/TEM1_263AA.fasta
+# target HMM database:             MSAs/PF13354.hmm
+# output directed to file:         MSAs/TEM1_263AA.scan
+# max ASCII text line length:      unlimited
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Query:       TEM-1  [L=263]
+Scores for complete sequence (score includes all domains):
+   --- full sequence ---   --- best 1 domain ---    -#dom-
+    E-value  score  bias    E-value  score  bias    exp  N  Model           Description
+    ------- ------ -----    ------- ------ -----   ---- --  --------        -----------
+      6e-46  142.6   0.0    7.6e-46  142.2   0.0    1.1  1  Beta-lactamase2  Beta-lactamase enzyme family
+
+
+Domain annotation for each model (and alignments):
+>> Beta-lactamase2  Beta-lactamase enzyme family
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !  142.2   0.0   7.6e-46   7.6e-46       6     214 .]      25     238 ..      21     238 .. 0.92
+
+  Alignments for each domain:
+  == domain 1  score: 142.2 bits;  conditional E-value: 7.6e-46
+                      ETTTS-E.EEESTTS-EE-GGGGHHHHHHHHHHHHHTTSTGTT-EEE--HHHH-SSS-SGGGTCCCTCEEHHHHHHHHHHTT-HHHHHHHHHHHT.HHHHHHHHHHTT-TTSCS-C-TTCCG--TTT..B-CE-HHHHHHHHHHHHCTSSSHHHHHHHHHHHHHC-ST.TTTTCCTTSTTTEEEEEEEEET.TEEEEEEEEECTTCCEE.EEEEEE CS
+  Beta-lactamase2   6 dldtgee.lginadesfpaaStiKvpillavleqveegklsldekltltaedkvggsgilqklsagkelslrdlltlmiavSDntAtnlLidrlg.lenvnaylrelGlkdtrlerklrdleaakae..tntttardmaklleaLyrgellspesteelldilskqqf.rerlpaglpkgvrvahKtGeld.gvrhdvGivytpagrpy.vlavlt 214
+                      dl++g+   +++++e fp++St+Kv++  avl +v++g+ +l ++++++++d v++s++++k  +   +++r+l+ ++i++SDntA+nlL+  +g  +++ a+l+ +G + trl+r++++l++a +   ++tt +++ma+ l++L++gell+  s+++l+d++++ ++   +l++ lp g+ +a+K+G  + g r+ ++ +  p+g+p  +++++t
+            TEM-1  25 DLNSGKIlESFRPEERFPMMSTFKVLLCGAVLSRVDAGQEQLGRRIHYSQNDLVEYSPVTEKHLT-DGMTVRELCSAAITMSDNTAANLLLTTIGgPKELTAFLHNMGDHVTRLDRWEPELNEAIPNdeRDTTMPAAMATTLRKLLTGELLTLASRQQLIDWMEADKVaGPLLRSALPAGWFIADKSGAGErGSRGIIAALG-PDGKPSrIVVIYT 238
+                      666666655799*************************************************9544.34*******************************************************998888999************************************999999***************7768888888888.5788876888876 PP
+
+
+
+Internal pipeline statistics summary:
+-------------------------------------
+Query sequence(s):                         1  (263 residues searched)
+Target model(s):                           1  (214 nodes)
+Passed MSV filter:                         1  (1); expected 0.0 (0.02)
+Passed bias filter:                        1  (1); expected 0.0 (0.02)
+Passed Vit filter:                         1  (1); expected 0.0 (0.001)
+Passed Fwd filter:                         1  (1); expected 0.0 (1e-05)
+Initial search space (Z):                  1  [actual number of targets]
+Domain search space  (domZ):               1  [number of targets reported over threshold]
+# CPU time: 0.00u 0.00s 00:00:00.00 Elapsed: 00:00:00.00
+# Mc/sec: 51.96
+//
+[ok]

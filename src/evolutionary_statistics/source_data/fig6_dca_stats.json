@@ -1,0 +1,19 @@
+{
+  "M_filtered_family_sequences": 27242,
+  "N_positions": 214,
+  "Meff": 8376.996004362747,
+  "TEM1_Hamiltonian": -1838.2382732346082,
+  "n_family_for_6B": 27242,
+  "TEM1_name": "sp|P62593|BLAT_ECOLX/48-261",
+  "family_positions_msa_cols": [
+    24,
+    59,
+    119,
+    135,
+    189,
+    190,
+    191,
+    194,
+    214
+  ]
+}

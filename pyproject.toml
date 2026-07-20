@@ -40,6 +40,15 @@ si-figures = [
     # incompatible API - it lacks convert_OD_plate_to_long / plot_single_plate_media_only_wells).
     "plategig @ git+https://github.com/msadikyildiz/plategig@2d9e7d9b611c1b0d3a00af32176758bd546bd9b1 ; python_version >= '3.12'",
 ]
+evo-stats = [
+    # Figure 6 / S6 mean-field DCA of the PF13354 family. py-mfdca imports as `dca`;
+    # pinned to the commit validated against the assembled figure. The v1.0.0 tag is
+    # unusable here (it predates compute_EffAlphabet and requires Python < 3.10).
+    "dca @ git+https://github.com/utdal/py-mfdca@24bb3adf7feaa2410063dc1869a54ce68ae86d98 ; python_version >= '3.12'",
+    "pyhmmer>=0.10 ; python_version >= '3.12'",
+    "logomaker>=0.8 ; python_version >= '3.12'",
+    "seaborn>=0.12 ; python_version >= '3.12'",
+]
 
 [tool.uv.sources]
 torch = [

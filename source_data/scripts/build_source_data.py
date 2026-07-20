@@ -3,11 +3,10 @@
 figures whose underlying values live in verified analysis CSVs; stubs parquet-derived and
 contributor figures with a clear source/owner note so they can be filled at figure-lock.
 
-NOTE: the final workbook is release-gated on one still-pending contributor sheet
-(Fig 6 - F.M./Sophia/Alberto, which needs the PF13354 MSA + py-mfdca to run). S18 is now
-reproduced from Meng's pipeline (src/graph_analysis/s18_peak_robustness/reproduce_s18.py).
-Running this script before Fig 6 lands produces a workbook with that sheet (plus Fig1F,
-which has no plotted data) stubbed out -- see source_data/README.md.
+Fig 6 (Morcos-lab DCA) and S18 (Meng graph pipeline) are now both reproduced in-repo
+(src/evolutionary_statistics/reproduce_fig6.py, src/graph_analysis/s18_peak_robustness/
+reproduce_s18.py). The only remaining stub is Fig1F, which has no plotted data (structural
+render + chemical structures). See source_data/README.md.
 """
 import csv
 import re
@@ -90,11 +89,15 @@ DATA = {
     ("B: AZT-108 global-peak-supernode fitness advantage, box statistics per concentration x neighbour distance (full observations = source_data/full/figS18B_azt108_all_comparisons.csv)", "src/graph_analysis/s18_peak_robustness/source_data/figS18B_azt108_peak_advantage_boxstats.csv"),
     ("D: AZT-108 landscape-graph NODES at neutral threshold 0.42 (global peak present) vs 0.43 (absent)", "src/graph_analysis/s18_peak_robustness/source_data/figS18D_azt108_nodes.csv"),
     ("D: AZT-108 landscape-graph EDGES at neutral threshold 0.42 vs 0.43 (source->target, weight, count; Gephi layout not reproducible)", "src/graph_analysis/s18_peak_robustness/source_data/figS18D_azt108_edges.csv")],
+ "Fig6 evolutionary statistics (DCA)": [
+    ("A: PF13354 family sequence-logo information content at the nine family positions (69,104,164,182,237,238,240,244,265)", "src/evolutionary_statistics/source_data/fig6a_family_logo_information.csv"),
+    ("B: contextual effective alphabet — family average +/- 1 SD (n=27242) vs TEM-1 target, per position", "src/evolutionary_statistics/source_data/fig6b_effective_alphabet.csv")],
+ "S6 DCA Hamiltonian vs fitness": [
+    ("Spearman rho of family Hamiltonian vs AUC-fitness per drug x concentration (full per-genotype scatter = regenerable source_data/full/figS6_hamiltonian_vs_fitness_{amp,azt}.csv)", "src/evolutionary_statistics/source_data/figS6_spearman_stats.csv")],
 }
 
 # figure -> (source note, owner) for not-yet-filled sheets
 STUB = {
- "Fig6 - TODO Morcos lab":   ("DCA code folded in at src/evolutionary_statistics/ (panels A/B/C/G/H: family logo, effective alphabet, Hamiltonian C/G/H); LGL D/E/F via github.com/morcoslab/LGL-VAE. Numbers pending: add MSAs/PF13354_ga.fasta + install py-mfdca to run + extract, and obtain LGL-VAE outputs — F.M./Sophia/Alberto", "F.M./Sophia/Alberto"),
  "Fig1F no plotted data":    ("Structural render + 2D chemical structures — no plotted data; ChemDraw supplied as artwork", "IG/DS"),
 }
 
@@ -158,6 +161,21 @@ NOTES = {
     "external neighbour, up to 2 mutations) of the rank-0 global-peak supernode at AZT 12 / AZT 108 "
     "(neutral_threshold=0.40), summarised as box statistics per concentration x neighbour distance; the "
     "companion figS18{A,B}_*_peak_group_genotypes.csv list the peak-group genotypes behind the panel logos."),
+ "Fig6 evolutionary statistics (DCA)": (
+    "Mean-field DCA of the Pfam PF13354 family (src/evolutionary_statistics/reproduce_fig6.py; M=27242 "
+    "filtered family sequences, N=214, Meff=8377, TEM-1 Hamiltonian -1838.24) constraining the 55,293 "
+    "intended designs. 6A: family sequence logo at the nine family positions (69,104,164,182,237,238,240,"
+    "244,265 — 9 of the 13 library positions; the other four fall outside the PF13354 mature-domain "
+    "alignment). 6B: contextual effective alphabet, family mean +/- 1 SD vs TEM-1 (the published 6B label "
+    "reads n=27241, a one-sequence fencepost in the filter's reported kept-count; the plotted mean/SD use "
+    "27242, delta < 0.004%). 6C/6G/6H: per-genotype family-Hamiltonian distributions (all vs top-2.5k "
+    "common / AMP-781 / AZT-36) — regenerable full tables source_data/full/fig6{c,g,h}_*.csv. LGL panels "
+    "6D/E/F are from the separate LGL-VAE model (github.com/morcoslab/LGL-VAE; deposited coordinates "
+    "doi:10.5061/dryad.51c59zwbn)."),
+ "S6 DCA Hamiltonian vs fitness": (
+    "Family Hamiltonian vs AUC-fitness per concentration; Spearman rho tabulated here, the full "
+    "per-genotype (Hamiltonian, fitness) scatter tables regenerable source_data/full/"
+    "figS6_hamiltonian_vs_fitness_{amp,azt}.csv via reproduce_fig6.py."),
 }
 
 HEAD=Font(bold=True); TITLE=Font(bold=True, size=12)

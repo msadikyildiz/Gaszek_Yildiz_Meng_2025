@@ -8,13 +8,13 @@ Figure 3D,figures/main/Figure 3D. Fitness in AZT vs. number of mutations.png,src
 Figure 4,figures/main/Figure 4A..H. *.png,src/05_epistasis_figures.ipynb,Single/double-mutant fitness (A-D) + density grids and per-order R^2/rho (E-H)
 Figure 5A/5C,figures/main/Figure 5A. SHAP *.png; figures/main/Figure 5C. Mean SHAP per mutation AMP.png,src/04_epistasis_amp_regression.ipynb,AMP SHAP (LightGBM)
 Figure 5B/5D,figures/main/Figure 5B. SHAP *.png; figures/main/Figure 5D. Mean SHAP per mutation AZT.png,src/03_epistasis_azt_regression.ipynb,AZT SHAP (LightGBM)
-Figure 6,figures/main/Figure 6. Evolutionary statistics.png,src/evolutionary_statistics/ + morcoslab/LGL-VAE,"Morcos-lab DCA: panels A/B/C/G/H via src/evolutionary_statistics/Figure6_evolutionary_statistics.ipynb (needs py-mfdca + the PF13354 MSA to run); LGL panels D/E/F via github.com/morcoslab/LGL-VAE. Source Data pending those inputs"
+Figure 6,figures/main/Figure 6. Evolutionary statistics.png,src/evolutionary_statistics/reproduce_fig6.py + morcoslab/LGL-VAE,"Morcos-lab DCA: panels A/B/C/G/H reproduced in-repo via src/evolutionary_statistics/reproduce_fig6.py (uv extra evo-stats; committed PF13354 MSA); LGL panels D/E/F via github.com/morcoslab/LGL-VAE (stochastic; deposited coords). Source data provided (evolutionary_statistics/source_data/)"
 S1,figures/supplementary/figure_s01.png,(original submission — no in-repo generator),"Clinical mutational spectrum; retained verbatim from the accepted submission (no regeneration script in this repository)"
 S2,figures/supplementary/figure_s02.png,si_figures/s02_mic/,"MIC panel (measured); reproducing data+code (CML_MIC_estimations.ipynb + plate data + plategig) in si_figures/s02_mic/. Published single-panel layout retained; see that folder's README"
 S3,figures/supplementary/figure_s03.png,si_figures/s03_dose_response/analysis.py,"Dose-response of a representative library subset; code-native recreation from data/raw/ — differs from the frozen SI pixels (regenerated from code per the archive's use-code-output policy)"
 S4,figures/supplementary/figure_s04.png,src/graph_analysis/ + Gephi,Graph-theoretic landscape view across concentrations
 S5,figures/supplementary/figure_s05_amp.png; figures/supplementary/figure_s05_azt.png,src/05_epistasis_figures.ipynb,Context-dependent triple-mutant effects (AMP/AZT panels)
-S6,figures/supplementary/figure_s06.png,contributors (F.M.),DCA Hamiltonian vs AUC-fitness correlation
+S6,figures/supplementary/figure_s06.png,src/evolutionary_statistics/reproduce_fig6.py,"Morcos-lab DCA family Hamiltonian vs AUC-fitness per concentration (Spearman rho); reproduced in-repo. Source data provided (evolutionary_statistics/source_data/figS6_*)"
 S7,figures/supplementary/figure_s07.png,si_figures/s07_s08_ic50/,IC50 vs AUC-fitness (monoculture validation replot)
 S8,figures/supplementary/figure_s08_amp.png; figures/supplementary/figure_s08_azt.png,si_figures/s07_s08_ic50/,IC50 per concentration (AMP/AZT)
 S9,figures/supplementary/figure_s09.png,analysis/s09_s10_epistatic_order/analysis.py,Epistatic-order decomposition

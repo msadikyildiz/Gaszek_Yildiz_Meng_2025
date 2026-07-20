@@ -13,8 +13,17 @@ src/graph_analysis/_generated/
 # Figure composition scratch
 figures/_compose/
 
-# Figure 6 DCA notebook run scratch (regenerates on running the notebook)
+# Figure 6 DCA run scratch (regenerate via evolutionary_statistics/reproduce_fig6.py;
+# the committed Source Data lives in evolutionary_statistics/source_data/)
 src/evolutionary_statistics/figures/
+# Full per-genotype Fig6/S6 tables (~28MB; regenerable; belong in the release Source Data zip)
+src/evolutionary_statistics/source_data/full/
+# Decompressed + intermediate MSAs (only PF13354_ga.fasta.gz + the small inputs are tracked)
+src/evolutionary_statistics/MSAs/PF13354_ga.fasta
+src/evolutionary_statistics/MSAs/PF13354_ga_filtered_5pct.fasta
+src/evolutionary_statistics/MSAs/TEM1_single_MSA.fasta
+src/evolutionary_statistics/MSAs/*_MSA_wrtPF13354*.fasta
+src/evolutionary_statistics/MSAs/PF13354.hmm.h3*
 
 # Figure S18 graph-build + pairs scratch (regenerate via s18_peak_robustness/reproduce_s18.py;
 # the committed Source Data lives in s18_peak_robustness/source_data/)
@@ -50,3 +59,6 @@ si_figures/**/figures/
 # source_data/scripts/); the assembled source_data.xlsx is built separately
 # and is not committed until the Fig 6 / S18 contributor sheets land.
 source_data/derived/
+
+# Generated Source Data workbook (rebuild via source_data/scripts/build_source_data.py; the release Source_Data.zip is the deliverable)
+source_data/source_data.xlsx
