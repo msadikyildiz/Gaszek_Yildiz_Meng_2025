@@ -27,7 +27,7 @@ Inputs (PROJECT/Gaszek_Yildiz_Meng_2025/data/raw):
   Ampicillin_auc_per_genotype.csv,  Aztreonam_auc_per_genotype.csv
   Ampicillin_read_counts_per_genotype.csv, Aztreonam_read_counts_per_genotype.csv
   metadata.csv    (sample -> Drug/Concentration/Replicate/Timepoint)
-  figures/known_variants/encoded_variants.csv  (63 clinical TEM alleles)
+  data/known_variants/encoded_variants.csv  (63 clinical TEM alleles)
 
 Outputs:
   figures/fig_s3_revised_amp.png, figures/fig_s3_revised_azt.png,
@@ -59,7 +59,7 @@ def _repo_root(_p):
 REPO = _repo_root(Path(__file__).resolve())
 RAW = REPO / "data" / "raw"
 CLINICAL_CSV = (
-    REPO / "figures" / "known_variants" / "encoded_variants.csv"
+    REPO / "data" / "known_variants" / "encoded_variants.csv"
 )
 FIGDIR = HERE / "figures"
 DATADIR = HERE / "data"

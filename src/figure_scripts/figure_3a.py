@@ -61,7 +61,7 @@ extra_variants = {
 
 try:
     clin = pd.read_csv(
-      PROJECT_PATH/"figures"/"known_variants"/"encoded_variants.csv"
+      PROJECT_PATH/"data"/"known_variants"/"encoded_variants.csv"
     )['Encoded_Sequence'].dropna().unique()
 except FileNotFoundError:
     clin = []
@@ -147,4 +147,4 @@ cbar = fig.colorbar(hb[3], cax=cbar_ax)
 cbar.ax.set_ylabel('Mutant Count', labelpad=0)
 
 # ── 4) SAVE ───────────────────────────────────────────────────────
-fig.savefig(PROJECT_PATH/"figures"/"Figure 3A"/"Figure 3A. AMP vs. AZT fitness with clinical and tested variants.png", dpi=600, bbox_inches='tight')
+fig.savefig(PROJECT_PATH/"figures"/"main"/"Figure 3A. AMP vs. AZT fitness with clinical and tested variants.png", dpi=600, bbox_inches='tight')
