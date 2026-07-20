@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 PROCESSED_DIR = Path(__file__).resolve().parent / "processed"
 FIGURES_DIR = ROOT / "figures"
-# validation_experiments/ lives inside the distribution repo, whose root holds
+# validation/ lives inside the distribution repo, whose root holds
 # data/processed/Epistasis_Combined.parquet. Walk up to find it.
 def _epistasis_root(start: Path) -> Path:
     for anc in (start, *start.parents):

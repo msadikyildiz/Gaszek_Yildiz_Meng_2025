@@ -24,7 +24,7 @@ regression predictions in
  Definition). We do NOT refit any model here.
 
 Reuses derivations already computed in
-  revision_analyses/s7_concentration_grid/data/regression_r2_by_order.csv
+  analysis/s11_s12_concentration_grid/data/regression_r2_by_order.csv
 as a cross-check for R^2.
 
 Outputs:
@@ -58,8 +58,8 @@ def _repo_root(_p):
     raise FileNotFoundError("repo root not found from " + str(_p))
 REPO = _repo_root(Path(__file__).resolve())
 PARQUET = REPO / "data" / "processed" / "Epistasis_Combined.parquet"
-S7_R2 = HERE.parent / "s7_concentration_grid" / "data" / "regression_r2_by_order.csv"
-S7_PAIRWISE = HERE.parent / "s7_concentration_grid" / "data" / "pairwise_mean_fitness.csv"
+S7_R2 = HERE.parent / "s11_s12_concentration_grid" / "data" / "regression_r2_by_order.csv"
+S7_PAIRWISE = HERE.parent / "s11_s12_concentration_grid" / "data" / "pairwise_mean_fitness.csv"
 FIGDIR = HERE / "figures"
 DATADIR = HERE / "data"
 FIGDIR.mkdir(exist_ok=True, parents=True)

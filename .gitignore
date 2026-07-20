@@ -13,8 +13,8 @@ src/graph_analysis/_generated/
 # Figure composition scratch
 figures/_compose/
 
-# Large regenerable intermediate (rebuild via revision_analyses/s5_replicate_correlations/analysis.py)
-revision_analyses/s5_replicate_correlations/data/per_genotype_replicate_stats.csv
+# Large regenerable intermediate (rebuild via analysis/s16_replicate_reproducibility/analysis.py)
+analysis/s16_replicate_reproducibility/data/per_genotype_replicate_stats.csv
 
-# Validation pipeline regenerable figures (rebuild via validation_experiments/src/run_all.py)
-validation_experiments/figures/
+# Validation pipeline regenerable figures (rebuild via validation/src/run_all.py)
+validation/figures/
