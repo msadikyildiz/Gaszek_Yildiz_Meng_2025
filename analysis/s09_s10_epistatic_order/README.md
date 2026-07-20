@@ -20,7 +20,7 @@ stores every `Fitness_predicted for order K` column we need.
 
 ## Inputs
 
-- `Gaszek_Yildiz_Meng_2025/data/processed/Epistasis_Combined.parquet`
+- `data/processed/Epistasis_Combined.parquet`
   — 774,144 rows, 50 columns; the manuscript's master parquet with
   measured `Fitness` and `Fitness_predicted for order K` for
   K ∈ {1, …, 13}.

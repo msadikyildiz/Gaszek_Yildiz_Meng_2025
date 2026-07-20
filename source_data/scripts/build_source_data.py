@@ -39,7 +39,7 @@ DATA = {
     ("Histogram counts per drug x concentration (reproduces the ridgelines)", f"{PD}/fig1E_histogram_counts.csv")],
  "Fig2 landscape graphs": [
     ("Coarse-grained landscape-graph NODES per plotted concentration (fitness = median at that conc; n_genotypes = merged group size; is_peak = out-degree 0; contains_wildtype)", f"{PD}/fig2_nodes.csv"),
-    ("Landscape-graph EDGES per plotted concentration (source -> target of increasing fitness; weight = exp(|Δfitness|))", f"{PD}/fig2_edges.csv")],
+    ("Landscape-graph EDGES per plotted concentration: source -> target oriented toward net-higher fitness after neutral-merging supernodes; weight = |net flow| = |summed exp(|Δfitness|) over forward minus reverse single-mutation transitions| (net magnitudes, not raw exp(|Δfitness|) - near-balanced pairs are small, min ~0.09); count = number of merged transitions", f"{PD}/fig2_edges.csv")],
  "Fig3 landscape signatures": [
     ("A: overlay points (WT, dead, 7 follow-ups, clinical isolates) - fitness at AMP 195/781 & AZT 36/108/324", f"{PD}/fig3A_overlay_points.csv"),
     ("B: top-1% sequence-logo residue frequencies at AMP 781 (letter height + colour)", f"{PD}/fig3B_top1pct_logo_freq_amp.csv"),
@@ -156,7 +156,9 @@ idx=wb.create_sheet("Index")
 idx["A1"]="Source Data — index"; idx["A1"].font=TITLE
 idx.append([]); idx.append(["Figure sheet","Status","Primary source"])
 for c in idx[3]: c.font=HEAD; c.fill=HDRFILL
-for name in DATA: idx.append([name,"populated", DATA[name][0][1]])
+for name in DATA:
+    primary = DATA[name][0][1]
+    idx.append([name, "populated" if (REPO / primary).exists() else "missing (run builders)", primary])
 for name,(note,owner) in STUB.items():
     status = "N/A" if "no plotted data" in note else f"TODO ({owner})"
     idx.append([name, status, note])

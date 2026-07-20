@@ -32,7 +32,10 @@ dependencies = [
 # (si_figures/s02_mic/). Install with `uv sync --extra si-figures`.
 [project.optional-dependencies]
 si-figures = [
-    "plategig @ git+https://github.com/msadikyildiz/plategig",
+    # Pinned to the plategig `biohpc` branch commit: the exact API the S2 MIC
+    # notebook was written against (the default `main` branch has a different,
+    # incompatible API - it lacks convert_OD_plate_to_long / plot_single_plate_media_only_wells).
+    "plategig @ git+https://github.com/msadikyildiz/plategig@2d9e7d9b611c1b0d3a00af32176758bd546bd9b1 ; python_version >= '3.12'",
 ]
 
 [tool.uv.sources]

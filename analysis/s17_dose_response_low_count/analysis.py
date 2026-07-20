@@ -23,7 +23,7 @@ Response strategy (agreed with PI):
   - Shade the empirical AUC floor (the TEM-1_dead band) as the limit of
     detection (LOD).
 
-Inputs (PROJECT/Gaszek_Yildiz_Meng_2025/data/raw):
+Inputs (data/raw):
   Ampicillin_auc_per_genotype.csv,  Aztreonam_auc_per_genotype.csv
   Ampicillin_read_counts_per_genotype.csv, Aztreonam_read_counts_per_genotype.csv
   metadata.csv    (sample -> Drug/Concentration/Replicate/Timepoint)

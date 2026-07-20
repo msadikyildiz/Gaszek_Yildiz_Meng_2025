@@ -32,6 +32,8 @@ uv run python analysis/s13_model_comparison/analysis.py
 
 Each `analysis.py` locates the repository root automatically (it walks up to the
 directory containing `data/processed/Epistasis_Combined.parquet`) and writes its
-figures and result tables back into its own `figures/` and `data/` sub-folders.
+published Supplementary panel(s) into the shared `figures/supplementary/` gallery,
+and its result tables and secondary/diagnostic panels into its own `data/` and
+`figures/` sub-folders (the latter gitignored as regenerable scratch).
 Per-folder `README.md` files describe the analysis and report the headline
 numbers.

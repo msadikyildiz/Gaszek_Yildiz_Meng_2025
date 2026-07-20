@@ -26,9 +26,9 @@ Exclusion rule (locked by brief):
   majority_low = sum of reads across the 4 timepoints < 10 in >= 2 of 3 reps.
 
 Data paths:
-  raw reads   : Gaszek_Yildiz_Meng_2025/data/raw/Ampicillin_read_counts_per_genotype.csv
-  metadata    : Gaszek_Yildiz_Meng_2025/data/raw/metadata.csv
-  landscape   : Gaszek_Yildiz_Meng_2025/data/processed/Epistasis_Combined.parquet
+  raw reads   : data/raw/Ampicillin_read_counts_per_genotype.csv
+  metadata    : data/raw/metadata.csv
+  landscape   : data/processed/Epistasis_Combined.parquet
 
 Note: the raw read-counts CSV has 70,183 genotypes; the parquet landscape
 subset (what Fig 4/5 use) has 55,296. The S6 library-wide census "32%

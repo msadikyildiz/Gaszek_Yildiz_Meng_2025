@@ -16,7 +16,7 @@ Runtime: ~1 minute on 8 cores.
 
 ## Inputs
 
-- `Gaszek_Yildiz_Meng_2025/data/processed/Epistasis_Combined.parquet`
+- `data/processed/Epistasis_Combined.parquet`
   (55,296 genotypes × 2 drugs × 6–8 concentrations; `Fitness` column is
   log10 AUC).
 

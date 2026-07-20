@@ -15,10 +15,14 @@ Runtime: ~30 s single-core. Polars + Matplotlib, reproducible (seed 20260420).
 
 ## Inputs
 
-- `Gaszek_Yildiz_Meng_2025/data/raw/Ampicillin_auc_per_genotype.csv`
-- `Gaszek_Yildiz_Meng_2025/data/raw/Aztreonam_auc_per_genotype.csv`
+- `data/raw/Ampicillin_auc_per_genotype.csv`
+- `data/raw/Aztreonam_auc_per_genotype.csv`
   Schema: `mut_profile_masked, <Drug> <conc> 1, <Drug> <conc> 2, <Drug> <conc> 3`.
   Cell values are already log10(AUC) (manuscript "fitness").
+- **Design filter.** Analysis is restricted to the 55,293 combinatorially-complete
+  design genotypes (masked profiles present in `data/processed/Epistasis_Combined.parquet`);
+  off-design barcode artefacts in the raw per-genotype table are excluded so the
+  reproducibility statistics use the same population analysed in the paper.
 
 ## Outputs
 
@@ -42,7 +46,7 @@ and regenerate into this module's local `figures/` (gitignored, scratch).
   — regenerates locally (gitignored).
 - `data/per_genotype_replicate_stats.csv` — one row per (genotype, drug,
   concentration); columns: `genotype, drug, concentration, log_mean,
-  log_sd, raw_mean, raw_sd, cv_percent` (985,674 rows).
+  log_sd, raw_mean, raw_sd, cv_percent` (774,144 rows, design-filtered).
 - `data/summary_by_conc.csv` — 14 rows (drug x concentration including
   conc=0) with median/IQR/quantiles of %CV and log_sd, and fraction of
   genotypes with %CV < 10.

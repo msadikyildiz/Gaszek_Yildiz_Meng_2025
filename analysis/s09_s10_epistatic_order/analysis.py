@@ -19,7 +19,7 @@ extended figures called out in the draft:
 
 All numbers come from the manuscript's pre-computed partial linear-
 regression predictions in
-  Gaszek_Yildiz_Meng_2025/data/processed/Epistasis_Combined.parquet
+  data/processed/Epistasis_Combined.parquet
 (columns: Fitness, Fitness_predicted for order K, Biochemical
  Definition). We do NOT refit any model here.
 

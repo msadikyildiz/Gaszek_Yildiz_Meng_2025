@@ -93,9 +93,25 @@ mpl.rcParams["font.sans-serif"] = ["DejaVu Sans", "Helvetica", "Arial"]
 
 
 # --- IO + per-genotype stats -------------------------------------------------
+def _design_profiles() -> set[str]:
+    """The 55,296 combinatorially-complete design genotypes, as masked profiles
+    ('.' = wild-type at that position). Derived from the analysed fitness matrix
+    so the reproducibility statistics use the same population as the paper; the
+    raw per-genotype table also contains off-design barcode artefacts (residues
+    outside the 18-substitution design) that must be excluded."""
+    wt = "LQMERMAGERTRN"
+    ec = pl.read_parquet(
+        REPO / "data" / "processed" / "Epistasis_Combined.parquet",
+        columns=["Genotype", "Drug", "Concentration"],
+    )
+    one = ec.filter((pl.col("Drug") == "AMP") & (pl.col("Concentration") == 781.0))["Genotype"].to_list()
+    return {"".join("." if g[i] == wt[i] else g[i] for i in range(13)) for g in one}
+
+
 def load_drug(drug: str) -> pl.DataFrame:
     df = pl.read_csv(DRUG_FILES[drug])
     df = df.rename({df.columns[0]: "_row_index"})
+    df = df.filter(pl.col("mut_profile_masked").is_in(list(_design_profiles())))
     return df
 
 
@@ -469,6 +485,10 @@ def main():
     summary = summarise_by_conc(per_gt)
     summary.write_csv(DATADIR / "summary_by_conc.csv")
     print(f"  wrote {DATADIR / 'summary_by_conc.csv'}  ({summary.height} rows)")
+
+    viable = summarise_by_conc(per_gt.filter(pl.col("log_mean") > VIABLE_LOG_MEAN_THRESHOLD))
+    viable.write_csv(DATADIR / "summary_by_conc_viable.csv")
+    print(f"  wrote {DATADIR / 'summary_by_conc_viable.csv'}  ({viable.height} rows)")
 
     print("Computing replicate-pair Pearson correlations...")
     corr = build_correlation_table()

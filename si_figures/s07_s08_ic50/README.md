@@ -121,14 +121,6 @@ MD5 before this port):
 
 ## Caveats
 
-- `validation/README.md` and `validation/S7_S8_provenance.md` both give their
-  reproduce commands with an `validation_experiments/` path prefix
-  (e.g. `python validation_experiments/src/run_all.py`); the actual directory
-  in this repo is `validation/`. Pre-existing inconsistency from an earlier
-  rename, not introduced or corrected by this port — flagged here so it isn't
-  mistaken for a path error in this new script (`analysis.py` in this
-  directory uses the correct `validation/src/processed/` path throughout, and
-  was verified to run).
 - DD (catalytically dead control) has a null `mean_fitness` in the processed
   xref (excluded from the Pearson correlation) but is still plotted as an
   open circle, matching the manuscript's TEM-1$^{dead}$ reference-point

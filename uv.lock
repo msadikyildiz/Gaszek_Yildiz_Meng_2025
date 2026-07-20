@@ -2324,8 +2324,8 @@ wheels = [
 
 [[package]]
 name = "plategig"
-version = "0.1"
-source = { git = "https://github.com/msadikyildiz/plategig#b531e202e7e7f87625a89a5069b86f992e952e10" }
+version = "0.1.0"
+source = { git = "https://github.com/msadikyildiz/plategig?rev=2d9e7d9b611c1b0d3a00af32176758bd546bd9b1#2d9e7d9b611c1b0d3a00af32176758bd546bd9b1" }
 
 [[package]]
 name = "platformdirs"
@@ -3349,7 +3349,7 @@ dependencies = [
 
 [package.optional-dependencies]
 si-figures = [
-    { name = "plategig" },
+    { name = "plategig", marker = "python_full_version >= '3.12'" },
 ]
 
 [package.metadata]
@@ -3366,7 +3366,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "openpyxl" },
     { name = "pandas" },
-    { name = "plategig", marker = "extra == 'si-figures'", git = "https://github.com/msadikyildiz/plategig" },
+    { name = "plategig", marker = "python_full_version >= '3.12' and extra == 'si-figures'", git = "https://github.com/msadikyildiz/plategig?rev=2d9e7d9b611c1b0d3a00af32176758bd546bd9b1#2d9e7d9b611c1b0d3a00af32176758bd546bd9b1" },
     { name = "polars" },
     { name = "pyarrow" },
     { name = "scikit-learn" },

@@ -2,9 +2,13 @@
 
 Code that regenerates the Nature Communications "Source Data" workbook: one
 sheet per display item (main and supplementary figures), each holding the
-exact numbers plotted in that panel. This mirrors the journal's Source Data
-requirement — reviewers and readers get the underlying table for every
-figure, not just the rendered image.
+underlying numerical values for that panel. This mirrors the journal's Source
+Data requirement — reviewers and readers get the underlying table for every
+figure, not just the rendered image. Two sheets are deterministic
+re-computations rather than the original plotted arrays — Fig 5 (SHAP, re-fit
+at seed 42; per-mutation mean|SHAP| Spearman rho 0.95-0.99 vs the original
+unseeded run) and Fig 2 (landscape graph, re-derived from the design-filtered
+data) — as each sheet's header note states.
 
 ## Layout
 

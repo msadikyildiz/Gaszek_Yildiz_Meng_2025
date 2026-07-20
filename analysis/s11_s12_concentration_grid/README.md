@@ -18,7 +18,7 @@ aggregate and plot).
 
 ## Inputs
 
-- `Gaszek_Yildiz_Meng_2025/data/processed/Epistasis_Combined.parquet`
+- `data/processed/Epistasis_Combined.parquet`
   (774,144 rows = 55,296 genotypes × 2 drugs × 6–8 concentrations).
   Includes `Fitness` (log₁₀ AUC), `Biochemical Definition`
   (pairwise-epistasis measure), and pre-computed

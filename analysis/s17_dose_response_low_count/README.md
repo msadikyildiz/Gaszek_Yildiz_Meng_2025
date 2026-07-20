@@ -16,19 +16,19 @@ Runtime: ~45 s.
 
 ## Inputs
 
-- `Gaszek_Yildiz_Meng_2025/data/raw/Ampicillin_auc_per_genotype.csv`,
+- `data/raw/Ampicillin_auc_per_genotype.csv`,
   `Aztreonam_auc_per_genotype.csv` — per-genotype log10(AUC) across 3
   biological replicates at 6 (AMP) or 8 (AZT) concentrations. Rows = 70,183
   (AMP) / 70,572 (AZT) genotypes. Schema: `mut_profile_masked, <Drug> <conc> <rep>`.
-- `Gaszek_Yildiz_Meng_2025/data/raw/Ampicillin_read_counts_per_genotype.csv`,
+- `data/raw/Ampicillin_read_counts_per_genotype.csv`,
   `Aztreonam_read_counts_per_genotype.csv` — per-genotype Illumina read counts
   at every drug × conc × replicate × timepoint sample. Used to flag
   low-count (extinction) events. Column schema: `<DRUG>_<conc>_<rep>_<tp>_S<n>`.
-- `Gaszek_Yildiz_Meng_2025/data/raw/metadata.csv` — maps sample column names
+- `data/raw/metadata.csv` — maps sample column names
   to drug / concentration / replicate / timepoint. Concentration read as a
   string because "3,100" is European decimal for 3.1; parsed with
   `str.replace(",", ".").cast(Float64)`.
-- `Gaszek_Yildiz_Meng_2025/figures/known_variants/encoded_variants.csv` — 63
+- `data/known_variants/encoded_variants.csv` — 63
   clinical TEM alleles with their 13-letter encoded sequences. Converted
   from residue strings to the library's masked encoding via
   `"".join('.' if seq[i] == WT[i] else seq[i])`.

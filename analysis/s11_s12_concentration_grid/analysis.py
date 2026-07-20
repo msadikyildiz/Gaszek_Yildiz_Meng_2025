@@ -20,7 +20,7 @@ measured non-zero concentration:
                                     S7 task brief) rather than RMSD.
 
 All predictions come pre-computed from
-  Gaszek_Yildiz_Meng_2025/data/processed/Epistasis_Combined.parquet
+  data/processed/Epistasis_Combined.parquet
 which stores `Fitness` (log10 AUC) alongside `Fitness_predicted for order K`
 for K in 1..13 (see src/utils/calculate_epistasis.py). We do NOT re-fit the
 partial linear-regression epistasis model - we match the manuscript exactly.
