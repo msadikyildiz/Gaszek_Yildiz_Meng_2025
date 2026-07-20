@@ -78,7 +78,9 @@ release-gated on outstanding contributor work:
   `github.com/morcoslab/LGL-VAE`. The Source Data numbers still need the
   PF13354 MSA + `py-mfdca` to run the notebook, plus the LGL-VAE outputs — see
   `src/evolutionary_statistics/README.md`.
-- **S18** (peak-advantage box plots + neutral-threshold matrix) — Devin/Milo.
+- **S18** (peak-advantage box plots + neutral-threshold matrix) — Devin Meng's
+  code is folded in at `src/graph_analysis/s18_peak_robustness/`; the numbers
+  need a data-path port + a pipeline run to extract (see that folder's README).
 
 `build_source_data.py` stubs both sheets (plus Fig 1F, which has no plotted
 data — it is a structural render / ChemDraw artwork) with a clear

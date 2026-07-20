@@ -26,4 +26,4 @@ S14,figures/supplementary/figure_s14_amp.png; figures/supplementary/figure_s14_a
 S15,figures/supplementary/figure_s15_amp.png; figures/supplementary/figure_s15_azt.png,analysis/s15_classification_metrics/analysis.py,Classification metrics + RMSD grounding
 S16,figures/supplementary/figure_s16_amp.png; figures/supplementary/figure_s16_azt.png,analysis/s16_replicate_reproducibility/analysis.py,Per-genotype %CV + replicate correlations
 S17,figures/supplementary/figure_s17_amp.png; figures/supplementary/figure_s17_azt.png,analysis/s17_dose_response_low_count/analysis.py,Revised dose-response with low-read flagging
-S18,figures/supplementary/figure_s18.png,contributors (Devin Meng),Peak-absorption diagnostic + neutrality-cutoff robustness (graph analysis)
+S18,figures/supplementary/figure_s18.png,src/graph_analysis/s18_peak_robustness/,"Peak-advantage box plots (A/B) + neutral-threshold robustness (C) + Gephi (D); Devin Meng's code folded in (fitness_advantage_analysis.ipynb + neutral_threshold_robustness.ipynb + fitness_landscape_graph/). Needs a data-path port to run in-repo + extract Source Data"

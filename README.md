@@ -32,7 +32,7 @@ src/
   04_epistasis_amp_regression.ipynb # LightGBM + SHAP, AMP (Fig 5A/5C)
   05_epistasis_figures.ipynb        # Main-figure panels (Figs 3-4) + SI panel S5
   utils/                            # W/H/V/G/X matrix generation, epistasis methods, config
-  graph_analysis/                   # Landscape-graph + distribution analysis; graph_builder/ = Fig 2 construction
+  graph_analysis/                   # Landscape-graph + distribution analysis; graph_builder/ = Fig 2; s18_peak_robustness/ = Fig S18 (Meng)
   figure_scripts/                   # Standalone figure scripts (Fig 3A; known-variants overlay)
   evolutionary_statistics/          # Morcos-lab DCA analysis = Figure 6 A/B/C/G/H (LGL D/E/F via morcoslab/LGL-VAE)
 analysis/                 # Revision analyses → Supplementary Figs S9–S17 (one self-contained module each)
