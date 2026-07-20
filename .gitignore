@@ -16,8 +16,10 @@ figures/_compose/
 # Figure 6 DCA notebook run scratch (regenerates on running the notebook)
 src/evolutionary_statistics/figures/
 
-# Figure S18 graph-build outputs (regenerate via s18_peak_robustness/generate_graphs.sh)
+# Figure S18 graph-build + pairs scratch (regenerate via s18_peak_robustness/reproduce_s18.py;
+# the committed Source Data lives in s18_peak_robustness/source_data/)
 src/graph_analysis/s18_peak_robustness/outputs/
+src/graph_analysis/s18_peak_robustness/data/
 
 # Large regenerable intermediate (rebuild via analysis/s16_replicate_reproducibility/analysis.py)
 analysis/s16_replicate_reproducibility/data/per_genotype_replicate_stats.csv

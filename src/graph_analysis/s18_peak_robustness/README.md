@@ -45,17 +45,32 @@ The pipeline reads **our** AUC-fitness data — no external Meng data is require
 Dependencies (`polars`, `networkx`, `matplotlib`, `seaborn`, `logomaker`, `numpy`) are the
 same set already used by the Fig 2 graph code — no new packages.
 
-## Status — folded in as received; not yet runnable in-repo
+## Reproduced in-repo
 
-To run it here and extract the S18 Source Data (A/B fitness-advantage values; C
-neutral-threshold matrix), two ports are needed:
+`reproduce_s18.py` runs the whole pipeline on this repo's AUC data and writes the S18
+Source Data into `source_data/`:
 
-1. **Data path/format** — point `preprocess_data(amp_path=…, azt_path=…)` at this repo's
-   `data/raw/` AUC CSVs (or emit the `genotype_auc_sorted_*.csv` form the code expects).
-2. **Output paths** — both notebooks hardcode `output_dir =
-   Path("/work/greencenter/s439821/…")`; repoint to a repo-relative
-   `outputs/global-peak-robustness/` (gitignored), and fix `generate_graphs.sh`'s
-   `PROJECT_ROOT` for this directory depth.
+```bash
+uv pip install plotly           # graph_analyzer's only extra dependency
+python reproduce_s18.py         # ~15-20 min (the 248-graph neutral-threshold sweep)
+python reproduce_s18.py --skip-build --work <dir>   # re-run only the analysis on an existing sweep
+```
 
-Once ported: `generate_graphs.sh` → the two notebooks → the S18 Source Data sheet can be
-populated (it is a stub in `source_data/`).
+It (1) builds per-concentration pair tables from `data/raw/` via a vectorized equivalent of
+`pair_table.get_mutant_pairs` (verified byte-equal to Meng's function on genotype subsets —
+his does ~4M per-pair-per-concentration polars filters), (2) runs
+`fitness_landscape_graph.build_graphs_parallel` for the AZT sweep, and (3) runs the S18C /
+S18A / S18B analysis with Meng's `GraphAnalyzer` + `FitnessAdvantageAnalyzer` unchanged.
+
+**Verified against the published `figure_s18.png`:** the S18C matrix reproduces the green/grey
+pattern (conc 0/0.44/1.33 → no peak; 4 → 19/31; 36 → 1/31; 108 → 16/31 with the 0.42→0.43 gap
+in panel D; 324 → 21/31), and the AZT-12 and AZT-108 peak fitness advantages peak at ~1.5 and
+~2.35 at their respective concentrations, matching panels A and B.
+
+Source Data (`source_data/`): `figS18C_neutral_threshold_matrix.csv`,
+`figS18{A,B}_azt{12,108}_peak_advantage_boxstats.csv`, and the peak-group genotype lists.
+
+The two notebooks (`fitness_advantage_analysis.ipynb`, `neutral_threshold_robustness.ipynb`)
+are kept for provenance — they contain the same analysis and the figure-plotting code, with
+their original hardcoded `/work/greencenter/...` paths; `reproduce_s18.py` is the repo-relative
+entry point. Panel D is laid out in Gephi (same protocol as the main figures).

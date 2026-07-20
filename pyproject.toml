@@ -26,6 +26,7 @@ dependencies = [
     "altair>=5.4",
     "vl-convert-python",
     "joypy>=0.2.6",
+    "plotly>=5.0",
 ]
 
 # Optional: only needed to re-run the Supplementary Fig S2 MIC-estimation notebook

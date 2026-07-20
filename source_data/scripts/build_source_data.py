@@ -3,10 +3,11 @@
 figures whose underlying values live in verified analysis CSVs; stubs parquet-derived and
 contributor figures with a clear source/owner note so they can be filled at figure-lock.
 
-NOTE: the final workbook is release-gated on two still-pending contributor sheets
-(Fig 6 - F.M./Sophia/Alberto; S18 - Devin/Milo). Running this script before those land
-produces a workbook with those two sheets (plus Fig1F, which has no plotted data) stubbed
-out -- see source_data/README.md.
+NOTE: the final workbook is release-gated on one still-pending contributor sheet
+(Fig 6 - F.M./Sophia/Alberto, which needs the PF13354 MSA + py-mfdca to run). S18 is now
+reproduced from Meng's pipeline (src/graph_analysis/s18_peak_robustness/reproduce_s18.py).
+Running this script before Fig 6 lands produces a workbook with that sheet (plus Fig1F,
+which has no plotted data) stubbed out -- see source_data/README.md.
 """
 import csv
 import re
@@ -83,12 +84,15 @@ DATA = {
     ("Highlighted-variant categories", "analysis/s17_dose_response_low_count/data/highlighted_variants.csv")],
  "Fig4G-H R2 by order": [
     ("Cumulative R^2 for orders 1-6 per drug x concentration", "analysis/s11_s12_concentration_grid/results_table.csv")],
+ "S18 peak-advantage + threshold robustness": [
+    ("C: neutral-threshold robustness — has_global_peak per AZT concentration x neutral threshold (0.15-0.45)", "src/graph_analysis/s18_peak_robustness/source_data/figS18C_neutral_threshold_matrix.csv"),
+    ("A: AZT-12 global-peak-supernode fitness advantage over external neighbours, box stats per concentration x neighbour distance", "src/graph_analysis/s18_peak_robustness/source_data/figS18A_azt12_peak_advantage_boxstats.csv"),
+    ("B: AZT-108 global-peak-supernode fitness advantage, box stats per concentration x neighbour distance", "src/graph_analysis/s18_peak_robustness/source_data/figS18B_azt108_peak_advantage_boxstats.csv")],
 }
 
 # figure -> (source note, owner) for not-yet-filled sheets
 STUB = {
  "Fig6 - TODO Morcos lab":   ("DCA code folded in at src/evolutionary_statistics/ (panels A/B/C/G/H: family logo, effective alphabet, Hamiltonian C/G/H); LGL D/E/F via github.com/morcoslab/LGL-VAE. Numbers pending: add MSAs/PF13354_ga.fasta + install py-mfdca to run + extract, and obtain LGL-VAE outputs — F.M./Sophia/Alberto", "F.M./Sophia/Alberto"),
- "S18 - TODO Devin-Milo":    ("Peak-advantage box plots (A/B) + neutral-threshold matrix (C) underlying values. Meng's code folded in at src/graph_analysis/s18_peak_robustness/ — run it (after a data-path port) to extract these numbers", "Devin/Milo"),
  "Fig1F no plotted data":    ("Structural render + 2D chemical structures — no plotted data; ChemDraw supplied as artwork", "IG/DS"),
 }
 
@@ -145,6 +149,13 @@ NOTES = {
     "Squared-Pearson R^2 and RMSD of measured vs cumulative-order-K predicted fitness across the full "
     "concentration grid (0-drug panels excluded). Reproduces analysis/s11_s12_concentration_grid exactly. "
     "Per-genotype pairs are in Epistasis_Combined.parquet."),
+ "S18 peak-advantage + threshold robustness": (
+    "Reproduced from D. Meng's fitness-landscape-graph pipeline (src/graph_analysis/s18_peak_robustness/, "
+    "driver reproduce_s18.py) on this repo's AUC data. C: has_global_peak (min_group_size=12) across the "
+    "AZT neutral-threshold sweep 0.15-0.45 x 8 concentrations. A/B: fitness advantage (group member minus "
+    "external neighbour, up to 2 mutations) of the rank-0 global-peak supernode at AZT 12 / AZT 108 "
+    "(neutral_threshold=0.40), summarised as box statistics per concentration x neighbour distance; the "
+    "companion figS18{A,B}_*_peak_group_genotypes.csv list the peak-group genotypes behind the panel logos."),
 }
 
 HEAD=Font(bold=True); TITLE=Font(bold=True, size=12)
