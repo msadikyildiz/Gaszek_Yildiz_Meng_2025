@@ -19,7 +19,10 @@ This notebook reproduces the DCA half of Figure 6:
 | **6H** | `H_fam_Distribution_withTop2.5k_36AZT_H.png/pdf` | family-Hamiltonian distribution, AZT 36 |
 
 **Panels 6D / 6E / 6F (LGL coordinates) are NOT produced here** — they come from the
-separate LGL-VAE model at <https://github.com/morcoslab/LGL-VAE> (A. de la Paz).
+separate LGL-VAE model at <https://github.com/morcoslab/LGL-VAE> (A. de la Paz; **MIT**
+licensed, release 2023-03-28). Its training / plotting files are archived on Dryad
+(**doi:10.5061/dryad.51c59zwbn**). The VAE is stochastic, so the exact 6D/E/F coordinates
+require the Dryad-deposited trained model / coordinates, not merely a re-run.
 
 ## What this settles for the legend / reporting checklist
 
@@ -36,8 +39,11 @@ separate LGL-VAE model at <https://github.com/morcoslab/LGL-VAE> (A. de la Paz).
 ## Dependencies
 
 - **`py-mfdca`** — the `dca` package (`from dca.dca_class import dca`), published at
-  <https://github.com/utdal/py-mfdca> (UT Dallas). Not yet declared in this repo's
-  `pyproject.toml` (see "Status" below).
+  <https://github.com/utdal/py-mfdca> (UT Dallas). Public and pip/git-installable
+  (`pip install git+https://github.com/utdal/py-mfdca.git@v1.0.0`), release **v1.0.0**
+  (2024-07-18) — the pin target when this is wired as an optional extra. **License not
+  yet visible on the repo** — a Code-availability requirement to confirm with the Morcos lab.
+  Not yet declared in this repo's `pyproject.toml` (see "Status" below).
 - `logomaker`, `biopython` (`Bio`), `numpy`, `pandas`, `seaborn`, `matplotlib` — already
   in this repo's environment.
 - **HMMER** (`hmmsearch` / `hmmalign`, called via `subprocess`) — a system tool, not a
