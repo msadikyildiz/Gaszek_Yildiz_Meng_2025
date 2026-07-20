@@ -25,3 +25,8 @@ validation/figures/
 # secondary/diagnostic output that regenerates on rerun of that module's
 # analysis.py, so it is not committed.
 analysis/**/figures/
+
+# Same convention for the si_figures/ backfill imports (S2, S3): each
+# module's own figures/ is regenerable scratch (rerun the notebook /
+# analysis.py); the published panel lives in figures/supplementary/.
+si_figures/**/figures/

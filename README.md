@@ -125,7 +125,17 @@ in subfolders:
 | `Figure 3A/` | Standalone script for the Figure 3A AMP-vs-AZT scatter. |
 | `_not_in_manuscript/` | Notebook renders with no manuscript panel, plus `_pre_s9_s13/` — a frozen pre-revision figure snapshot under the earlier numbering. See the folder's README. |
 
-All figures are regenerable from `src/05_epistasis_figures.ipynb`.
+All main-text figures are regenerable from `src/05_epistasis_figures.ipynb`.
+Supplementary Figures S2 and S3 are original-submission panels whose
+generating code lived only on the wet-lab MIC-estimation and sequencing
+clusters; `si_figures/` backfills their source for this public archive:
+
+| Folder | Produces |
+|---|---|
+| `si_figures/s02_mic/` | Supplementary Fig **S2** (MIC panel for TEM-1-CML and select variants across 9 beta-lactams). Bundles the small local `plategig` fitting package; verified to run end-to-end in this repo's `uv` env. |
+| `si_figures/s03_dose_response/` | Supplementary Fig **S3** (dose-response AUC profiles for a representative genotype subset). `analysis.py` reads `data/raw/*_auc_per_genotype.csv` directly — no extra data needed. |
+
+See each folder's README for BioHPC provenance and reproducibility notes.
 
 ---
 
