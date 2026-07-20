@@ -39,7 +39,7 @@ DATA = {
     ("Histogram counts per drug x concentration (reproduces the ridgelines)", f"{PD}/fig1E_histogram_counts.csv")],
  "Fig2 landscape graphs": [
     ("Coarse-grained landscape-graph NODES per plotted concentration (fitness = median at that conc; n_genotypes = merged group size; is_peak = out-degree 0; contains_wildtype)", f"{PD}/fig2_nodes.csv"),
-    ("Landscape-graph EDGES per plotted concentration: source -> target oriented toward net-higher fitness after neutral-merging supernodes; weight = |net flow| = |summed exp(|Δfitness|) over forward minus reverse single-mutation transitions| (net magnitudes, not raw exp(|Δfitness|) - near-balanced pairs are small, min ~0.09); count = number of merged transitions", f"{PD}/fig2_edges.csv")],
+    ("Landscape-graph EDGES per plotted concentration: source -> target oriented by the sign of the net aggregate transition flow (forward minus reverse) after neutral-merging supernodes - predominantly toward higher fitness, though a few edges (3 of 2873) point to a lower-median-fitness supernode where aggregation reverses the net flow; weight = |net flow| = |summed exp(|Δfitness|) over forward minus reverse single-mutation transitions| (net magnitudes, not raw exp(|Δfitness|) - near-balanced pairs are small, min ~0.09); count = number of merged transitions", f"{PD}/fig2_edges.csv")],
  "Fig3 landscape signatures": [
     ("A: overlay points (WT, dead, 7 follow-ups, clinical isolates) - fitness at AMP 195/781 & AZT 36/108/324", f"{PD}/fig3A_overlay_points.csv"),
     ("B: top-1% sequence-logo residue frequencies at AMP 781 (letter height + colour)", f"{PD}/fig3B_top1pct_logo_freq_amp.csv"),
@@ -98,10 +98,11 @@ NOTES = {
     "Reproduced deterministically from D. Meng's fitness-landscape-graph builder "
     "(neutral_threshold=0.4, tiny_initial_threshold=0.02, large_edge_threshold=5.5, "
     "num_forbidden_pairs=1) run on the design-filtered per-genotype AUC data. Nodes are "
-    "neutral-merged supernodes (per-concentration median fitness); edges are single-mutation "
-    "transitions oriented toward higher fitness. Plotted concentrations: AMP 12.2/48.8/195 and "
-    "AZT 12/36/108 µg/mL; all 55,293 design genotypes are partitioned across the nodes at each "
-    "concentration."),
+    "neutral-merged supernodes (per-concentration median fitness); edges are net single-mutation "
+    "transition flows, oriented by the sign of forward-minus-reverse aggregate weight "
+    "(predominantly, but not strictly, toward higher fitness). Plotted concentrations: AMP "
+    "12.2/48.8/195 and AZT 12/36/108 µg/mL; all 55,296 design genotypes are partitioned across "
+    "the nodes at each concentration."),
  "Fig3 landscape signatures": (
     "Panel A is a 2x3 hex-bin density of AZT (36/108/324) vs AMP (195/781) fitness for all 55,296 "
     "genotypes; bulk per-genotype values = companion derived/fig3A_all_genotypes.csv (also in "
@@ -157,8 +158,15 @@ idx["A1"]="Source Data — index"; idx["A1"].font=TITLE
 idx.append([]); idx.append(["Figure sheet","Status","Primary source"])
 for c in idx[3]: c.font=HEAD; c.fill=HDRFILL
 for name in DATA:
-    primary = DATA[name][0][1]
-    idx.append([name, "populated" if (REPO / primary).exists() else "missing (run builders)", primary])
+    sources = [rel for _label, rel in DATA[name]]
+    present = [rel for rel in sources if (REPO / rel).exists()]
+    if len(present) == len(sources):
+        status = "populated"
+    elif not present:
+        status = "missing (run builders)"
+    else:
+        status = f"partial ({len(present)}/{len(sources)})"
+    idx.append([name, status, sources[0]])
 for name,(note,owner) in STUB.items():
     status = "N/A" if "no plotted data" in note else f"TODO ({owner})"
     idx.append([name, status, note])
@@ -199,5 +207,7 @@ for name,(note,owner) in STUB.items():
 
 wb.save(OUT)
 print(f"wrote {OUT}")
-print(f"sheets: {len(wb.sheetnames)}  ({len(DATA)} populated + {len(STUB)} stub + Index)")
-print("populated:", ", ".join(DATA.keys()))
+_fully = [n for n, secs in DATA.items() if all((REPO / rel).exists() for _l, rel in secs)]
+print(f"sheets: {len(wb.sheetnames)}  ({len(_fully)}/{len(DATA)} data sheets fully populated, "
+      f"{len(DATA) - len(_fully)} missing/partial + {len(STUB)} stub + Index)")
+print("data sheets:", ", ".join(DATA.keys()))

@@ -19,10 +19,12 @@ Runtime: ~30 s single-core. Polars + Matplotlib, reproducible (seed 20260420).
 - `data/raw/Aztreonam_auc_per_genotype.csv`
   Schema: `mut_profile_masked, <Drug> <conc> 1, <Drug> <conc> 2, <Drug> <conc> 3`.
   Cell values are already log10(AUC) (manuscript "fitness").
-- **Design filter.** Analysis is restricted to the 55,293 combinatorially-complete
+- **Design filter.** Analysis is restricted to the 55,296 combinatorially-complete
   design genotypes (masked profiles present in `data/processed/Epistasis_Combined.parquet`);
   off-design barcode artefacts in the raw per-genotype table are excluded so the
-  reproducibility statistics use the same population analysed in the paper.
+  reproducibility statistics use the same population analysed in the paper. Per-concentration
+  summaries report n = 55,293 — the three profiles without a finite replicate SD are dropped
+  from the dispersion tables.
 
 ## Outputs
 
@@ -52,9 +54,10 @@ and regenerate into this module's local `figures/` (gitignored, scratch).
   genotypes with %CV < 10.
 - `data/replicate_pair_correlations.csv` — 42 rows: one per unique
   replicate pair (1-2, 1-3, 2-3) per drug × concentration; columns:
-  `drug, concentration, rep_i, rep_j, n, pearson_r, pearson_p`. The
-  `pearson_p` column underflows to `0.0` at this sample size (double
-  precision).
+  `drug, concentration, rep_i, rep_j, n, pearson_r, pearson_p`. Most
+  `pearson_p` values underflow to `0.0` at this sample size (double precision);
+  a few high-concentration pairs, where nearly all genotypes are non-viable and
+  replicate agreement collapses, have finite and even non-significant p (max 0.105).
 - `data/summary_by_conc_viable.csv` — 14 rows; same columns as
   `summary_by_conc.csv` but restricted to genotypes with mean
   log10(AUC) > 3.0 at the given condition. Confirms the "<10% SD"
@@ -74,7 +77,7 @@ and regenerate into this module's local `figures/` (gitignored, scratch).
 - **Three replicate pairs per concentration**, shown as 3 sub-panels rather
   than an average, to display the scatter directly rather than collapsing
   it into a single averaged summary.
-- **Hex-bin with log-count colour** scales cleanly across 65k points
+- **Hex-bin with log-count colour** scales cleanly across ~55k points
   without over-plotting; identity line in drug colour.
 - **Pearson is the right summary** (replicates should cluster around the
   identity line, not just "rank-correlate"). Spearman would over-state

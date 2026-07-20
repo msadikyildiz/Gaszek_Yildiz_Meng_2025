@@ -26,13 +26,19 @@ reference/
 
 ## Dependency: `plategig`
 
-The notebook uses the lab's MIC/IC50 fitting package **`plategig`**, published at
-<https://github.com/msadikyildiz/plategig> (MIT). It is declared as an **optional** dependency
-in the repo's `pyproject.toml` (`[project.optional-dependencies].si-figures`) so the main
-pipeline does not require it. Install before running this notebook:
+The notebook uses the lab's MIC/IC50 fitting package **`plategig`**
+(<https://github.com/msadikyildiz/plategig>, MIT), pinned to the `biohpc`-branch commit
+`2d9e7d9` — the API this notebook targets (the default `main` branch has a different,
+incompatible API, missing `convert_OD_plate_to_long` / `plot_single_plate_media_only_wells`).
+It is an **optional** dependency (`[project.optional-dependencies].si-figures`) so the main
+pipeline does not require it.
+
+**Requires Python >= 3.12** (plategig's floor): the `si-figures` extra is marked
+`python_version >= '3.12'`, so on a 3.10/3.11 interpreter it resolves to nothing and the
+`import plategig` below fails. Run this notebook under a 3.12+ interpreter:
 
 ```bash
-uv sync --extra si-figures
+uv sync --extra si-figures      # under Python 3.12+ (see the repo's .python-version)
 ```
 
 ## Path ports

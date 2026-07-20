@@ -153,7 +153,7 @@ backfilled under `si_figures/` for this public archive:
 
 | Folder | Produces |
 |---|---|
-| `si_figures/s02_mic/` | Supplementary Fig **S2** (MIC panel for TEM-1-CML and select variants across 9 β-lactams). Uses the lab's `plategig` fitting package, declared as an **optional external dependency** (`uv sync --extra si-figures`; `git+https://github.com/msadikyildiz/plategig`). The peer-reviewed single-panel figure is retained; this folder reproduces its underlying data. |
+| `si_figures/s02_mic/` | Supplementary Fig **S2** (MIC panel for TEM-1-CML and select variants across 9 β-lactams). Uses the lab's `plategig` fitting package — an **optional external dependency** pinned to its `biohpc` commit and requiring **Python ≥ 3.12** (`uv sync --extra si-figures` under a 3.12+ interpreter). The peer-reviewed single-panel figure is retained; this folder reproduces its underlying data. |
 | `si_figures/s03_dose_response/` | Supplementary Fig **S3** (dose-response profiles for a representative genotype subset). `analysis.py` reads `data/raw/*_auc_per_genotype.csv` directly. |
 | `si_figures/s07_s08_ic50/` | Supplementary Figs **S7/S8** (monoculture IC50 vs AUC-fitness). Reads `validation/src/processed/`. |
 
