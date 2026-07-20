@@ -3,10 +3,10 @@
 figures whose underlying values live in verified analysis CSVs; stubs parquet-derived and
 contributor figures with a clear source/owner note so they can be filled at figure-lock.
 
-NOTE: the final workbook is release-gated on two still-pending contributor sheets
-(Fig 6 - Faruck; S18 - Devin/Milo). Running this script before those land produces a
-workbook with those two sheets (plus Fig1F, which has no plotted data) stubbed out --
-see source_data/README.md.
+NOTE: the final workbook is release-gated on one still-pending contributor sheet
+(S18 - Devin/Milo). Fig 6 source values are available from F.M. on request (stated in the
+sheet + Code availability); Fig1F has no plotted data. Running this script before S18 lands
+produces a workbook with S18 stubbed out -- see source_data/README.md.
 """
 import csv
 import re
@@ -87,7 +87,7 @@ DATA = {
 
 # figure -> (source note, owner) for not-yet-filled sheets
 STUB = {
- "Fig6 - TODO Faruck":       ("DCA logo, effective alphabet, Hamiltonian distributions, LGL coords", "Faruck"),
+ "Fig6 evolutionary statistics": ("DCA sequence logo (A), effective-alphabet values (B), Hamiltonian distributions (C/G/H), and LGL coordinates (D/E/F) — available from F.M. on request (see Code availability)", "F.M."),
  "S18 - TODO Devin-Milo":    ("Peak-advantage box plots + neutral-threshold matrix underlying values", "Devin/Milo"),
  "Fig1F no plotted data":    ("Structural render + 2D chemical structures — no plotted data; ChemDraw supplied as artwork", "IG/DS"),
 }
@@ -168,7 +168,12 @@ for name in DATA:
         status = f"partial ({len(present)}/{len(sources)})"
     idx.append([name, status, sources[0]])
 for name,(note,owner) in STUB.items():
-    status = "N/A" if "no plotted data" in note else f"TODO ({owner})"
+    if "no plotted data" in note:
+        status = "N/A"
+    elif "on request" in note:
+        status = "available on request"
+    else:
+        status = f"TODO ({owner})"
     idx.append([name, status, note])
 idx.column_dimensions["A"].width=30; idx.column_dimensions["B"].width=16; idx.column_dimensions["C"].width=90
 
@@ -201,7 +206,12 @@ for name, sections in DATA.items():
 for name,(note,owner) in STUB.items():
     ws=wb.create_sheet(re.sub(r'[\\/?*\[\]:]', '-', name)[:31])
     ws.cell(1,1,name.split(" - ")[0].replace(" N/A","")).font=TITLE
-    body = f"N/A — no source data. {note}" if "no plotted data" in note else f"TO FILL ({owner}): {note}"
+    if "no plotted data" in note:
+        body = f"N/A — no source data. {note}"
+    elif "on request" in note:
+        body = f"Available on request. {note}"
+    else:
+        body = f"TO FILL ({owner}): {note}"
     c=ws.cell(3,1,body); c.fill=NOTEFILL; c.alignment=Alignment(wrap_text=True)
     ws.column_dimensions["A"].width=110
 

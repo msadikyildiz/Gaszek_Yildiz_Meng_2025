@@ -69,18 +69,22 @@ before running the assembler.
 
 ## What is NOT done yet
 
-`source_data.xlsx` is **not built or committed** by this port. Two sheets are
+`source_data.xlsx` is **not built or committed** by this port. One sheet is
 release-gated on outstanding contributor work:
 
-- **Fig 6** (DCA logo, effective alphabet, Hamiltonian distributions, LGL
-  coordinates) — Faruck.
 - **S18** (peak-advantage box plots + neutral-threshold matrix) — Devin/Milo.
 
-`build_source_data.py` stubs both sheets (plus Fig 1F, which has no plotted
-data — it is a structural render / ChemDraw artwork) with a clear
-"TO FILL (owner): ..." note rather than failing, so it can be run early to
-sanity-check the rest of the workbook. The real assembly — and the Zenodo
-release it feeds — waits for those two sheets.
+Two further sheets need no tabulated data in the workbook:
+
+- **Fig 6** (DCA logo, effective alphabet, Hamiltonian distributions, LGL
+  coordinates) — source values are available from F.M. on request, stated in
+  the sheet and under Code availability.
+- **Fig 1F** — a structural render / ChemDraw artwork with no plotted data.
+
+`build_source_data.py` marks S18 "TODO", Fig 6 "available on request", and
+Fig 1F "N/A" rather than failing, so it can be run early to sanity-check the
+rest of the workbook. The real assembly — and the Zenodo release it feeds —
+waits for the S18 sheet.
 
 ## Provenance
 
