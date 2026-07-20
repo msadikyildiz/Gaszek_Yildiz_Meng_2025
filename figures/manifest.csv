@@ -8,7 +8,7 @@ Figure 3D,figures/main/Figure 3D. Fitness in AZT vs. number of mutations.png,src
 Figure 4,figures/main/Figure 4A..H. *.png,src/05_epistasis_figures.ipynb,Single/double-mutant fitness (A-D) + density grids and per-order R^2/rho (E-H)
 Figure 5A/5C,figures/main/Figure 5A. SHAP *.png; figures/main/Figure 5C. Mean SHAP per mutation AMP.png,src/04_epistasis_amp_regression.ipynb,AMP SHAP (LightGBM)
 Figure 5B/5D,figures/main/Figure 5B. SHAP *.png; figures/main/Figure 5D. Mean SHAP per mutation AZT.png,src/03_epistasis_azt_regression.ipynb,AZT SHAP (LightGBM)
-Figure 6,figures/main/Figure 6. Evolutionary statistics.png,contributors (F.M.),DCA/LGL evolutionary statistics; source values available from F.M. (see Code availability)
+Figure 6,figures/main/Figure 6. Evolutionary statistics.png,contributors (F.M.),DCA/LGL evolutionary statistics; reproducible code / source values pending from the Morcos lab (see Code availability)
 S1,figures/supplementary/figure_s01.png,(original submission — no in-repo generator),"Clinical mutational spectrum; retained verbatim from the accepted submission (no regeneration script in this repository)"
 S2,figures/supplementary/figure_s02.png,si_figures/s02_mic/,"MIC panel (measured); reproducing data+code (CML_MIC_estimations.ipynb + plate data + plategig) in si_figures/s02_mic/. Published single-panel layout retained; see that folder's README"
 S3,figures/supplementary/figure_s03.png,si_figures/s03_dose_response/analysis.py,"Dose-response of a representative library subset; code-native recreation from data/raw/ — differs from the frozen SI pixels (regenerated from code per the archive's use-code-output policy)"
