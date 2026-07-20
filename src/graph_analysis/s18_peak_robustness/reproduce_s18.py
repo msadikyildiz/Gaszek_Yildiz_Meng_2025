@@ -4,8 +4,8 @@ repository's AUC data, using Devin Meng's `fitness_landscape_graph` library unch
 Pipeline:
   1. Per-concentration pair tables (median_diff) from data/raw/ AUC. Uses a vectorized
      equivalent of fitness_landscape_graph.pair_table.get_mutant_pairs (Meng's version does
-     ~4M per-pair-per-concentration polars filters); verified byte-equal to his function on
-     genotype subsets.
+     ~4M per-pair-per-concentration polars filters); verified to produce identical median_diff
+     and the same Hamming-1 pair set as his function on genotype subsets.
   2. Neutral-threshold graph sweep (0.15-0.45 step 0.01 x 8 AZT concentrations) via
      `python -m fitness_landscape_graph.build_graphs_parallel` (~15-20 min, 248 graphs).
   3. S18C neutral-threshold robustness matrix: GraphAnalyzer.has_global_peak(min_group_size=12)
@@ -21,12 +21,14 @@ Requires the repo env plus `plotly` (imported by graph_analyzer). Run from this 
     python reproduce_s18.py --skip-build   # reuse an existing graph sweep under --work
 """
 import argparse
+import os
 import subprocess
 import sys
 from collections import defaultdict
 from itertools import product
 from pathlib import Path
 
+import networkx as nx
 import numpy as np
 import polars as pl
 
@@ -65,7 +67,8 @@ def _make_long(path, concs):
 def _pairs_lean(long_df):
     """Per-concentration pairs (mutant_profile1/2, concentration, median_diff) — the columns
     GraphBuilder(fitness_diff_col='median_diff') and FitnessAdvantageAnalyzer consume.
-    Vectorized equivalent of pair_table.get_mutant_pairs (verified byte-equal on subsets)."""
+    Vectorized equivalent of pair_table.get_mutant_pairs (verified: identical median_diff and
+    the same Hamming-1 pair set as Meng's function on subsets)."""
     mp = sorted(long_df["mutant_profile"].unique().to_list())
     cdd = defaultdict(set)
     for i, m in enumerate(mp):
@@ -121,11 +124,13 @@ def main():
             _pairs_lean(_make_long(REPO / f"data/raw/{raw}_auc_per_genotype.csv", concs)).write_csv(
                 work / f"data/processed/{drug[:3]}_pairs.csv")
         print("pairs + layout ready; building 248-graph sweep (~15-20 min)...", flush=True)
+        # PYTHONHASHSEED=0 pins set/dict iteration so supernode representative-label
+        # tie-breaks are reproducible across runs (same partition either way).
         subprocess.run([sys.executable, "-m", "fitness_landscape_graph.build_graphs_parallel",
                         "--base-path", str(work), "--output-dir", str(graphs),
                         "--neutral-thresholds", "0.15", "0.45", "0.01",
                         "--concentrations", *[str(c) for c in SWEEP_CONCS]],
-                       cwd=str(HERE), check=True)
+                       cwd=str(HERE), check=True, env={**os.environ, "PYTHONHASHSEED": "0"})
 
     # 3. S18C matrix
     rows = []
@@ -146,14 +151,35 @@ def main():
         azt_pairs_path=str(work / "data/processed/azt_pairs.csv"),
         clean_nulls_flag=True)
     fa = FitnessAdvantageAnalyzer(pdata["azt"]["pairs"], pdata["azt"]["long"])
+    full = out / "full"; full.mkdir(exist_ok=True)
     for panel, conc in [("A", 12.0), ("B", 108.0)]:
         ga = GraphAnalyzer(str(graphs / f"azt_c{str(conc).replace('.', '_')}_t0_40.graphml"))
         group = ga.get_peak_genotypes(rank=0)
         res = fa.compute_fitness_advantage(group_genotypes=group, max_distance=2)
+        # full plotted observations (every group-member vs external-neighbour comparison; the
+        # box plots consume all of these, including fliers). Large + regenerable -> source_data/full/.
+        res.write_csv(full / f"figS18{panel}_azt{int(conc)}_all_comparisons.csv")
         _box_summary(res).write_csv(out / f"figS18{panel}_azt{int(conc)}_peak_advantage_boxstats.csv")
         pl.DataFrame({"genotype": sorted(group)}).write_csv(
             out / f"figS18{panel}_azt{int(conc)}_peak_group_genotypes.csv")
         print(f"S18{panel}: AZT {int(conc)} peak group={len(group)}, {res.height} comparisons", flush=True)
+
+    # 5. S18D: node/edge tables for the AZT 108 graphs at neutral threshold 0.42 (global peak
+    #    present) vs 0.43 (peak gone) — the "global peak disappears" comparison. Gephi layout only.
+    dn, de = [], []
+    for thr in ("0_42", "0_43"):
+        g = nx.read_graphml(str(graphs / f"azt_c108_0_t{thr}.graphml"))
+        t = float(thr.replace("_", "."))
+        for n, d in g.nodes(data=True):
+            dn.append({"concentration": 108.0, "neutral_threshold": t, "node_id": n,
+                       "fitness": float(d["fitness"]), "n_genotypes": int(d["group_size"]),
+                       "is_peak": int(d["is_peak"]), "contains_wildtype": int(d["contain_wildtype"])})
+        for u, v, d in g.edges(data=True):
+            de.append({"concentration": 108.0, "neutral_threshold": t, "source": u, "target": v,
+                       "weight": float(d["weight"]), "count": int(d["count"])})
+    pl.DataFrame(dn).sort(["neutral_threshold", "node_id"]).write_csv(out / "figS18D_azt108_nodes.csv")
+    pl.DataFrame(de).sort(["neutral_threshold", "source", "target"]).write_csv(out / "figS18D_azt108_edges.csv")
+    print(f"S18D: {len(dn)} nodes + {len(de)} edges (t=0.42 vs 0.43)", flush=True)
     print("done -> source_data/", flush=True)
 
 

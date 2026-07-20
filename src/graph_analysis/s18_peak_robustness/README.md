@@ -57,18 +57,25 @@ python reproduce_s18.py --skip-build --work <dir>   # re-run only the analysis o
 ```
 
 It (1) builds per-concentration pair tables from `data/raw/` via a vectorized equivalent of
-`pair_table.get_mutant_pairs` (verified byte-equal to Meng's function on genotype subsets —
-his does ~4M per-pair-per-concentration polars filters), (2) runs
-`fitness_landscape_graph.build_graphs_parallel` for the AZT sweep, and (3) runs the S18C /
-S18A / S18B analysis with Meng's `GraphAnalyzer` + `FitnessAdvantageAnalyzer` unchanged.
+`pair_table.get_mutant_pairs` (verified to produce identical `median_diff` and the same
+Hamming-1 pair set as Meng's function on genotype subsets — his does ~4M
+per-pair-per-concentration polars filters), (2) runs `fitness_landscape_graph.build_graphs_parallel`
+(with `PYTHONHASHSEED=0` so supernode representative labels are deterministic) for the AZT
+sweep, and (3) runs the S18C / S18A / S18B / S18D extraction with Meng's `GraphAnalyzer` +
+`FitnessAdvantageAnalyzer` unchanged.
 
 **Verified against the published `figure_s18.png`:** the S18C matrix reproduces the green/grey
 pattern (conc 0/0.44/1.33 → no peak; 4 → 19/31; 36 → 1/31; 108 → 16/31 with the 0.42→0.43 gap
 in panel D; 324 → 21/31), and the AZT-12 and AZT-108 peak fitness advantages peak at ~1.5 and
 ~2.35 at their respective concentrations, matching panels A and B.
 
-Source Data (`source_data/`): `figS18C_neutral_threshold_matrix.csv`,
-`figS18{A,B}_azt{12,108}_peak_advantage_boxstats.csv`, and the peak-group genotype lists.
+Source Data (`source_data/`): `figS18C_neutral_threshold_matrix.csv`;
+`figS18{A,B}_azt{12,108}_peak_advantage_boxstats.csv` (box statistics — the **full plotted
+observations**, every group-member vs external-neighbour comparison including fliers, are the
+regenerable `source_data/full/figS18{A,B}_*_all_comparisons.csv`, ~1.9M rows, gitignored and
+destined for the release Source Data zip); `figS18D_azt108_{nodes,edges}.csv` (the AZT-108
+t=0.42-vs-0.43 networks behind panel D; Gephi layout not reproducible); and the peak-group
+genotype lists behind the panel A/B logos.
 
 The two notebooks (`fitness_advantage_analysis.ipynb`, `neutral_threshold_robustness.ipynb`)
 are kept for provenance — they contain the same analysis and the figure-plotting code, with

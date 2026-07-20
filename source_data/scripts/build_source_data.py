@@ -86,8 +86,10 @@ DATA = {
     ("Cumulative R^2 for orders 1-6 per drug x concentration", "analysis/s11_s12_concentration_grid/results_table.csv")],
  "S18 peak-advantage + threshold robustness": [
     ("C: neutral-threshold robustness — has_global_peak per AZT concentration x neutral threshold (0.15-0.45)", "src/graph_analysis/s18_peak_robustness/source_data/figS18C_neutral_threshold_matrix.csv"),
-    ("A: AZT-12 global-peak-supernode fitness advantage over external neighbours, box stats per concentration x neighbour distance", "src/graph_analysis/s18_peak_robustness/source_data/figS18A_azt12_peak_advantage_boxstats.csv"),
-    ("B: AZT-108 global-peak-supernode fitness advantage, box stats per concentration x neighbour distance", "src/graph_analysis/s18_peak_robustness/source_data/figS18B_azt108_peak_advantage_boxstats.csv")],
+    ("A: AZT-12 global-peak-supernode fitness advantage over external neighbours, box statistics per concentration x neighbour distance (full plotted observations incl. fliers = the regenerable source_data/full/figS18A_azt12_all_comparisons.csv)", "src/graph_analysis/s18_peak_robustness/source_data/figS18A_azt12_peak_advantage_boxstats.csv"),
+    ("B: AZT-108 global-peak-supernode fitness advantage, box statistics per concentration x neighbour distance (full observations = source_data/full/figS18B_azt108_all_comparisons.csv)", "src/graph_analysis/s18_peak_robustness/source_data/figS18B_azt108_peak_advantage_boxstats.csv"),
+    ("D: AZT-108 landscape-graph NODES at neutral threshold 0.42 (global peak present) vs 0.43 (absent)", "src/graph_analysis/s18_peak_robustness/source_data/figS18D_azt108_nodes.csv"),
+    ("D: AZT-108 landscape-graph EDGES at neutral threshold 0.42 vs 0.43 (source->target, weight, count; Gephi layout not reproducible)", "src/graph_analysis/s18_peak_robustness/source_data/figS18D_azt108_edges.csv")],
 }
 
 # figure -> (source note, owner) for not-yet-filled sheets

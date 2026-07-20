@@ -20,6 +20,9 @@ src/evolutionary_statistics/figures/
 # the committed Source Data lives in s18_peak_robustness/source_data/)
 src/graph_analysis/s18_peak_robustness/outputs/
 src/graph_analysis/s18_peak_robustness/data/
+# Full S18 A/B plotted observations (~1.9M rows; regenerable; belong in the release Source
+# Data zip, not git). The committed box statistics summarise them.
+src/graph_analysis/s18_peak_robustness/source_data/full/
 
 # Large regenerable intermediate (rebuild via analysis/s16_replicate_reproducibility/analysis.py)
 analysis/s16_replicate_reproducibility/data/per_genotype_replicate_stats.csv
