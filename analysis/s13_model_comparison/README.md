@@ -1,16 +1,15 @@
-# S1 — model-comparison analysis
+# s13 — model comparison: LightGBM vs linear, Lasso, and decision-tree regression
 
-Response to Reviewer #3 comment 2b: compare LightGBM against unregularised linear
-regression, L1 (Lasso) regression, and a single decision tree; report predictive
-accuracy as a function of training sample size.
+Produces **Supplementary Figure S13**. Compares LightGBM against
+unregularised linear regression, L1 (Lasso) regression, and a single decision
+tree, reporting predictive accuracy as a function of training sample size.
+Added during the Nature Communications revision.
 
 ## Rerun
 
 ```
-export MPLCONFIGDIR=/tmp/claude/mpl_cache FONTCONFIG_CACHE=/tmp/claude/fc_cache
 export LOKY_MAX_CPU_COUNT=8
-mkdir -p $MPLCONFIGDIR $FONTCONFIG_CACHE
-uv run python revision_analyses/s1_model_comparison/analysis.py
+uv run python analysis/s13_model_comparison/analysis.py
 ```
 
 Runtime: ~1 minute on 8 cores.
@@ -27,7 +26,6 @@ Runtime: ~1 minute on 8 cores.
 - `figures/model_comparison_azt.png` — AZT @ 36 µg/mL learning curves.
 - `results_table.csv` — one row per (model, drug, fraction, seed): RMSD, R², runtime (396 rows; raw per-seed data).
 - `data/learning_curves_summary.csv` — aggregated mean ± s.d. over seeds for every (model, drug, fraction) (132 rows; the spec-shaped table).
-- `results.md` — rebuttal-response draft with quoted reviewer text + conclusions.
 
 ## Design choices
 

@@ -3,12 +3,10 @@
 Tests whether the main-text Fig 4/Fig 5 conclusions at AMP 781 µg/mL are
 robust to dropping the sequencing-floor fraction of the library.
 
-## Run it
+## Rerun
 
 ```bash
-export MPLCONFIGDIR=/private/tmp/claude/mpl_cache FONTCONFIG_CACHE=/private/tmp/claude/fc_cache
-mkdir -p $MPLCONFIGDIR $FONTCONFIG_CACHE
-uv run python revision_analyses/s7_concentration_grid/library_invariance/analysis.py
+uv run python analysis/s11_s12_concentration_grid/library_invariance/analysis.py
 ```
 
 Takes about 2 min on a single CPU (LightGBM + SHAP dominate runtime).
@@ -54,8 +52,7 @@ of model fit or claimed epistatic pattern. The biochemical-epistasis view
 (Fig 5E/F) is numerically unchanged (r = 1.0000); R² vs K is strictly higher
 on the clean subset at every K; LightGBM is more accurate (RMSD 0.37 vs
 0.46). We therefore soften the invariance claim at the level of raw means
-while keeping the exclusion rule; `results.md` carries the reviewer-facing
-paragraph.
+while keeping the exclusion rule.
 
 ## File layout
 
@@ -64,6 +61,5 @@ library_invariance/
   analysis.py              # 4-step pipeline
   data/*.csv               # 5 CSVs
   figures/*.png            # 3 PNGs
-  results.md               # reviewer-facing summary
   README.md                # this file
 ```

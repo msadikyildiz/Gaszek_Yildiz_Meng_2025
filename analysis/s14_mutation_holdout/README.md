@@ -1,17 +1,16 @@
-# S2 — Block-holdout ML validation
+# s14 — mutation-stratified holdout validation (LOMO + Hamming distance)
 
-Reviewer #4 point ii: block-holdout / mutation-stratified ML validation to
-test whether the LightGBM fitness regressor learns transferable epistatic
-rules rather than memorising local genotype neighbourhoods. See `results.md`
-for the rebuttal-ready narrative.
+Produces **Supplementary Figure S14**. Block-holdout / mutation-stratified
+validation testing whether the LightGBM fitness regressor learns transferable
+epistatic rules rather than memorising local genotype neighbourhoods. Added
+during the Nature Communications revision.
 
-## How to reproduce
+## Rerun
 
 ```bash
 # From repository root
-export MPLCONFIGDIR=/tmp/claude/mpl_cache FONTCONFIG_CACHE=/tmp/claude/fc_cache
-uv run python revision_analyses/s2_block_holdout/analysis.py
-uv run python revision_analyses/s2_block_holdout/classification_check.py
+uv run python analysis/s14_mutation_holdout/analysis.py
+uv run python analysis/s14_mutation_holdout/classification_check.py
 ```
 
 `analysis.py` runs, for each of AMP @ 781 µg/mL and AZT @ 36 µg/mL:
@@ -36,7 +35,6 @@ P90 gain-of-resistance). Output: `data/classification_results.csv`.
 | `data/hamming_results.csv`      | Per-D LightGBM + random RMSD/R² for both references |
 | `data/classification_results.csv` | AUROC / balanced-accuracy under LOMO |
 | `results_table.csv`             | Aggregated deliverable |
-| `results.md`                    | Rebuttal response draft |
 
 ## Hyperparameters (held fixed)
 

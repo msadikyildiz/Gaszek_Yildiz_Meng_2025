@@ -1,15 +1,14 @@
-# S5 — replicate reproducibility
+# s16 — replicate-to-replicate reproducibility of the AUC-fitness metric
 
-Response to Reviewer #1 on manuscript line 163: quantify replicate-to-
-replicate reproducibility of the AUC-Fitness metric, which the reviewer
-flagged as unsupported by a correlation figure.
+Produces **Supplementary Figure S16**. Quantifies replicate-to-replicate
+reproducibility of the AUC-fitness metric via per-genotype %CV and pairwise
+replicate correlations, addressing the manuscript's reproducibility claim at
+line 163. Added during the Nature Communications revision.
 
 ## Rerun
 
 ```
-export MPLCONFIGDIR=/private/tmp/claude/mpl_cache FONTCONFIG_CACHE=/private/tmp/claude/fc_cache
-mkdir -p $MPLCONFIGDIR $FONTCONFIG_CACHE
-uv run python revision_analyses/s5_replicate_correlations/analysis.py
+uv run python analysis/s16_replicate_reproducibility/analysis.py
 ```
 
 Runtime: ~30 s single-core. Polars + Matplotlib, reproducible (seed 20260420).
@@ -50,7 +49,6 @@ Runtime: ~30 s single-core. Polars + Matplotlib, reproducible (seed 20260420).
   claim fails even in the viable subset.
 - `results_table.csv` — 14-row headline verdict table: CV summary joined
   to mean Pearson r across pairs, with `median_cv_below_10pct` boolean.
-- `results.md` — rebuttal response draft.
 
 ## Design choices
 
@@ -62,7 +60,8 @@ Runtime: ~30 s single-core. Polars + Matplotlib, reproducible (seed 20260420).
     typical reader interpretation of "SD below 10%."
   - SD of log10(AUC) directly. Matches the manuscript units.
 - **Three replicate pairs per concentration**, shown as 3 sub-panels rather
-  than an average — the reviewer explicitly asked for scatter plots.
+  than an average, to display the scatter directly rather than collapsing
+  it into a single averaged summary.
 - **Hex-bin with log-count colour** scales cleanly across 65k points
   without over-plotting; identity line in drug colour.
 - **Pearson is the right summary** (replicates should cluster around the
@@ -72,8 +71,7 @@ Runtime: ~30 s single-core. Polars + Matplotlib, reproducible (seed 20260420).
 ## Status
 
 - Figures and tables: complete, reproducible, correct.
-- Manuscript text proposal: see `results.md`. Line 163 is replaced with
-  honest, data-backed wording citing the Pearson r range and the
-  log-SD dispersion directly. Denominators corrected, p-value wording
-  fixed, and the viable-subset claim verified and saved to
+- Manuscript line 163 is revised to cite the Pearson r range and log-SD
+  dispersion directly, with corrected denominators and p-value wording; the
+  viable-subset claim is verified and saved to
   `data/summary_by_conc_viable.csv`.

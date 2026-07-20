@@ -1,20 +1,18 @@
-# S4 — Epistasis section rewrite and two new extended figures
+# s09/s10 — epistatic-order decomposition and drug asymmetry
 
-Addresses **Reviewer #3** (restructure the Epistasis section to lead with
-the overall linear-model results) and reinforces answers to **Reviewer
-#1 R1-22** (prediction-method comparison, primarily handled in S1) and
-**Reviewer #1 R1-23** (aztreonam vs other β-lactams).
-
-See `results.md` for the full rebuttal-format response and
-`draft.md` for the rewritten Epistasis-section text (~820 words) ready
-for integration.
+Produces **Supplementary Figures S9** and **S10**. S9 decomposes the
+manuscript's partial linear-regression R² by maximum included epistatic order
+K, showing how much of the fitness-landscape variance is captured as
+pairwise, three-way, and higher-order terms are added. S10 compares AMP vs
+AZT predictability (R², RMSD, pairwise-epistasis magnitude) at matched
+selective stringency, testing whether the apparent drug asymmetry reflects
+genuine epistatic-structure differences rather than the choice of
+concentration. Added during the Nature Communications revision.
 
 ## Rerun
 
 ```
-export MPLCONFIGDIR=/private/tmp/claude/mpl_cache FONTCONFIG_CACHE=/private/tmp/claude/fc_cache
-mkdir -p $MPLCONFIGDIR $FONTCONFIG_CACHE
-uv run python revision_analyses/s4_epistasis_rewrite/analysis.py
+uv run python analysis/s09_s10_epistatic_order/analysis.py
 ```
 
 Runtime: ~10 s on CPU. No GPU, no model refit — the parquet already
@@ -26,11 +24,11 @@ stores every `Fitness_predicted for order K` column we need.
   — 774,144 rows, 50 columns; the manuscript's master parquet with
   measured `Fitness` and `Fitness_predicted for order K` for
   K ∈ {1, …, 13}.
-- `revision_analyses/s7_concentration_grid/data/regression_r2_by_order.csv`
-  — used for cross-check only (S4 R² must match S7 R² to machine
-  precision). This dependency is optional; if the S7 file is missing the
+- `analysis/s11_s12_concentration_grid/data/regression_r2_by_order.csv`
+  — used for cross-check only (S9/S10 R² must match S11/S12 R² to machine
+  precision). This dependency is optional; if the file is missing the
   analysis still runs without the assertion.
-- `revision_analyses/s7_concentration_grid/data/pairwise_mean_fitness.csv`
+- `analysis/s11_s12_concentration_grid/data/pairwise_mean_fitness.csv`
   — used to derive the pairwise-epistasis magnitude distributions
   shown in Ext Fig. E panel (d).
 
@@ -73,26 +71,22 @@ stores every `Fitness_predicted for order K` column we need.
 - **LOC.** `analysis.py` is 497 non-blank non-comment non-docstring
   lines (project rule: ≤ 500).
 
-## Related work in this response set
+## Related analyses
 
-- `../s1_model_comparison/` — Reviewer #3 2b (model-class comparison).
-  The rewritten Epistasis section references S1 for the predictive-
-  method-comparison bridge paragraph.
-- `../s7_concentration_grid/` — Reviewer #1 (concentration-grid
-  extension). S7's R² and pairwise-epistasis CSVs are direct inputs
-  to S4.
-- `../s2_block_holdout/` — Reviewer #4 block-holdout / mutation-
-  stratified validation.
-- `../s3_rmsd_justification/` — Reviewer #3/#4 sensitivity/specificity
-  justification.
+- `../s13_model_comparison/` — model-class comparison (linear / Lasso /
+  decision tree / LightGBM). Referenced by the epistatic-order discussion
+  for the predictive-method-comparison bridge.
+- `../s11_s12_concentration_grid/` — concentration-grid extension. Its
+  R² and pairwise-epistasis CSVs are direct inputs here.
+- `../s14_mutation_holdout/` — mutation-stratified holdout validation.
+- `../s15_classification_metrics/` — sensitivity/specificity/RMSD
+  classification metrics.
 
 ## File layout
 
 ```
-s4_epistasis_rewrite/
+s09_s10_epistatic_order/
 ├── README.md                      (this file)
-├── draft.md                       (rewritten Epistasis section, ~820 words)
-├── results.md                     (rebuttal-format response + quoted comments)
 ├── analysis.py
 ├── results_table.csv              (4 rows)
 ├── data/

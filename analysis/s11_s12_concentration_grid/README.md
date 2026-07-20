@@ -1,20 +1,16 @@
-# S7 — concentration-grid extension of Figure 4 (and pairwise-epistasis panel of Figure 5)
+# s11/s12 — concentration-grid extension of Figure 4 (and pairwise-epistasis panel of Figure 5)
 
-Response to **Reviewer #1** (and parallel concerns from Reviewer #3) that the
-manuscript's epistatic / predictive conclusions in Figures 4 and 5 are shown
-at only one representative concentration per drug (AMP 781 µg/mL,
-AZT 36 µg/mL) and need to be validated across the full measured concentration
-range.
-
-See `results.md` for the full rebuttal-response draft with reviewer
-quotations and headline numbers.
+Produces **Supplementary Figures S11** (pairwise-epistasis heatmaps) and
+**S12** (measured-vs-predicted densities). Extends the manuscript's epistatic
+and predictive conclusions in Figures 4 and 5 — shown at one representative
+concentration per drug in the main text (AMP 781 µg/mL, AZT 36 µg/mL) —
+across the full measured concentration range. Added during the Nature
+Communications revision.
 
 ## Rerun
 
 ```
-export MPLCONFIGDIR=/private/tmp/claude/mpl_cache FONTCONFIG_CACHE=/private/tmp/claude/fc_cache
-mkdir -p $MPLCONFIGDIR $FONTCONFIG_CACHE
-uv run python revision_analyses/s7_concentration_grid/analysis.py
+uv run python analysis/s11_s12_concentration_grid/analysis.py
 ```
 
 Runtime: ~6 s on CPU (data is pre-computed in the parquet — we only
@@ -71,20 +67,18 @@ aggregate and plot).
   relative to the 55,296-genotype library, so K = 13 is near-exact but
   not bit-exact.
 
-## Related work in this response set
+## Related analyses
 
-- `../s1_model_comparison/` — reviewer #3 comment 2b (model-class comparison).
-- `../s2_block_holdout/` — reviewer #4 block-holdout / mutation-stratified
-  validation.
-- `../s3_rmsd_justification/` — reviewer #3/#4 sensitivity/specificity
-  justification of the "RMSD ∼0.3 sufficient" claim.
+- `../s13_model_comparison/` — model-class comparison.
+- `../s14_mutation_holdout/` — mutation-stratified holdout validation.
+- `../s15_classification_metrics/` — sensitivity/specificity classification
+  metrics grounding the "RMSD ~0.3 sufficient" claim.
 
 ## File layout
 
 ```
-s7_concentration_grid/
+s11_s12_concentration_grid/
 ├── README.md                                        (this file)
-├── results.md                                       (draft rebuttal text)
 ├── analysis.py                                      (441 lines; <500 LOC)
 ├── results_table.csv                                (12 rows)
 ├── data/

@@ -1,15 +1,15 @@
-# S6 — revised Figure S3
+# s17 — dose-response profiles with low-count flagging (revised Fig. S3)
 
-Response to Reviewer #1's request to clarify the origin of noisy fitness
-values at some concentrations and to reduce the number of genotypes displayed
-in Fig. S3.
+Produces **Supplementary Figure S17**, a revised version of Figure S3:
+dose-response profiles for a curated set of highlighted genotypes, with
+read-count-based flagging of low-count (extinction) replicates and a reduced
+genotype count relative to the original figure. Added during the Nature
+Communications revision.
 
 ## Rerun
 
 ```
-export MPLCONFIGDIR=/private/tmp/claude/mpl_cache FONTCONFIG_CACHE=/private/tmp/claude/fc_cache
-mkdir -p $MPLCONFIGDIR $FONTCONFIG_CACHE
-uv run python revision_analyses/s6_fig_s3_revision/analysis.py
+uv run python analysis/s17_dose_response_low_count/analysis.py
 ```
 
 Runtime: ~45 s.
@@ -48,8 +48,6 @@ Runtime: ~45 s.
 - `results_table.csv` — library-wide extinction census: 14 rows (one per
   drug × conc) with the fraction of genotypes whose read counts fall below
   the threshold in any / majority / all replicates.
-- `results.md` — reviewer response draft (quoted comment, our reply, figure
-  reference, revised caption).
 
 ## Highlighted-variant selection
 
@@ -87,15 +85,8 @@ than **10**. The threshold was chosen before any plotting, from the clear
 shoulder in the library-wide read-count distribution. The library-wide
 fraction of low-count
 replicates varies between 17% (AMP 0 µg/mL, baseline) and 34% (AMP 781
-µg/mL), with the sharp increase at the highest AMP concentration being the
-extinction signature our response invokes.
-
-Visual convention:
-
-- **All 3 reps low** → no mean; line breaks at that concentration.
-- **Majority (2 of 3) reps low** → mean driven by a single surviving rep;
-  plotted as an open marker at reduced α, line drawn through.
-- **≤ 1 rep low** → solid marker; mean and SD computed over non-flagged reps.
+µg/mL), with the sharp increase at the highest AMP concentration reflecting
+the drug-induced extinction discussed under LOD band, below.
 
 ## LOD band
 
