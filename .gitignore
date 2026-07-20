@@ -16,7 +16,11 @@ figures/_compose/
 # Large regenerable intermediate (rebuild via analysis/s16_replicate_reproducibility/analysis.py)
 analysis/s16_replicate_reproducibility/data/per_genotype_replicate_stats.csv
 
-# Validation pipeline regenerable figures (rebuild via validation/src/run_all.py)
+# Validation pipeline regenerable outputs (rebuild via validation/src/run_all.py):
+# processed parquet/CSV intermediates + figures. Regeneration verified from a clean clone.
+# Note: run validation/src/run_all.py BEFORE the S7/S8 generators (si_figures/s07_s08_ic50/,
+# source_data/scripts/build_s7s8_source_data.py), which read validation/src/processed/.
+validation/src/processed/
 validation/figures/
 
 # Per-module analysis figure scratch: published Supplementary panels now write
