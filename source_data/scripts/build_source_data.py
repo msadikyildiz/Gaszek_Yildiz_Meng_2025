@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""Assemble source_data.xlsx: one sheet per display item. Populates the new revision
-figures whose underlying values live in verified analysis CSVs; stubs parquet-derived and
-contributor figures with a clear source/owner note so they can be filled at figure-lock.
-
-Fig 6 (Morcos-lab DCA) and S18 (Meng graph pipeline) are now both reproduced in-repo
-(src/evolutionary_statistics/reproduce_fig6.py, src/graph_analysis/s18_peak_robustness/
-reproduce_s18.py). The only remaining stub is Fig1F, which has no plotted data (structural
-render + chemical structures). See source_data/README.md.
+"""Assemble source_data.xlsx: one sheet per display item, populated from the
+deposited analysis CSVs (each figure's plotted values). Fig 6 (mean-field DCA)
+and S18 (graph pipeline) are reproduced in-repo via
+src/evolutionary_statistics/reproduce_fig6.py and
+src/graph_analysis/s18_peak_robustness/reproduce_s18.py. Fig 1F has no plotted
+data (structural render + chemical structures) and carries a no-source-data
+note. See source_data/README.md.
 """
 import csv
 import re
@@ -94,11 +93,22 @@ DATA = {
     ("B: contextual effective alphabet — family average +/- 1 SD (n=27242) vs TEM-1 target, per position", "src/evolutionary_statistics/source_data/fig6b_effective_alphabet.csv")],
  "S6 DCA Hamiltonian vs fitness": [
     ("Spearman rho of family Hamiltonian vs AUC-fitness per drug x concentration (full per-genotype scatter = regenerable source_data/full/figS6_hamiltonian_vs_fitness_{amp,azt}.csv)", "src/evolutionary_statistics/source_data/figS6_spearman_stats.csv")],
+ "S2 MIC panel": [
+    ("Minimum inhibitory concentrations and IC50 (with 95% bootstrap CIs) for the 10 plotted strains against the beta-lactam panel; exactly the points plotted by the s02 reconstruction (strain_order, PASS status - the dose-range-adjusted re-run rows are excluded as in the figure)", f"{PD}/figS2_mic_values.csv")],
+ "S3 dose-response subset": [
+    ("Highlighted dose-response trajectories: the top-18 highest-AUC genotypes plus TEM-1 WT and the dead control, per-replicate AUC (n=3) at every concentration, per drug (the faint full-library background is context, not tabulated)", f"{PD}/figS3_dose_response_highlighted.csv")],
+ "S5 context-dependent triple": [
+    ("Mean AUC-fitness +/- s.d. (n=3) for the eight E104K/R164S/E240K combinations on four backgrounds (WT, G238S, Q39K, A237T), at AMP 781 and AZT 36 ug/mL", f"{PD}/figS5_context_dependent_triple.csv")],
+ "S1B library logo": [
+    ("Panel B library sequence-logo: per-position amino-acid counts across all 55,296 library genotypes (panel A, the clinical mutational spectrum, is an external NCBI beta-lactamase analysis described in Data Availability)", f"{PD}/figS1B_library_logo_counts.csv")],
+ "S4 landscape graphs": [
+    ("Coarse-grained landscape-graph NODES at every measured concentration (AMP 0-781, AZT 0-324 ug/mL): fitness, n_genotypes, is_peak, contains_wildtype. Node/edge structure is byte-identical to Fig 2 at the shared concentrations; the Gephi x/y layout is a manual aesthetic and is not reproduced", "src/graph_analysis/graph_builder/source_data/figS4_nodes.csv"),
+    ("Landscape-graph EDGES at every measured concentration (source -> target, weight = |net flow|, count)", "src/graph_analysis/graph_builder/source_data/figS4_edges.csv")],
 }
 
-# figure -> (source note, owner) for not-yet-filled sheets
-STUB = {
- "Fig1F no plotted data":    ("Structural render + 2D chemical structures — no plotted data; ChemDraw supplied as artwork", "IG/DS"),
+# figure -> note for display items that have no plotted data
+NO_DATA = {
+ "Fig1F no plotted data": "Structural render + 2D chemical structures; no plotted data.",
 }
 
 # figure -> provenance / raw-data-location note (written at top of the sheet)
@@ -110,7 +120,7 @@ NOTES = {
     "neutral-merged supernodes (per-concentration median fitness); edges are net single-mutation "
     "transition flows, oriented by the sign of forward-minus-reverse aggregate weight "
     "(predominantly, but not strictly, toward higher fitness). Plotted concentrations: AMP "
-    "12.2/48.8/195 and AZT 12/36/108 µg/mL; all 55,296 design genotypes are partitioned across "
+    "12.2/48.8/195 and AZT 12/36/108 µg/mL; all 55,293 design genotypes are partitioned across "
     "the nodes at each concentration."),
  "Fig3 landscape signatures": (
     "Panel A is a 2x3 hex-bin density of AZT (36/108/324) vs AMP (195/781) fitness for all 55,296 "
@@ -128,14 +138,13 @@ NOTES = {
     "for every single (mutation_2 = none) and double combination of the 18 mutations at the reference dose. "
     "This is fitness, not epistasis (the pairwise-epistasis heatmap is a separate, non-manuscript panel)."),
  "Fig5 SHAP interpretation": (
-    "Deterministic re-computation of the published Fig 5 SHAP pipeline (the figure itself is unchanged): "
-    "Epistasis_Combined at the reference dose -> 18 one-hot mutation features -> LGBMRegressor(n_estimators="
-    "100, learning_rate=0.1, seed 42) trained on a 10% split -> shap.TreeExplainer over the 90% test set. "
-    "The original notebooks used an unseeded split; the attributions do not depend on it - per-mutation "
-    "mean|SHAP| Spearman rho vs seed 42 = 0.95-0.99 across four seeds, max drift <=0.018 (seed-stability "
-    "block below). The 5A/5B heatmap matrices (top-553 test genotypes x 18 mutations, ordered most->least "
-    "resistant) and the full test-set SHAP behind the beeswarm are the companion files "
-    "fig5A/fig5B_shap_top553_*.csv and fig5_shap_all_test_*.csv."),
+    "Fixed-seed computation of the Fig 5 SHAP pipeline: Epistasis_Combined at the reference dose -> 18 "
+    "one-hot mutation features -> LGBMRegressor(n_estimators=100, learning_rate=0.1, seed 42) trained on a "
+    "10% split -> shap.TreeExplainer over the 90% test set. Per-mutation mean|SHAP| rankings are stable "
+    "across four split seeds (Spearman rho = 0.95-0.99, max drift <=0.018; seed-stability block below). The "
+    "5A/5B heatmap matrices (top-553 test genotypes x 18 mutations, ordered most->least resistant) and the "
+    "full test-set SHAP behind the beeswarm are the companion files fig5A/fig5B_shap_top553_*.csv and "
+    "fig5_shap_all_test_*.csv."),
  "S7-S8 IC50 validation": (
     "Monoculture IC50 (four-parameter Hill fit) vs pooled AUC-fitness for the validation variants. S7 "
     "correlates log10(IC50) against mean AUC-fitness (AMP r=0.88, n=13; AZT r=0.80, n=18; the dead "
@@ -197,9 +206,8 @@ for name in DATA:
     else:
         status = f"partial ({len(present)}/{len(sources)})"
     idx.append([name, status, sources[0]])
-for name,(note,owner) in STUB.items():
-    status = "N/A" if "no plotted data" in note else f"TODO ({owner})"
-    idx.append([name, status, note])
+for name, note in NO_DATA.items():
+    idx.append([name, "N/A", note])
 idx.column_dimensions["A"].width=30; idx.column_dimensions["B"].width=16; idx.column_dimensions["C"].width=90
 
 def add_csv(ws, row, label, relpath):
@@ -228,16 +236,15 @@ for name, sections in DATA.items():
     for label, rel in sections:
         r=add_csv(ws, r, label, rel)+1
 
-for name,(note,owner) in STUB.items():
+for name, note in NO_DATA.items():
     ws=wb.create_sheet(re.sub(r'[\\/?*\[\]:]', '-', name)[:31])
-    ws.cell(1,1,name.split(" - ")[0].replace(" N/A","")).font=TITLE
-    body = f"N/A — no source data. {note}" if "no plotted data" in note else f"TO FILL ({owner}): {note}"
-    c=ws.cell(3,1,body); c.fill=NOTEFILL; c.alignment=Alignment(wrap_text=True)
+    ws.cell(1,1,name.split(" - ")[0]).font=TITLE
+    c=ws.cell(3,1,f"N/A — no source data. {note}"); c.fill=NOTEFILL; c.alignment=Alignment(wrap_text=True)
     ws.column_dimensions["A"].width=110
 
 wb.save(OUT)
 print(f"wrote {OUT}")
 _fully = [n for n, secs in DATA.items() if all((REPO / rel).exists() for _l, rel in secs)]
 print(f"sheets: {len(wb.sheetnames)}  ({len(_fully)}/{len(DATA)} data sheets fully populated, "
-      f"{len(DATA) - len(_fully)} missing/partial + {len(STUB)} stub + Index)")
+      f"{len(DATA) - len(_fully)} missing/partial + {len(NO_DATA)} no-data + Index)")
 print("data sheets:", ", ".join(DATA.keys()))

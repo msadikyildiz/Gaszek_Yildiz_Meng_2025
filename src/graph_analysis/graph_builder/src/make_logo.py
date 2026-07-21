@@ -1,6 +1,5 @@
 # This script contains the code to make weblogos and calculate logo strings for the fitness landscape graph.
 import logomaker as lm
-import json
 import matplotlib.pyplot as plt
 
 sign_pos = [19,  37,  67, 102, 162, 180, 235, 236, 237, 241, 261, 271, 272]
@@ -249,18 +248,3 @@ def plot_logo(mutant_seqs, all_mutations, intended, threshold_ratio=0.6, figsize
         plt.close()
     
     return fig
-
-
-if __name__ == "__main__":
-    mutant_dict_file = "/path/to/TEM1CML/data/processed/node_group_mutants.json"
-    with open(mutant_dict_file, 'r') as f:
-        mutant_dict = json.load(f)
-
-    logo_string = mutant_dict_to_string(mutant_dict, all_mutations, intended, threshold_ratio=0.6, use_dots=True)
-    print(logo_string)
-
-    filename = "amp_3_1_big.png"
-    save_path = f"/path/to/TEM1CML/data/outputs/figures/logo/graph_{filename}"
-    mutant_seqs = list(mutant_dict.keys())
-    fig = plot_logo(mutant_seqs, all_mutations, intended, threshold_ratio=0.6, figsize=(8,2), save_path=save_path)
-    plt.show()

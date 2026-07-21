@@ -252,7 +252,7 @@ class GraphBuilder:
                 fitness_values.append(node_data["fitness"])
 
             # For representative node's 'fitness', pick min or another rule
-            # we will also revise this later, see rename_nodes_closest_to_average function.
+            # Fitness is updated by rename_nodes_closest_to_average().
             rep_fitness = min(fitness_values) if fitness_values else 0.0
             merged_graph.add_node(
                 rep,

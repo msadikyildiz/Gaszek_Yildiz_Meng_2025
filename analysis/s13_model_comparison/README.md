@@ -3,7 +3,6 @@
 Produces **Supplementary Figure S13**. Compares LightGBM against
 unregularised linear regression, L1 (Lasso) regression, and a single decision
 tree, reporting predictive accuracy as a function of training sample size.
-Added during the Nature Communications revision.
 
 ## Rerun
 

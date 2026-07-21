@@ -1,6 +1,5 @@
 """
-Extra check: does the 'RMSD ~0.3 is sufficient to classify resistant/sensitive
-for clinical purposes' claim survive the block-holdout regime?
+Resistance-classification metrics under the block-holdout (LOMO) regime.
 
 For each LOMO fold and for the matched-N random baseline we compute binary
 classification metrics at a biologically reasonable cutoff.  Thresholds are
@@ -8,16 +7,17 @@ per-drug percentiles (AMP: P25 loss-of-resistance; AZT: P90 gain-of-resistance,
 see DRUG_THRESHOLDS below). These were chosen because the raw median is
 uninformative for AZT (WT sits in the bulk; the resistant tail lives above P90).
 
-Outputs: appended rows to results_table.csv, and two JSON snippets for the
-results.md narrative.
+Output: data/classification_results.csv (one row per LOMO fold and per random
+baseline, per drug).
 """
 from __future__ import annotations
 import math
 import os
+import tempfile
 from pathlib import Path
 
-os.environ.setdefault('MPLCONFIGDIR', '/tmp/claude/mpl_cache')
-os.environ.setdefault('FONTCONFIG_CACHE', '/tmp/claude/fc_cache')
+os.environ.setdefault('MPLCONFIGDIR', os.path.join(tempfile.gettempdir(), "matplotlib"))
+os.environ.setdefault('FONTCONFIG_CACHE', os.path.join(tempfile.gettempdir(), "fontconfig"))
 
 import numpy as np
 import pandas as pd

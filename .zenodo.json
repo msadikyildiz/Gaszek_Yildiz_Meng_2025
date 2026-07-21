@@ -2,7 +2,7 @@
   "title": "Higher-order epistasis drives evolutionary unpredictability toward new antibiotic resistance",
   "description": "Analysis code and processed data for a combinatorially complete TEM-1 beta-lactamase fitness landscape (55,296 variants from 18 clinical mutations across 13 residues) measured under native (ampicillin) and non-native (aztreonam) antibiotic selection. Includes preprocessing, epistasis-order decomposition, LightGBM/SHAP regression, graph analysis, direct coupling analysis / latent generative landscapes, and figure generation. Accompanies the Nature Communications article.",
   "upload_type": "software",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "access_right": "open",
   "license": "GPL-3.0-or-later",
   "related_identifiers": [

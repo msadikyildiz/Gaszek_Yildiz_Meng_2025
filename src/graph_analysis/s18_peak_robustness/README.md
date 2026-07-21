@@ -1,7 +1,7 @@
 # Supplementary Figure S18 — global-peak robustness (graph analysis)
 
-Code behind **Supplementary Figure S18**, contributed by **Devin Meng**. Delivered as-is
-and committed verbatim for provenance; `README_original_meng.md` is Meng's own note.
+Code behind **Supplementary Figure S18**, contributed by **Devin Meng**. See
+`README_original_meng.md` for the original module notes.
 
 ## Panels
 
@@ -25,11 +25,6 @@ and the same Fig 2 parameters** (`neutral_threshold=0.4`, `tiny_initial_threshol
 a `--base-path` argument that removes the hardcoded cluster paths, the package rename
 `src` → `fitness_landscape_graph`, and formatting. It **adds** the S18-specific modules
 `fitness_advantage.py`, `graph_analyzer.py`, `build_graphs_parallel.py`, `pair_table.py`.
-
-> Fig 2 output is expected to be unchanged under this version (identical algorithm and
-> parameters), but has **not yet been re-verified** against the committed
-> `fig2_nodes.csv` / `fig2_edges.csv`. Unifying the two graph packages onto this newer
-> version (and re-verifying Fig 2) is a deliberate follow-up, not done here.
 
 ## Data
 
@@ -78,6 +73,6 @@ t=0.42-vs-0.43 networks behind panel D; Gephi layout not reproducible); and the 
 genotype lists behind the panel A/B logos.
 
 The two notebooks (`fitness_advantage_analysis.ipynb`, `neutral_threshold_robustness.ipynb`)
-are kept for provenance — they contain the same analysis and the figure-plotting code, with
-their original hardcoded `/work/greencenter/...` paths; `reproduce_s18.py` is the repo-relative
-entry point. Panel D is laid out in Gephi (same protocol as the main figures).
+contain the same analysis and the figure-plotting code; `reproduce_s18.py` is the
+repo-relative entry point. Panel D is laid out in Gephi (same protocol as the main
+figures).

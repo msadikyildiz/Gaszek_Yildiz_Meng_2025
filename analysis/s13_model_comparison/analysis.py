@@ -1,5 +1,5 @@
 """
-S1 — Four-model comparison: linear, Lasso, single decision tree, and LightGBM.
+Supplementary Figure S13: four-model comparison: linear, Lasso, single decision tree, and LightGBM.
 
 Compares four regression model classes on the TEM-1 fitness landscape:
   1. Unregularized linear regression (bare additive features).

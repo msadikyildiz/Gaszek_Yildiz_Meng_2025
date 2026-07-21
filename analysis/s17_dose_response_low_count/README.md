@@ -1,10 +1,8 @@
-# s17 — dose-response profiles with low-count flagging (revised Fig. S3)
+# s17 — dose-response profiles with low-count flagging (Supplementary Fig. S17)
 
-Produces **Supplementary Figure S17**, a revised version of Figure S3:
-dose-response profiles for a curated set of highlighted genotypes, with
-read-count-based flagging of low-count (extinction) replicates and a reduced
-genotype count relative to the original figure. Added during the Nature
-Communications revision.
+Produces **Supplementary Figure S17**: dose-response profiles for a curated
+set of highlighted genotypes, with read-count-based flagging of low-count
+(extinction) replicates.
 
 ## Rerun
 
@@ -40,7 +38,7 @@ directly to the shared gallery `figures/supplementary/`. The combined
 two-panel figure is secondary/diagnostic and regenerates into this module's
 local `figures/` (gitignored, scratch).
 
-- `figures/fig_s3_revised.png` — combined two-panel publication figure.
+- `figures/fig_s17.png` — combined two-panel local preview.
   Secondary/diagnostic — regenerates locally (gitignored).
 - `figures/supplementary/figure_s17_amp.png`, `figures/supplementary/figure_s17_azt.png`
   — per-drug high-resolution panels (kept in case individual embedding is

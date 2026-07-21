@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """Reproduce Figure 6 (+ Supplementary Figure S6) and their Source Data.
 
-Faithful transcription of the evolutionary-statistics analysis contributed by
-Jose Alberto de la Paz (Morcos lab, UT Dallas), `Figure6_Analysis.ipynb`, kept
-verbatim alongside this script for provenance. Direct-coupling analysis (mean
+Transcription of the evolutionary-statistics analysis contributed by
+Jose Alberto de la Paz (Morcos lab, UT Dallas), `Figure6_Analysis.ipynb`.
+Direct-coupling analysis (mean
 field) of the Pfam PF13354 family constrains the combinatorial TEM-1 variants:
 panel 6A is the family sequence logo at the nine mutated positions present in the
 family; 6B the contextual effective alphabet; 6C/6G/6H the family Hamiltonian

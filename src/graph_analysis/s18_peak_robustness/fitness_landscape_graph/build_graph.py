@@ -86,8 +86,8 @@ def main():
     base_path = args.base_path
 
     # File paths
-    amp_path = f"{base_path}/data/raw/combined-auc/genotype_auc_sorted_ampicillin.csv"
-    azt_path = f"{base_path}/data/raw/combined-auc/genotype_auc_sorted_aztreonam.csv"
+    amp_path = f"{base_path}/data/raw/Ampicillin_auc_per_genotype.csv"
+    azt_path = f"{base_path}/data/raw/Aztreonam_auc_per_genotype.csv"
     amp_pairs_path = f"{base_path}/data/processed/amp_pairs.csv"
     azt_pairs_path = f"{base_path}/data/processed/azt_pairs.csv"
     amp_global_pairs_path = f"{base_path}/data/processed/amp_global_pairs.csv"

@@ -2,8 +2,7 @@
 
 Produces **Supplementary Figure S14**. Block-holdout / mutation-stratified
 validation testing whether the LightGBM fitness regressor learns transferable
-epistatic rules rather than memorising local genotype neighbourhoods. Added
-during the Nature Communications revision.
+epistatic rules rather than memorising local genotype neighbourhoods.
 
 ## Rerun
 

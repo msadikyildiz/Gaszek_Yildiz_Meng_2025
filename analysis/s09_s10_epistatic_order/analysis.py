@@ -1,16 +1,16 @@
 """
-S4 - Epistasis section rewrite and two new extended figures.
+Supplementary Figures S9 and S10: epistatic-order analysis.
 
 Produces the analytical backing for the manuscript's Epistasis section,
 narrating epistasis from global (order-decomposition) to local
-(drug-asymmetry) scales, plus the two extended figures called out in
+(drug-asymmetry) scales, plus the two Supplementary Figures called out in
 the text:
 
-    Ext Fig A - Order-decomposition: cumulative R^2 and incremental
+    Supplementary Fig. S9 - Order-decomposition: cumulative R^2 and incremental
                  dR^2 per additional epistatic order, one curve per
                  concentration, stratified by drug.
 
-    Ext Fig E - Drug asymmetry at matched selective stringency:
+    Supplementary Fig. S10 - Drug asymmetry at matched selective stringency:
                  R^2-vs-order, RMSD-vs-order, measured-fitness
                  dynamic-range histogram, pairwise |Biochemical-
                  epistasis| distribution. Primary pair is the main-
@@ -29,14 +29,14 @@ Reuses derivations already computed in
 as a cross-check for R^2.
 
 Outputs:
-  data/order_decomposition.csv           - (drug, conc, order, R^2, dR^2, cum_R^2)
-  data/matched_stringency_summary.csv    - (drug, conc_label, order, R^2, RMSD, n)
-  data/source_data.xlsx                  - Excel, one sheet per figure
-  figures/ext_order_decomposition_amp.png
-  figures/ext_order_decomposition_azt.png
-  figures/ext_order_decomposition_combined.png
-  figures/ext_drug_asymmetry.png
-  results_table.csv                      - Compact summary
+  data/order_decomposition.csv              - (drug, conc, order, R^2, dR^2, cum_R^2)
+  data/matched_stringency_summary.csv       - (drug, conc_label, order, R^2, RMSD, n)
+  data/source_data.xlsx                     - Excel, one sheet per figure
+  figures/s09_order_decomposition_amp.png   - local single-drug S9 (AMP)
+  figures/s09_order_decomposition_azt.png   - local single-drug S9 (AZT)
+  figures/supplementary/figure_s09.png      - combined S9 (published)
+  figures/supplementary/figure_s10.png      - drug-asymmetry S10 (published)
+  results_table.csv                         - Compact summary
 """
 
 from __future__ import annotations
@@ -59,8 +59,8 @@ def _repo_root(_p):
     raise FileNotFoundError("repo root not found from " + str(_p))
 REPO = _repo_root(Path(__file__).resolve())
 PARQUET = REPO / "data" / "processed" / "Epistasis_Combined.parquet"
-S7_R2 = HERE.parent / "s11_s12_concentration_grid" / "data" / "regression_r2_by_order.csv"
-S7_PAIRWISE = HERE.parent / "s11_s12_concentration_grid" / "data" / "pairwise_mean_fitness.csv"
+GRID_R2 = HERE.parent / "s11_s12_concentration_grid" / "data" / "regression_r2_by_order.csv"
+GRID_PAIRWISE = HERE.parent / "s11_s12_concentration_grid" / "data" / "pairwise_mean_fitness.csv"
 FIGDIR = HERE / "figures"
 DATADIR = HERE / "data"
 SUPP = REPO / "figures" / "supplementary"
@@ -152,7 +152,7 @@ def compute_order_decomposition(df_all: pl.DataFrame) -> pl.DataFrame:
     return pl.DataFrame(rows)
 
 
-# --- Extended Fig A ----------------------------------------------------------
+# --- Supplementary Fig. S9 ---------------------------------------------------
 def _plot_order_decomposition_panel(
     ax_line,
     ax_bar,
@@ -251,8 +251,8 @@ def _plot_order_decomposition_panel(
         ax_bar.axvline(k, color="k", linewidth=0.5, linestyle=":", alpha=0.25)
 
 
-def plot_ext_fig_a_single(df_order: pl.DataFrame, drug: str, out_path: Path) -> None:
-    """Single-drug version of Ext Fig A (stand-alone PNG)."""
+def plot_s09_single(df_order: pl.DataFrame, drug: str, out_path: Path) -> None:
+    """Single-drug version of Supplementary Fig. S9 (stand-alone PNG)."""
     fig = plt.figure(figsize=(7.2, 5.6), dpi=150)
     gs = fig.add_gridspec(2, 1, height_ratios=[1.8, 1.0], hspace=0.09)
     ax_line = fig.add_subplot(gs[0, 0])
@@ -266,8 +266,8 @@ def plot_ext_fig_a_single(df_order: pl.DataFrame, drug: str, out_path: Path) -> 
     print(f"saved {out_path}")
 
 
-def plot_ext_fig_a_combined(df_order: pl.DataFrame, out_path: Path) -> None:
-    """Two-drug stacked version of Ext Fig A (AMP top, AZT bottom)."""
+def plot_s09_combined(df_order: pl.DataFrame, out_path: Path) -> None:
+    """Two-drug stacked version of Supplementary Fig. S9 (AMP top, AZT bottom)."""
     fig = plt.figure(figsize=(8.6, 10.2), dpi=150)
     # Two drug blocks with a large gap between them.
     gs_outer = fig.add_gridspec(2, 1, hspace=0.42)
@@ -290,7 +290,7 @@ def plot_ext_fig_a_combined(df_order: pl.DataFrame, out_path: Path) -> None:
     print(f"saved {out_path}")
 
 
-# --- Step 2: Matched-stringency comparison (Ext Fig E) -----------------------
+# --- Step 2: Matched-stringency comparison (Supplementary Fig. S10) -----------------------
 def compute_matched_stringency(
     df_all: pl.DataFrame, df_order: pl.DataFrame,
 ) -> tuple[pl.DataFrame, dict]:
@@ -325,8 +325,8 @@ def compute_matched_stringency(
                 y = y[np.isfinite(y)]
                 extras[f"fitness_{drug}_{conc}"] = y
 
-                # |pairwise epistasis| distribution from S7 CSV.
-                pair_df = pl.read_csv(S7_PAIRWISE)
+                # |pairwise epistasis| distribution from the s11_s12 concentration-grid CSV.
+                pair_df = pl.read_csv(GRID_PAIRWISE)
                 pair_df_drug = pair_df.filter(
                     (pl.col("drug") == drug) & (pl.col("concentration") == conc)
                 )
@@ -337,7 +337,7 @@ def compute_matched_stringency(
     return pl.DataFrame(rows), extras
 
 
-def plot_ext_fig_e(
+def plot_s10_asymmetry(
     matched_long: pl.DataFrame,
     extras: dict,
     df_order: pl.DataFrame,
@@ -488,7 +488,7 @@ def write_source_data(
 
     sheets: dict[str, pd.DataFrame] = {}
 
-    # Ext Fig A panels (one per drug) - long form with cum + dR^2.
+    # Supplementary Fig. S9 panels (one per drug) - long form with cum + dR^2.
     for drug in ("AMP", "AZT"):
         sub = (
             df_order
@@ -512,10 +512,10 @@ def write_source_data(
                 "n",
             )
         )
-        sheets[f"Ext_Fig_A_{drug}"] = sub.to_pandas()
+        sheets[f"S9_order_{drug}"] = sub.to_pandas()
 
-    # Ext Fig E - R^2 / RMSD curves at primary + secondary matched pairs.
-    sheets["Ext_Fig_E_R2_curves"] = (
+    # Supplementary Fig. S10 - R^2 / RMSD curves at primary + secondary matched pairs.
+    sheets["S10_R2_curves"] = (
         matched_long
         .sort(["tier", "drug", "order"])
         .rename({
@@ -527,7 +527,7 @@ def write_source_data(
         .to_pandas()
     )
 
-    # Ext Fig E - fitness distributions at primary matched pair.
+    # Supplementary Fig. S10 - fitness distributions at primary matched pair.
     amp_y = extras[f"fitness_AMP_{amp_c}"]
     azt_y = extras[f"fitness_AZT_{azt_c}"]
     fit_df = pd.DataFrame({
@@ -535,9 +535,9 @@ def write_source_data(
         "concentration_ug_per_mL": [amp_c] * len(amp_y) + [azt_c] * len(azt_y),
         "measured_fitness_log10_AUC": np.concatenate([amp_y, azt_y]),
     })
-    sheets["Ext_Fig_E_fitness_dist"] = fit_df
+    sheets["S10_fitness_dist"] = fit_df
 
-    # Ext Fig E - |pairwise epistasis| at primary matched pair.
+    # Supplementary Fig. S10 - |pairwise epistasis| at primary matched pair.
     amp_pair = extras[f"pairabs_AMP_{amp_c}"]
     azt_pair = extras[f"pairabs_AZT_{azt_c}"]
     pair_df = pd.DataFrame({
@@ -546,7 +546,7 @@ def write_source_data(
         "abs_biochemical_pairwise_epistasis":
             np.concatenate([amp_pair, azt_pair]),
     })
-    sheets["Ext_Fig_E_pairwise_abs"] = pair_df
+    sheets["S10_pairwise_abs"] = pair_df
 
     # Summary of matched-stringency comparison at K=1,2,3,6.
     snapshot = (
@@ -616,33 +616,33 @@ def main() -> None:
     df_order.write_csv(DATADIR / "order_decomposition.csv")
     print(f"wrote {DATADIR / 'order_decomposition.csv'} ({df_order.height} rows)")
 
-    # Cross-check: our R^2 should equal S7's regression_r2_by_order.csv up to
+    # Cross-check: our R^2 should equal the s11_s12 concentration-grid regression_r2_by_order.csv up to
     # floating-point noise.
-    if S7_R2.exists():
-        s7 = pl.read_csv(S7_R2)
+    if GRID_R2.exists():
+        grid_r2 = pl.read_csv(GRID_R2)
         merged = (
             df_order
             .select("drug", "concentration", "order", "r2")
             .join(
-                s7.select("drug", "concentration", "order", pl.col("r2").alias("r2_s7")),
+                grid_r2.select("drug", "concentration", "order", pl.col("r2").alias("r2_grid")),
                 on=["drug", "concentration", "order"],
                 how="inner",
             )
         )
-        diff = (merged["r2"] - merged["r2_s7"]).abs().max()
-        print(f"  cross-check max |R^2 - R^2_S7| = {diff:.3e}")
-        assert diff < 1e-9, "S4 R^2 disagrees with S7 R^2"
+        diff = (merged["r2"] - merged["r2_grid"]).abs().max()
+        print(f"  cross-check max |R^2 - R^2_grid| = {diff:.3e}")
+        assert diff < 1e-9, "S9/S10 R^2 disagrees with S11/S12 R^2"
 
-    # Ext Fig A (single-drug + combined).
-    plot_ext_fig_a_single(df_order, "AMP", FIGDIR / "ext_order_decomposition_amp.png")
-    plot_ext_fig_a_single(df_order, "AZT", FIGDIR / "ext_order_decomposition_azt.png")
-    plot_ext_fig_a_combined(df_order, SUPP / "figure_s09.png")
+    # Supplementary Fig. S9 (single-drug + combined).
+    plot_s09_single(df_order, "AMP", FIGDIR / "s09_order_decomposition_amp.png")
+    plot_s09_single(df_order, "AZT", FIGDIR / "s09_order_decomposition_azt.png")
+    plot_s09_combined(df_order, SUPP / "figure_s09.png")
 
-    # Ext Fig E (matched stringency).
+    # Supplementary Fig. S10 (matched stringency).
     matched_long, extras = compute_matched_stringency(df_all, df_order)
     matched_long.write_csv(DATADIR / "matched_stringency_summary.csv")
     print(f"wrote {DATADIR / 'matched_stringency_summary.csv'} ({matched_long.height} rows)")
-    plot_ext_fig_e(matched_long, extras, df_order, SUPP / "figure_s10.png")
+    plot_s10_asymmetry(matched_long, extras, df_order, SUPP / "figure_s10.png")
 
     # Source Data workbook.
     write_source_data(df_order, matched_long, extras, DATADIR / "source_data.xlsx")

@@ -1,5 +1,5 @@
 """
-S6 — Revised Fig. S3: dose-response line noise and low-read-count flagging.
+Supplementary Figure S17: dose-response fitness profiles with low-read measurements marked.
 
 Some genotypes in Figure S3 show noisy fitness values, jumping from the
 minimum to the mean trend from one concentration to another. This analysis
@@ -7,8 +7,8 @@ characterizes how often this occurs and whether it affects downstream
 results such as landscape graphs and epistasis measurements.
 
 Approach:
-  - Revise Fig S3 by replacing the all-library grey lines with a small curated
-    set of highlighted variants:
+  - Replace the all-library grey lines with a small curated set of highlighted
+    variants:
       (1) wild type (LQMERMAGERTRN, black);
       (2) TEM-1_dead (XXXXXXXXXXXXX, blue-grey);
       (3) the 18 single-substitution mutants (one per non-WT column), colored
@@ -30,8 +30,9 @@ Inputs (data/raw):
   data/known_variants/encoded_variants.csv  (63 clinical TEM alleles)
 
 Outputs:
-  figures/fig_s3_revised_amp.png, figures/fig_s3_revised_azt.png,
-  figures/fig_s3_revised.png  (combined two-panel)
+  figures/fig_s17.png  (local combined preview; gitignored)
+  figures/supplementary/figure_s17_amp.png,
+  figures/supplementary/figure_s17_azt.png  (published per-drug)
   data/highlighted_variants.csv
   data/per_variant_fitness.csv
   results_table.csv   (per-conc summary: n_flagged, fraction_flagged, LOD)
@@ -586,7 +587,7 @@ def plot_combined(per_variant: pl.DataFrame, highlighted: pl.DataFrame,
     )
 
     fig.tight_layout(rect=(0, 0.08, 1, 0.94))
-    out = FIGDIR / "fig_s3_revised.png"
+    out = FIGDIR / "fig_s17.png"
     fig.savefig(out, dpi=300, bbox_inches="tight")
     plt.close(fig)
     print(f"saved {out}")

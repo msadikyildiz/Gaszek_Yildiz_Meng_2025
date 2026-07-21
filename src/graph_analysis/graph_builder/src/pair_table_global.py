@@ -1,5 +1,6 @@
 # This script contains the code that generate the global fitness table and pairs table for the fitness landscape graph.
 
+import os
 import polars as pl
 import numpy as np
 from collections import defaultdict
@@ -138,10 +139,12 @@ def get_pairs(global_fitness_df):
     return pl.DataFrame(pairs)
 
 def main():
-    base_path = "/path/to/TEM1CML"
+    _HERE = os.path.dirname(os.path.abspath(__file__))
+    _REPO = os.path.abspath(os.path.join(_HERE, "..", "..", "..", ".."))
+    base_path = os.environ.get("TEM1CML_ROOT", _REPO)
     # File paths
-    amp_path = f"{base_path}/data/raw/combined-auc/genotype_auc_sorted_ampicillin.csv"
-    azt_path = f"{base_path}/data/raw/combined-auc/genotype_auc_sorted_aztreonam.csv"
+    amp_path = f"{base_path}/data/raw/Ampicillin_auc_per_genotype.csv"
+    azt_path = f"{base_path}/data/raw/Aztreonam_auc_per_genotype.csv"
     amp_pairs_path = f"{base_path}/data/processed/amp_pairs.csv"
     azt_pairs_path = f"{base_path}/data/processed/azt_pairs.csv"
 

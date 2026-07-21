@@ -8,16 +8,12 @@ analysis/s09_s10_epistatic_order/analysis.py and
 si_figures/s03_dose_response/analysis.py -- AMP = greys, AZT = RdPu,
 DejaVu Sans font, Illustrator-editable PDF fonts.
 
-Provenance
-----------
-Ported from an earlier internal development version of this script (not part
-of this public repository). That script reads pre-computed processed
-parquets under
-    contributors/deniz_validation_experiments/src/processed/<batch>/xref_expanded_df.parquet
-The same processed tables live in this public repo at
+Inputs
+------
+Reads the processed cross-reference tables
     validation/src/processed/<batch>/xref_expanded_df.parquet
-(identical schema: drug, variant, genotype_13, mean_fitness, log10_ic50,
-fitness_<concentration> columns), and regenerate from the raw plate-reader
+(schema: drug, variant, genotype_13, mean_fitness, log10_ic50,
+fitness_<concentration> columns), which regenerate from the raw plate-reader
 XLSX via `validation/src/run_all.py`. Nothing under `validation/` is modified
 by this script; it only reads the already-processed parquets.
 
@@ -27,20 +23,12 @@ a different, minimal snippet):
     AMP (batch 20260407): n = 13, Pearson r = 0.885, p = 5.9e-05
     AZT (batch 20260307): n = 18, Pearson r = 0.803, p = 6.1e-05
 
-Scope note: the earlier version also built a `before_after_comparison.png`
-(side-by-side against Ilona's pre-replot `ic50_auc_dotplot.png` diagnostic
-PNG, used only for that version's own visual QA). That comparison is
-intentionally NOT ported here -- it is not one of the three published
-Supplementary panels, and its "before" input is an internal diagnostic image
-that isn't part of this repository's tracked/regenerable outputs.
-
 Outputs (written directly to the published Supplementary location):
     figures/supplementary/figure_s07.png       (S7: IC50 vs mean AUC-fitness)
     figures/supplementary/figure_s08_amp.png   (S8, AMP per-concentration)
     figures/supplementary/figure_s08_azt.png   (S8, AZT per-concentration)
-A convenience copy of each (same content) is also written locally under
-si_figures/s07_s08_ic50/figures/ using the earlier version's original
-filenames, for provenance diffing.
+A convenience copy of each (same content) is also written under
+si_figures/s07_s08_ic50/figures/.
 """
 
 from __future__ import annotations

@@ -1,3 +1,8 @@
+# Standalone per-concentration Hamming-1 pair-table builder. The reproduction entry
+# point is reproduce_s18.py, which recomputes these pairs (vectorized) from the
+# repository's data/raw AUC CSVs. The base path defaults to the repository root
+# (override with the TEM1CML_ROOT environment variable).
+import os
 import time
 from collections import defaultdict
 from itertools import product
@@ -150,8 +155,11 @@ def get_mutant_pairs(long_df: pl.DataFrame) -> pl.DataFrame:
     return pl.DataFrame(results)
 
 
-amp_path = "/path/to/fitness-landscape-graph/data/raw/combined-auc/genotype_auc_sorted_ampicillin.csv"
-azt_path = "/path/to/fitness-landscape-graph/data/raw/combined-auc/genotype_auc_sorted_aztreonam.csv"
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_REPO = os.path.abspath(os.path.join(_HERE, "..", "..", "..", ".."))
+base_path = os.environ.get("TEM1CML_ROOT", _REPO)
+amp_path = f"{base_path}/data/raw/Ampicillin_auc_per_genotype.csv"
+azt_path = f"{base_path}/data/raw/Aztreonam_auc_per_genotype.csv"
 
 amp_df = pl.read_csv(amp_path)
 azt_df = pl.read_csv(azt_path)
@@ -220,7 +228,8 @@ azt_pairs = get_mutant_pairs(azt_long_df)
 end = time.time()
 print("azt time: ", end - start)
 
-save_path = "/path/to/fitness-landscape-graph/exps/exp-01-reproduce-results/outputs/reproduce-pairs"
+save_path = os.path.join(base_path, "outputs", "reproduce-pairs")
+os.makedirs(save_path, exist_ok=True)
 amp_pairs.write_csv(f"{save_path}/amp_pairs.csv")
 azt_pairs.write_csv(f"{save_path}/azt_pairs.csv")
 print("done!")

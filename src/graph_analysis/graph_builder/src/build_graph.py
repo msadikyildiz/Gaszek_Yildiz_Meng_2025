@@ -7,9 +7,15 @@ import polars as pl
 from src.graph_builder import GraphBuilder
 from src.preprocess import preprocess_data
 from src.pair_table_global import calculate_normalized_fitness
+
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_REPO = os.path.abspath(os.path.join(_HERE, "..", "..", "..", ".."))
+_BASE_PATH = os.environ.get("TEM1CML_ROOT", _REPO)
+
+
 def parse_args():
     parser = argparse.ArgumentParser(description='Build graphs from antibiotic resistance data')
-    parser.add_argument('--output-dir', type=str, default="/path/to/TEM1CML/output/graphs/test",
+    parser.add_argument('--output-dir', type=str, default=os.path.join(_BASE_PATH, "output", "graphs", "test"),
                        help='Directory to save the output graph files')
     parser.add_argument('--neutral-threshold', type=float, default=0.4,
                        help='Threshold for merging neutral edges (for concentration-specific graphs)')
@@ -53,11 +59,11 @@ def main():
     global_thresholds = [0.1,0.15, 0.2,0.25, 0.3, 0.35, 0.4]
     print(f"Building global graphs with thresholds: {global_thresholds}")
 
-    base_path = "/path/to/TEM1CML"
+    base_path = _BASE_PATH
 
     # File paths
-    amp_path = f"{base_path}/data/raw/combined-auc/genotype_auc_sorted_ampicillin.csv"
-    azt_path = f"{base_path}/data/raw/combined-auc/genotype_auc_sorted_aztreonam.csv"
+    amp_path = f"{base_path}/data/raw/Ampicillin_auc_per_genotype.csv"
+    azt_path = f"{base_path}/data/raw/Aztreonam_auc_per_genotype.csv"
     amp_pairs_path = f"{base_path}/data/processed/amp_pairs.csv"
     azt_pairs_path = f"{base_path}/data/processed/azt_pairs.csv"
     amp_global_pairs_path = f"{base_path}/data/processed/amp_global_pairs.csv"

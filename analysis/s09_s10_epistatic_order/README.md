@@ -7,7 +7,7 @@ pairwise, three-way, and higher-order terms are added. S10 compares AMP vs
 AZT predictability (R², RMSD, pairwise-epistasis magnitude) at matched
 selective stringency, testing whether the apparent drug asymmetry reflects
 genuine epistatic-structure differences rather than the choice of
-concentration. Added during the Nature Communications revision.
+concentration.
 
 ## Rerun
 
@@ -30,7 +30,7 @@ stores every `Fitness_predicted for order K` column we need.
   analysis still runs without the assertion.
 - `analysis/s11_s12_concentration_grid/data/pairwise_mean_fitness.csv`
   — used to derive the pairwise-epistasis magnitude distributions
-  shown in Ext Fig. E panel (d).
+  shown in Supplementary Fig. S10 panel (d).
 
 ## Outputs
 
@@ -43,10 +43,10 @@ are secondary/diagnostic and regenerate into this module's local `figures/`
 
 | File | Description |
 | --- | --- |
-| `figures/ext_order_decomposition_amp.png` | Ext Fig. A (AMP only). Cumulative R² line + ΔR² bars per concentration. Secondary/diagnostic — regenerates locally (gitignored). |
-| `figures/ext_order_decomposition_azt.png` | Ext Fig. A (AZT only). Secondary/diagnostic — regenerates locally (gitignored). |
-| `figures/supplementary/figure_s09.png` | Ext Fig. A combined — **published Supplementary Fig. S9**. |
-| `figures/supplementary/figure_s10.png` | Ext Fig. E, 2×2 panels: R², RMSD, fitness distribution, pairwise-ε histogram at matched stringency — **published Supplementary Fig. S10**. |
+| `figures/s09_order_decomposition_amp.png` | Supplementary Fig. S9 (AMP only). Cumulative R² line + ΔR² bars per concentration. Secondary/diagnostic — regenerates locally (gitignored). |
+| `figures/s09_order_decomposition_azt.png` | Supplementary Fig. S9 (AZT only). Secondary/diagnostic — regenerates locally (gitignored). |
+| `figures/supplementary/figure_s09.png` | Supplementary Fig. S9 combined — **published Supplementary Fig. S9**. |
+| `figures/supplementary/figure_s10.png` | Supplementary Fig. S10, 2×2 panels: R², RMSD, fitness distribution, pairwise-ε histogram at matched stringency — **published Supplementary Fig. S10**. |
 
 ### Data
 
@@ -54,7 +54,7 @@ are secondary/diagnostic and regenerate into this module's local `figures/`
 | --- | --- | --- |
 | `data/order_decomposition.csv` | 156 rows | drug × concentration × order × R², ΔR², cumulative R², RMSD, n |
 | `data/matched_stringency_summary.csv` | 52 rows | primary + secondary matched-stringency pairs × drug × order × R², RMSD |
-| `data/source_data.xlsx` | 6 sheets | one sheet per Extended Figure panel + matched-stringency summary |
+| `data/source_data.xlsx` | 6 sheets | one sheet per figure panel + matched-stringency summary |
 | `results_table.csv` | 4 rows | compact summary of matched-stringency R² and RMSD at K ∈ {1, 2, 3, 6, 13} |
 
 ## Design choices
@@ -63,7 +63,7 @@ are secondary/diagnostic and regenerate into this module's local `figures/`
   from `Fitness_predicted for order K` in the parquet; no refit.
 - **ΔR² convention.** R²(0) := 0, so ΔR²(K = 1) = R²(K = 1). This makes
   the full stack of ΔR² bars sum to the cumulative R² at any K.
-- **Matched-stringency pairs (Ext Fig. E).** Primary pair is the main-
+- **Matched-stringency pairs (Supplementary Fig. S10).** Primary pair is the main-
   text concentration per drug (AMP 781 µg/mL, AZT 36 µg/mL — the
   just-above-WT-MIC selective point). Secondary pair is AMP 195 µg/mL
   vs AZT 12 µg/mL (each ~3× WT-MIC) — included to demonstrate that the
@@ -99,8 +99,6 @@ s09_s10_epistatic_order/
 │   ├── matched_stringency_summary.csv
 │   └── source_data.xlsx
 └── figures/
-    ├── ext_order_decomposition_amp.png
-    ├── ext_order_decomposition_azt.png
-    ├── ext_order_decomposition_combined.png
-    └── ext_drug_asymmetry.png
+    ├── s09_order_decomposition_amp.png
+    └── s09_order_decomposition_azt.png
 ```

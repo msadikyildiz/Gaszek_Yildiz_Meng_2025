@@ -11,7 +11,17 @@ cache/
 src/graph_analysis/_generated/
 
 # Figure composition scratch
-figures/_compose/
+# Figure 3/4 vector assembly is tracked (emit_fig{3,4}_vector.py +
+# compose_figure{3,4}_vector.py, compose_figure4.py raster, regen_gh.py,
+# figstyle.py, panel_A_dist.png, panel_B_dist.png); only the regenerable
+# rendered outputs (composites + per-panel PDFs) are ignored.
+figures/_compose/Figure_4_composite.png
+figures/_compose/Figure_3.pdf
+figures/_compose/Figure_4.pdf
+figures/_compose/vector/
+figures/_compose/panel_G.png
+figures/_compose/panel_H.png
+figures/_compose/__pycache__/
 
 # Figure 6 DCA run scratch (regenerate via evolutionary_statistics/reproduce_fig6.py;
 # the committed Source Data lives in evolutionary_statistics/source_data/)
@@ -55,9 +65,8 @@ analysis/**/figures/
 # analysis.py); the published panel lives in figures/supplementary/.
 si_figures/**/figures/
 
-# Source Data per-figure CSVs: regenerable scratch (rebuild via the scripts in
-# source_data/scripts/); the assembled source_data.xlsx is built separately
-# and is not committed until the Fig 6 / S18 contributor sheets land.
+# Source Data per-figure CSVs: regenerable (rebuild via the scripts in
+# source_data/scripts/); the assembled source_data.xlsx is built separately.
 source_data/derived/
 
 # Generated Source Data workbook (rebuild via source_data/scripts/build_source_data.py; the release Source_Data.zip is the deliverable)

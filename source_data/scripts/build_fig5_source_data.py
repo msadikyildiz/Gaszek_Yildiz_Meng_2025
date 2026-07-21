@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
-"""Deterministic Source Data for Figure 5 (SHAP interpretation of TEM-1 fitness).
+"""Fixed-seed Source Data for Figure 5 (SHAP interpretation of TEM-1 fitness).
 
-The published Fig 5 was made by src/04 (AMP) and src/03 (AZT) regression notebooks, which
-split with an UNSEEDED train/test seed and never saved the SHAP arrays. The published figure
-is not being changed. This script re-computes the identical pipeline deterministically
-(fixed seed) so the SHAP values behind each panel are reproducible, and verifies that the
-attributions do not depend on the particular split (per-mutation mean|SHAP| Spearman rho and
-max drift across seeds are reported and written out).
+Figure 5 SHAP values come from the src/04 (AMP) and src/03 (AZT) regression pipelines. This
+script recomputes that pipeline with a fixed seed so the SHAP arrays behind each panel are
+reproducible, and reports that the per-mutation attributions are stable across split seeds
+(per-mutation mean|SHAP| Spearman rho and max drift across seeds are written out).
 
 Pipeline (identical to the notebooks): Epistasis_Combined at the reference dose (AMP 781 /
 AZT 36) -> 18 one-hot mutation-presence features -> LGBMRegressor(n_estimators=100,

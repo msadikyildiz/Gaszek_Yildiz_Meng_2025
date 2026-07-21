@@ -1,7 +1,7 @@
 """
-S5 — Replicate reproducibility.
+Supplementary Figure S16: replicate reproducibility.
 
-The manuscript (line 163) states that the AUC-Fitness metric "exhibited excellent
+The manuscript states that the AUC-Fitness metric "exhibited excellent
 reproducibility across biological replicates, typically yielding standard
 deviations below 10%." This analysis demonstrates that quantitatively
 (e.g. replicate-vs-replicate correlations).

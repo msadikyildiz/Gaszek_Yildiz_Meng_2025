@@ -49,6 +49,9 @@ evo-stats = [
     "logomaker>=0.8 ; python_version >= '3.12'",
     "seaborn>=0.12 ; python_version >= '3.12'",
 ]
+figures = [
+    "pymupdf>=1.28.0",
+]
 
 [tool.uv.sources]
 torch = [

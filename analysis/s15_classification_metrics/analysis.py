@@ -1,4 +1,4 @@
-"""RMSD justification analysis for Gaszek-Yildiz-Meng 2026 (SI section S3:
+"""RMSD justification analysis for Gaszek-Yildiz-Meng 2026 (Supplementary Figure S15:
 resistance-classification metrics).
 
 Reproduces the 10%-trained LightGBM model (matching notebooks 03/04) for
@@ -25,10 +25,11 @@ from __future__ import annotations
 
 import math
 import os
+import tempfile
 from pathlib import Path
 
-os.environ.setdefault("MPLCONFIGDIR", "/tmp/claude/mpl_cache")
-os.environ.setdefault("FONTCONFIG_CACHE", "/tmp/claude/fc_cache")
+os.environ.setdefault("MPLCONFIGDIR", os.path.join(tempfile.gettempdir(), "matplotlib"))
+os.environ.setdefault("FONTCONFIG_CACHE", os.path.join(tempfile.gettempdir(), "fontconfig"))
 
 import numpy as np
 import pandas as pd

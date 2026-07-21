@@ -13,7 +13,7 @@ merged (union-find), then peak/connection nodes are identified.
 - `preprocess.py` — raw genotype-AUC CSV → intended-mutant-filtered long table (per-concentration median).
 - `pair_table_global.py` — global (integrated-AUC) fitness + Hamming-1 neighbour pairs.
 - `graph_builder.py` — `GraphBuilder`: raw graph → neutral merging → peak detection (`build_graph`).
-- `build_graph.py` — batch driver used on the UTSW BioHPC cluster (writes GraphML).
+- `build_graph.py` — batch driver (writes GraphML).
 - `make_logo.py` — sequence-logo / mutation helpers used by the builder.
 
 Build parameters (from `build_graph.sh`): `neutral_threshold=0.4`,
@@ -42,13 +42,12 @@ values are identical.
 The Supplementary Figure S18 *peak-absorption diagnostic* (per-supernode fitness
 advantage over 1-/2-mutation neighbours; global-peak presence across the
 0.15–0.45 cutoff sweep) is a separate analysis on top of these graphs and is not
-part of this builder delivery — its Source Data is provided by Devin Meng.
+part of this builder — its Source Data is provided by Devin Meng.
 
-## Historical cluster paths
+## Batch drivers
 
-The original batch drivers `src/build_graph.py`, `src/pair_table_global.py`, and
-`src/make_logo.py` carry hardcoded `/work/greencenter/…` paths — the defaults from
-the UTSW BioHPC cluster where the graphs were first built. They are **historical**
-and are *not* used by the public reproduction path: `extract_fig2_source_data.py`
-is the entry point and reads only this repository's `data/`. Treat those `__main__`
-blocks as provenance, not runnable-as-is here.
+The batch drivers `src/build_graph.py`, `src/pair_table_global.py`, and
+`src/make_logo.py` are not used by the reproduction entry points
+(`extract_fig2_source_data.py` for Figure 2, `extract_figS4_source_data.py` for
+Supplementary Figure S4), which read only this repository's `data/`. Their `__main__` blocks default their base path to the repository root
+(override with the `TEM1CML_ROOT` environment variable).

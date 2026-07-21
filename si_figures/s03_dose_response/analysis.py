@@ -3,41 +3,29 @@ representative subset of the TEM-1 CML library.
 
 (A)/(B): raw genotype AUC ("auc") vs. antibiotic concentration for
 Ampicillin and Aztreonam. Each panel shows the full library as a faint
-gray background, a representative subset of the top-18 highest-AUC
-genotypes in color, and the spiked wild-type (TEM-1^WT) and dead-control
-(TEM-1^dead) reference genotypes highlighted.
+gray background, the top-18 highest-AUC genotypes in color, and the spiked
+wild-type (TEM-1^WT) and dead-control (TEM-1^dead) reference genotypes
+highlighted.
 
-Provenance
-----------
-Ported from the BioHPC notebook
-    TEM1_Combinatorial_Mutagenesis/notebooks/20240723/
-        04-the-most-abundant-genotypes.ipynb  (cells 16-20)
-and confirmed against the notebook's own embedded cell-20 execution output:
-the top-18 genotype codes and their plotted order are byte-for-byte
-identical, per drug, to the manuscript's published Figure S3 legend. Two
-sibling notebooks with alternative genotype-calling stringency exist
-alongside it on BioHPC (04-...-spiked-wt.ipynb, 04-...-stringent.ipynb);
-they were not imported since the plain variant is the confirmed match.
-
-The original notebook derives `genotype_auc_sorted_{drug}.csv` from raw
-per-sample barcode-count parquet files that are not part of this
-repository's public data. This script instead reads directly from
+Inputs
+------
+Reads the deposited genotype-AUC tables
     data/raw/{Ampicillin,Aztreonam}_auc_per_genotype.csv
-which are byte-identical to the CSVs the BioHPC notebook produces (verified
-by file size during import: 21,968,691 / 28,665,545 bytes respectively) --
-so no data re-fetch was necessary, only the plotting logic below.
+one row per genotype, one column per "drug concentration replicate", sorted
+descending by total AUC. These hold the same per-genotype AUC values written
+by source_notebook/04-the-most-abundant-genotypes.ipynb (cell 17), which
+derives them from raw barcode-count parquet files that are not part of the
+public data deposit. The deposited CSVs and that intermediate have equal byte
+counts (21,968,691 / 28,665,545 bytes); byte identity was not verified.
 
-Known deviations from the original exploratory cell (both flagged, neither
-changes the selected genotypes or the underlying data):
-  1. TEM-1^WT / TEM-1^dead are drawn in a fixed black / blue on top of the
-     qualitative palette used for the other 18 genotypes, matching the
-     black-WT/blue-dead convention used elsewhere in this lab's plotting
-     code (e.g. `06_mutant_dashboard.py`, `5-Epistasis_Global_fitness_
-     calc_display_v02.ipynb`). The original exploratory cell left all 20
-     genotypes on the same qualitative palette with no special styling.
-  2. The background sample of 1000 genotypes (`np.random.choice`) is
-     seeded here for reproducibility; the original was unseeded.
-Neither change affects which genotypes are selected or their AUC values.
+Method
+------
+Selects the top-18 genotypes by total AUC plus the WT and dead rows, plots a
+1000-genotype random background sample, and highlights the references:
+  1. TEM-1^WT / TEM-1^dead are drawn last in fixed black / blue on top of the
+     tab20b qualitative palette used for the other 18 genotypes.
+  2. The background sample (`np.random.choice`) is drawn with a fixed seed for
+     reproducibility.
 """
 
 from __future__ import annotations
@@ -69,7 +57,7 @@ FIGDIR.mkdir(exist_ok=True, parents=True)
 SUPP.mkdir(exist_ok=True, parents=True)
 
 # --- constants -----------------------------------------------------------
-SEED = 20240723  # date-stamp of the BioHPC notebook this is ported from
+SEED = 20240723  # fixed seed for the background-sample draw
 N_TOP = 18
 N_BACKGROUND = 1000
 
@@ -90,7 +78,7 @@ def load_drug_table(path: Path) -> pd.DataFrame:
     """Load a genotype-AUC-per-concentration table.
 
     Already sorted descending by total AUC (this is exactly
-    `df_sorted[drug]` from the BioHPC notebook's cell 17, written directly
+    `df_sorted[drug]` from the source notebook's cell 17, written directly
     via `.to_csv()`, index preserved) -- so `df.index[:N_TOP]` reproduces
     the notebook's top-N selection without needing to re-derive the sort.
     """
@@ -100,7 +88,7 @@ def load_drug_table(path: Path) -> pd.DataFrame:
 
 def select_genotypes(df: pd.DataFrame, rng: np.random.Generator) -> tuple[list, list, list]:
     """Return (top_n_genotype_row_indices, wt_row_indices, dead_row_indices,
-    background_row_indices) mirroring the BioHPC notebook's cell 18 exactly:
+    background_row_indices) mirroring the source notebook's cell 18 exactly:
     `df.index[:18].to_list() + wt_index.to_list() + dead_index.to_list()`.
     """
     wt_idx = df.index[df["mut_profile_masked"] == WT].tolist()
@@ -113,7 +101,7 @@ def select_genotypes(df: pd.DataFrame, rng: np.random.Generator) -> tuple[list, 
 def melt_long(df: pd.DataFrame, drug: str, row_indices) -> pd.DataFrame:
     """Wide (genotype x 'Drug conc rep' columns) -> long (conc, genotype, auc).
 
-    Mirrors the BioHPC notebook's `slice_select` / cell-19 melt loop.
+    Mirrors the source notebook's `slice_select` / cell-19 melt loop.
     """
     value_cols = [c for c in df.columns if c.startswith(drug + " ")]
     rows = []

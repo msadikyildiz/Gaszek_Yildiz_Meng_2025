@@ -4,8 +4,7 @@ Direct-coupling-analysis (DCA) of the Pfam **PF13354** β-lactamase family behin
 **Figure 6** and **Supplementary Figure S6**, contributed by the Morcos lab
 (F. Morcos, J. A. de la Paz, S. Alvarez, UT Dallas).
 
-- **`Figure6_Analysis.ipynb`** — the notebook **as received** from J. A. de la Paz, kept
-  verbatim for provenance.
+- **`Figure6_Analysis.ipynb`** — the analysis notebook from J. A. de la Paz.
 - **`reproduce_fig6.py`** — a faithful, repo-relative transcription of that notebook that
   runs on our shipped data and writes the Source Data. This is the in-repo entry point.
 
@@ -49,11 +48,9 @@ position 240 family-mean 2.41 / TEM-1 bar 3.76). Run constants: `M = 27242` filt
 sequences, `N = 214`, `Meff = 8377`, TEM-1 Hamiltonian −1838.24.
 
 > **Note (n).** The 6B family average is over **n = 27242** filtered family sequences — the
-> count this pipeline produces, and the value carried by the figure (v12) and the Source Data.
-> (An earlier figure draft read 27241, a one-sequence fencepost in `filter_pfam`'s reported
-> kept-count; corrected so figure and Source Data agree.)
+> count this pipeline produces, and the value carried by the figure and the Source Data.
 
-## What this settles for the legend / reporting checklist
+## Figure 6B reporting details
 
 - **6A shows 9 of the 13 library positions** — `['69','104','164','182','237','238','240','244','265']`
   (Ambler). Positions 21, 39, 275, 276 fall outside the PF13354 mature-domain alignment (21 is

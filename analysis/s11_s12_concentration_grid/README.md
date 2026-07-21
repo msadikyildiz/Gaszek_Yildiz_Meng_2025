@@ -4,8 +4,7 @@ Produces **Supplementary Figures S11** (pairwise-epistasis heatmaps) and
 **S12** (measured-vs-predicted densities). Extends the manuscript's epistatic
 and predictive conclusions in Figures 4 and 5 — shown at one representative
 concentration per drug in the main text (AMP 781 µg/mL, AZT 36 µg/mL) —
-across the full measured concentration range. Added during the Nature
-Communications revision.
+across the full measured concentration range.
 
 ## Rerun
 

@@ -2,8 +2,7 @@
 
 Produces **Supplementary Figure S16**. Quantifies replicate-to-replicate
 reproducibility of the AUC-fitness metric via per-genotype %CV and pairwise
-replicate correlations, addressing the manuscript's reproducibility claim at
-line 163. Added during the Nature Communications revision.
+replicate correlations, addressing the manuscript's reproducibility claim.
 
 ## Rerun
 
@@ -56,8 +55,9 @@ and regenerate into this module's local `figures/` (gitignored, scratch).
   replicate pair (1-2, 1-3, 2-3) per drug × concentration; columns:
   `drug, concentration, rep_i, rep_j, n, pearson_r, pearson_p`. Most
   `pearson_p` values underflow to `0.0` at this sample size (double precision);
-  a few high-concentration pairs, where nearly all genotypes are non-viable and
-  replicate agreement collapses, have finite and even non-significant p (max 0.105).
+  the no-drug control (Aztreonam 0.0 µg/ml) has near-uniform fitness across
+  genotypes, so its replicate correlation is ≈0 and its p is finite and even
+  non-significant (max ≈0.10).
 - `data/summary_by_conc_viable.csv` — 14 rows; same columns as
   `summary_by_conc.csv` but restricted to genotypes with mean
   log10(AUC) > 3.0 at the given condition. Confirms the "<10% SD"
@@ -83,10 +83,17 @@ and regenerate into this module's local `figures/` (gitignored, scratch).
   identity line, not just "rank-correlate"). Spearman would over-state
   agreement in this regime.
 
-## Status
+## Summary
 
-- Figures and tables: complete, reproducible, correct.
-- Manuscript line 163 is revised to cite the Pearson r range and log-SD
-  dispersion directly, with corrected denominators and p-value wording; the
-  viable-subset claim is verified and saved to
-  `data/summary_by_conc_viable.csv`.
+- Reproducibility is quantified by 42 replicate-pair Pearson correlations
+  (three pairs per drug × concentration) and per-genotype %CV, over the
+  55,296 combinatorially-complete design genotypes (n = 55,293 with a finite
+  replicate SD per condition). Pearson r ranges from -0.01 to 0.85 across
+  pairs; most p-values underflow to 0.0 at this sample size; the largest (≈0.10)
+  is at Aztreonam 0.0 µg/ml — the no-drug control — where fitness is near-uniform
+  across genotypes, so replicate correlation is ≈0.
+- Generated files: `figures/supplementary/figure_s16_amp.png`,
+  `figures/supplementary/figure_s16_azt.png`,
+  `data/per_genotype_replicate_stats.csv`, `data/summary_by_conc.csv`,
+  `data/summary_by_conc_viable.csv`, `data/replicate_pair_correlations.csv`,
+  and `results_table.csv`.

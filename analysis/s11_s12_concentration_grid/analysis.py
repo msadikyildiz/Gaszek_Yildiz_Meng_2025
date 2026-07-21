@@ -3,7 +3,7 @@ Concentration-grid extension of Figure 4 (and the pairwise-epistasis panel
 of Figure 5) across the full measured concentration range (Supplementary
 Figures S11 and S12).
 
-Produces three extended-figure grids per drug, each panelled over every
+Produces the Supplementary Figures S11 and S12 grids per drug, each panelled over every
 measured non-zero concentration:
 
   1. Pairwise epistasis heatmap   - one 19 x 19 panel per concentration.
