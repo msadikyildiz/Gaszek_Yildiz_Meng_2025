@@ -1,5 +1,5 @@
 """
-S1 — Four-model comparison for Reviewer #3 comment 2b.
+S1 — Four-model comparison: linear, Lasso, single decision tree, and LightGBM.
 
 Compares four regression model classes on the TEM-1 fitness landscape:
   1. Unregularized linear regression (bare additive features).
@@ -7,9 +7,9 @@ Compares four regression model classes on the TEM-1 fitness landscape:
   3. Single decision tree (DecisionTreeRegressor, default hyperparameters).
   4. LightGBM (matching manuscript hyperparameters).
 
-To make the reviewer-style comparison fair (LightGBM captures interactions,
-the bare additive model cannot), we *additionally* fit the linear and Lasso
-variants on one-hot + pairwise-interaction features (171 features).
+To make the comparison fair (LightGBM captures interactions, the bare
+additive model cannot), we *additionally* fit the linear and Lasso variants
+on one-hot + pairwise-interaction features (171 features).
 
 Learning curve: RMSD and R^2 vs training fraction. Test set is held out once
 (5 % of all 55,296 genotypes at a given drug x concentration) and kept FIXED

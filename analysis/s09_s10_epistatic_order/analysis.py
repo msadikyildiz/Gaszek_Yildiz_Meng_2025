@@ -1,9 +1,10 @@
 """
 S4 - Epistasis section rewrite and two new extended figures.
 
-Produces the analytical backing for the rewritten Epistasis section
-(Reviewer 3 requested a global-to-local narration) plus the two new
-extended figures called out in the draft:
+Produces the analytical backing for the manuscript's Epistasis section,
+narrating epistasis from global (order-decomposition) to local
+(drug-asymmetry) scales, plus the two extended figures called out in
+the text:
 
     Ext Fig A - Order-decomposition: cumulative R^2 and incremental
                  dR^2 per additional epistatic order, one curve per

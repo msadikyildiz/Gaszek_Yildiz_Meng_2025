@@ -1,5 +1,6 @@
 """
-Block-holdout ML validation for Gaszek, Yildiz, Meng (2026) rebuttal (Reviewer #4 ii).
+Block-holdout ML validation for the Gaszek, Yildiz, Meng (2026) TEM-1
+fitness-landscape regression models.
 
 Runs three train/test regimes on the 55,296-genotype TEM-1 landscape:
   1. Leave-one-mutation-out (LOMO): exclude every variant carrying a focal

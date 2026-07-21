@@ -138,7 +138,7 @@ def get_pairs(global_fitness_df):
     return pl.DataFrame(pairs)
 
 def main():
-    base_path = "/work/greencenter/s439821/TEM1CML"
+    base_path = "/path/to/TEM1CML"
     # File paths
     amp_path = f"{base_path}/data/raw/combined-auc/genotype_auc_sorted_ampicillin.csv"
     azt_path = f"{base_path}/data/raw/combined-auc/genotype_auc_sorted_aztreonam.csv"

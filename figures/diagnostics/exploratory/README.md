@@ -19,7 +19,7 @@ move it back up and rename it to its assigned `Figure SXX. <description>.png`.
 ## `_pre_s9_s13/` — pre-revision figure snapshot
 
 This subfolder is a frozen snapshot of the figures as they stood **before** the
-S9–S13 figure-fix sprints renumbered and patched the panels. Its filenames use the
+S9–S13 revision pass renumbered and patched the panels. Its filenames use the
 *earlier* numbering (e.g. "Figure 5E", "Figure 3B"), which no longer maps to the
 current manuscript — `Figure 5E. Double mutants pairwise epistasis AMP.png` here is a
 superseded render, not the present Figure 5. It is kept for provenance only; do **not**

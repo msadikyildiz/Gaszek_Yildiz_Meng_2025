@@ -1,23 +1,23 @@
 """
-S7 - Concentration-grid extension of Figure 4 (and the pairwise-epistasis panel
-of Figure 5) for Reviewer #1 and Reviewer #3.
+Concentration-grid extension of Figure 4 (and the pairwise-epistasis panel
+of Figure 5) across the full measured concentration range (Supplementary
+Figures S11 and S12).
 
 Produces three extended-figure grids per drug, each panelled over every
 measured non-zero concentration:
 
   1. Pairwise epistasis heatmap   - one 19 x 19 panel per concentration.
                                     Uses the "Biochemical Definition" column
-                                    that the manuscript's Figure 5E/F uses.
-                                    (The task prompt calls this "Fig 4 C/D"
-                                    by analogy.)
+                                    that the manuscript's Figure 5E/F uses
+                                    (analogous to Figure 4 C/D).
 
   2. Measured-vs-predicted density - one hist2d panel per (concentration,
                                     included epistatic order <= K) for
                                     K = 1, 2, ..., 6. Mirrors Fig 4 A/C.
 
   3. R^2 vs epistatic order       - one line per concentration, K in 1..13.
-                                    Mirrors Fig 4 B/D but plots R^2 (per the
-                                    S7 task brief) rather than RMSD.
+                                    Mirrors Fig 4 B/D but plots R^2 rather
+                                    than RMSD.
 
 All predictions come pre-computed from
   data/processed/Epistasis_Combined.parquet
@@ -25,7 +25,7 @@ which stores `Fitness` (log10 AUC) alongside `Fitness_predicted for order K`
 for K in 1..13 (see src/utils/calculate_epistasis.py). We do NOT re-fit the
 partial linear-regression epistasis model - we match the manuscript exactly.
 
-Concentrations analysed (locked in the S7 brief; zero-drug panels excluded):
+Concentrations analysed (zero-drug panels excluded):
 
     AMP: 3.1, 12.2, 48.8, 195.0, 781.0   microgram/mL    (5 panels per figure)
     AZT: 0.44, 1.33, 4.0, 12.0, 36.0, 108.0, 324.0        (7 panels per figure)

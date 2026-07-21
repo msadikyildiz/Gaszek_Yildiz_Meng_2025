@@ -252,7 +252,7 @@ def plot_logo(mutant_seqs, all_mutations, intended, threshold_ratio=0.6, figsize
 
 
 if __name__ == "__main__":
-    mutant_dict_file = "/work/greencenter/s439821/TEM1CML/data/processed/node_group_mutants.json"
+    mutant_dict_file = "/path/to/TEM1CML/data/processed/node_group_mutants.json"
     with open(mutant_dict_file, 'r') as f:
         mutant_dict = json.load(f)
 
@@ -260,7 +260,7 @@ if __name__ == "__main__":
     print(logo_string)
 
     filename = "amp_3_1_big.png"
-    save_path = f"/work/greencenter/s439821/TEM1CML/data/outputs/figures/logo/graph_{filename}"
+    save_path = f"/path/to/TEM1CML/data/outputs/figures/logo/graph_{filename}"
     mutant_seqs = list(mutant_dict.keys())
     fig = plot_logo(mutant_seqs, all_mutations, intended, threshold_ratio=0.6, figsize=(8,2), save_path=save_path)
     plt.show()

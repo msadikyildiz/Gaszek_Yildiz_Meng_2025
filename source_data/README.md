@@ -84,10 +84,10 @@ rebuilt by the commands above.
 
 ## Provenance
 
-These 5 scripts were ported from the lab's private revision workspace
-(`rebuttal_response/editorial_revision/source_data/`), where they were
-originally written against that workspace's `sprints/sN_*` layout. This repo
-renumbers those as `analysis/s09_s10_epistatic_order/` …
+These 5 scripts were consolidated into this repository's `analysis/` layout
+from the lab's internal development workspace, where they were originally
+organized under a different, per-topic numbering. This repo renumbers those
+as `analysis/s09_s10_epistatic_order/` …
 `analysis/s17_dose_response_low_count/` (see `analysis/README.md`); the path
 rewrites in these scripts track that renumbering one-to-one. No analysis
 logic changed in the port — only path resolution.

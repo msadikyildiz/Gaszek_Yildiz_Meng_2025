@@ -1,10 +1,10 @@
 """
-S5 — Replicate reproducibility for Reviewer #1.
+S5 — Replicate reproducibility.
 
 The manuscript (line 163) states that the AUC-Fitness metric "exhibited excellent
 reproducibility across biological replicates, typically yielding standard
-deviations below 10%." The reviewer requested that this be demonstrated
-quantitatively (e.g. replicate-vs-replicate correlations).
+deviations below 10%." This analysis demonstrates that quantitatively
+(e.g. replicate-vs-replicate correlations).
 
 This pipeline builds two complementary figures per drug:
 

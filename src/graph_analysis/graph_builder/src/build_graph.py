@@ -9,7 +9,7 @@ from src.preprocess import preprocess_data
 from src.pair_table_global import calculate_normalized_fitness
 def parse_args():
     parser = argparse.ArgumentParser(description='Build graphs from antibiotic resistance data')
-    parser.add_argument('--output-dir', type=str, default="/work/greencenter/s439821/TEM1CML/output/graphs/test",
+    parser.add_argument('--output-dir', type=str, default="/path/to/TEM1CML/output/graphs/test",
                        help='Directory to save the output graph files')
     parser.add_argument('--neutral-threshold', type=float, default=0.4,
                        help='Threshold for merging neutral edges (for concentration-specific graphs)')
@@ -53,7 +53,7 @@ def main():
     global_thresholds = [0.1,0.15, 0.2,0.25, 0.3, 0.35, 0.4]
     print(f"Building global graphs with thresholds: {global_thresholds}")
 
-    base_path = "/work/greencenter/s439821/TEM1CML"
+    base_path = "/path/to/TEM1CML"
 
     # File paths
     amp_path = f"{base_path}/data/raw/combined-auc/genotype_auc_sorted_ampicillin.csv"

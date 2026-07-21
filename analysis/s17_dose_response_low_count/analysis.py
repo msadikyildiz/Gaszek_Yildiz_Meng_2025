@@ -1,12 +1,12 @@
 """
-S6 — Revised Fig. S3 for Reviewer #1 comment on dose-response line noise.
+S6 — Revised Fig. S3: dose-response line noise and low-read-count flagging.
 
-Reviewer #1: "Figure S3 shows that some genotypes have very noisy fitness values,
-jumping from the minimum to the mean trend from one concentration to another.
-What is the reason for this? Does this occur infrequently enough that it does
-not affect results such as landscape graphs and epistasis measurements?"
+Some genotypes in Figure S3 show noisy fitness values, jumping from the
+minimum to the mean trend from one concentration to another. This analysis
+characterizes how often this occurs and whether it affects downstream
+results such as landscape graphs and epistasis measurements.
 
-Response strategy (agreed with PI):
+Approach:
   - Revise Fig S3 by replacing the all-library grey lines with a small curated
     set of highlighted variants:
       (1) wild type (LQMERMAGERTRN, black);

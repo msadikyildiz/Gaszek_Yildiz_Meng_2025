@@ -1,6 +1,6 @@
 [project]
 name = "tem1-epistasis"
-version = "1.0.0"
+version = "1.1.0"
 description = "TEM-1 beta-lactamase epistasis analysis pipeline"
 requires-python = ">=3.10,<3.15"
 

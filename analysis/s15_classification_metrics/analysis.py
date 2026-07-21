@@ -1,4 +1,5 @@
-"""RMSD justification analysis for Gaszek-Yildiz-Meng 2026 (NatComm rebuttal S3).
+"""RMSD justification analysis for Gaszek-Yildiz-Meng 2026 (SI section S3:
+resistance-classification metrics).
 
 Reproduces the 10%-trained LightGBM model (matching notebooks 03/04) for
 AZT @ 36 ug/mL and AMP @ 781 ug/mL, then computes:
@@ -194,7 +195,7 @@ def noise_floor(long_df_conc: pl.DataFrame) -> dict:
     Several "noise floor" numbers are informative:
 
       * `pair_rmsd_mean` — RMSD between any two single replicates.  Directly
-        measurable; approximately √2·σ_single.  Reviewer-facing comparator for
+        measurable; approximately √2·σ_single.  Useful comparator for
         "replicate-level reproducibility".
       * `sigma_single_est` — pooled residual-from-mean σ per single replicate.
       * `sigma_median3_est` — empirical σ of the median of 3 reps.  Equals the
