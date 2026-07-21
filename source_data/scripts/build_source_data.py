@@ -34,7 +34,7 @@ OUT = OUTDIR / "source_data.xlsx"
 # figure -> list of (section label, csv relpath under the repo root)
 PD = "source_data/derived"
 DATA = {
- "Fig1E global fitness distributions": [
+ "Fig1E fitness distributions": [
     ("Per-concentration distribution summary + WT/dead reference lines", f"{PD}/fig1E_distribution_summary.csv"),
     ("Histogram counts per drug x concentration (reproduces the ridgelines)", f"{PD}/fig1E_histogram_counts.csv")],
  "Fig2 landscape graphs": [
@@ -83,13 +83,13 @@ DATA = {
     ("Highlighted-variant categories", "analysis/s17_dose_response_low_count/data/highlighted_variants.csv")],
  "Fig4G-H R2 by order": [
     ("Cumulative R^2 for orders 1-6 per drug x concentration", "analysis/s11_s12_concentration_grid/results_table.csv")],
- "S18 peak-advantage + threshold robustness": [
+ "S18 global-peak robustness": [
     ("C: neutral-threshold robustness — has_global_peak per AZT concentration x neutral threshold (0.15-0.45)", "src/graph_analysis/s18_peak_robustness/source_data/figS18C_neutral_threshold_matrix.csv"),
     ("A: AZT-12 global-peak-supernode fitness advantage over external neighbours, box statistics per concentration x neighbour distance (full plotted observations incl. fliers = the regenerable source_data/full/figS18A_azt12_all_comparisons.csv)", "src/graph_analysis/s18_peak_robustness/source_data/figS18A_azt12_peak_advantage_boxstats.csv"),
     ("B: AZT-108 global-peak-supernode fitness advantage, box statistics per concentration x neighbour distance (full observations = source_data/full/figS18B_azt108_all_comparisons.csv)", "src/graph_analysis/s18_peak_robustness/source_data/figS18B_azt108_peak_advantage_boxstats.csv"),
     ("D: AZT-108 landscape-graph NODES at neutral threshold 0.42 (global peak present) vs 0.43 (absent)", "src/graph_analysis/s18_peak_robustness/source_data/figS18D_azt108_nodes.csv"),
     ("D: AZT-108 landscape-graph EDGES at neutral threshold 0.42 vs 0.43 (source->target, weight, count; Gephi layout not reproducible)", "src/graph_analysis/s18_peak_robustness/source_data/figS18D_azt108_edges.csv")],
- "Fig6 evolutionary statistics (DCA)": [
+ "Fig6 evolutionary statistics": [
     ("A: PF13354 family sequence-logo information content at the nine family positions (69,104,164,182,237,238,240,244,265)", "src/evolutionary_statistics/source_data/fig6a_family_logo_information.csv"),
     ("B: contextual effective alphabet — family average +/- 1 SD (n=27242) vs TEM-1 target, per position", "src/evolutionary_statistics/source_data/fig6b_effective_alphabet.csv")],
  "S6 DCA Hamiltonian vs fitness": [
@@ -142,7 +142,7 @@ NOTES = {
     "double-mutant DD is plotted but has null fitness and is excluded from r). S8 correlates IC50 against "
     "AUC-fitness at each non-zero concentration. Source: validation/src/processed/"
     "{20260407 AMP, 20260307 AZT}/xref_expanded_df.parquet."),
- "Fig1E global fitness distributions": (
+ "Fig1E fitness distributions": (
     "Ridgeline of AUC-fitness per drug x concentration (KDE in the panel; the histogram counts here "
     "reproduce each ridge). Black dashed = TEM-1(WT) median, blue dashed = TEM-1(dead) median. Full "
     "per-genotype AUC-fitness values: Epistasis_Combined.parquet (Zenodo 10.5281/zenodo.21442350)."),
@@ -154,14 +154,14 @@ NOTES = {
     "Squared-Pearson R^2 and RMSD of measured vs cumulative-order-K predicted fitness across the full "
     "concentration grid (0-drug panels excluded). Reproduces analysis/s11_s12_concentration_grid exactly. "
     "Per-genotype pairs are in Epistasis_Combined.parquet."),
- "S18 peak-advantage + threshold robustness": (
+ "S18 global-peak robustness": (
     "Reproduced from D. Meng's fitness-landscape-graph pipeline (src/graph_analysis/s18_peak_robustness/, "
     "driver reproduce_s18.py) on this repo's AUC data. C: has_global_peak (min_group_size=12) across the "
     "AZT neutral-threshold sweep 0.15-0.45 x 8 concentrations. A/B: fitness advantage (group member minus "
     "external neighbour, up to 2 mutations) of the rank-0 global-peak supernode at AZT 12 / AZT 108 "
     "(neutral_threshold=0.40), summarised as box statistics per concentration x neighbour distance; the "
     "companion figS18{A,B}_*_peak_group_genotypes.csv list the peak-group genotypes behind the panel logos."),
- "Fig6 evolutionary statistics (DCA)": (
+ "Fig6 evolutionary statistics": (
     "Mean-field DCA of the Pfam PF13354 family (src/evolutionary_statistics/reproduce_fig6.py; M=27242 "
     "filtered family sequences, N=214, Meff=8377, TEM-1 Hamiltonian -1838.24) constraining the 55,293 "
     "intended designs. 6A: family sequence logo at the nine family positions (69,104,164,182,237,238,240,"

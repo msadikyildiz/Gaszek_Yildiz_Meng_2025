@@ -62,3 +62,6 @@ source_data/derived/
 
 # Generated Source Data workbook (rebuild via source_data/scripts/build_source_data.py; the release Source_Data.zip is the deliverable)
 source_data/source_data.xlsx
+
+# Generated release Source Data archive (rebuild via package_source_data.py)
+source_data/Source_Data.zip
