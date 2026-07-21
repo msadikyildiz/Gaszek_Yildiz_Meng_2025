@@ -166,9 +166,8 @@ NOTES = {
     "filtered family sequences, N=214, Meff=8377, TEM-1 Hamiltonian -1838.24) constraining the 55,293 "
     "intended designs. 6A: family sequence logo at the nine family positions (69,104,164,182,237,238,240,"
     "244,265 — 9 of the 13 library positions; the other four fall outside the PF13354 mature-domain "
-    "alignment). 6B: contextual effective alphabet, family mean +/- 1 SD vs TEM-1 (the published 6B label "
-    "reads n=27241, a one-sequence fencepost in the filter's reported kept-count; the plotted mean/SD use "
-    "27242, delta < 0.004%). 6C/6G/6H: per-genotype family-Hamiltonian distributions (all vs top-2.5k "
+    "alignment). 6B: contextual effective alphabet, family mean +/- 1 SD vs TEM-1 over n=27242 filtered "
+    "family sequences (figure v12 and this Source Data agree). 6C/6G/6H: per-genotype family-Hamiltonian distributions (all vs top-2.5k "
     "common / AMP-781 / AZT-36) — regenerable full tables source_data/full/fig6{c,g,h}_*.csv. LGL panels "
     "6D/E/F are from the separate LGL-VAE model (github.com/morcoslab/LGL-VAE; deposited coordinates "
     "doi:10.5061/dryad.51c59zwbn)."),

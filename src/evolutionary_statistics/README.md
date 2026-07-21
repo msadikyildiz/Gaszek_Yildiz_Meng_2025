@@ -48,10 +48,10 @@ decimals at all nine positions (e.g. position 104 family-mean 1.86 / TEM-1 bar 3
 position 240 family-mean 2.41 / TEM-1 bar 3.76). Run constants: `M = 27242` filtered family
 sequences, `N = 214`, `Meff = 8377`, TEM-1 Hamiltonian −1838.24.
 
-> **Legend note (n).** The published 6B labels the family average `n = 27241`; the
-> deterministic filter here keeps **27242** sequences. The one-sequence difference is a
-> fencepost in the *reported* "kept" count of the `filter_pfam` step and does not affect
-> the plotted mean/SD (Δ < 0.004 %).
+> **Note (n).** The 6B family average is over **n = 27242** filtered family sequences — the
+> count this pipeline produces, and the value carried by the figure (v12) and the Source Data.
+> (An earlier figure draft read 27241, a one-sequence fencepost in `filter_pfam`'s reported
+> kept-count; corrected so figure and Source Data agree.)
 
 ## What this settles for the legend / reporting checklist
 
